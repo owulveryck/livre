@@ -1,0 +1,2135 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Olivier Wulveryck" />
+  <title>Chapitre 1</title>
+  <style>
+  /* Import polices Google Fonts */
+  @import url('https://fonts.googleapis.com/css2?family=Literata:ital,wght@0,400;0,700;1,400&family=Lato:wght@400;700&display=swap');
+
+  /* ===============================================
+     CSS CUSTOM PROPERTIES (THEME VARIABLES)
+     =============================================== */
+
+  :root {
+    /* Light theme (default) */
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8f9fa;
+    --bg-navbar: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    --bg-sidebar: #f8f9fa;
+    --bg-code: #f5f5f5;
+    --bg-blockquote: #fff9e6;
+    --bg-table-header: #f39c12;
+
+    --text-primary: #2c3e50;
+    --text-secondary: #34495e;
+    --text-muted: #7f8c8d;
+    --text-heading: #2c3e50;
+    --text-navbar: #ffffff;
+
+    --border-primary: #ddd;
+    --border-secondary: #ecf0f1;
+    --border-accent: #f39c12;
+
+    --link-color: #3498db;
+    --link-hover: #2980b9;
+
+    --shadow-light: 0 2px 8px rgba(0,0,0,0.15);
+    --shadow-medium: 0 4px 12px rgba(0,0,0,0.2);
+
+    /* Font sizes (user-adjustable) */
+    --font-size-base: 12pt;
+    --font-size-h1: 24pt;
+    --font-size-h2: 18pt;
+    --font-size-h3: 14pt;
+    --font-size-code: 10pt;
+  }
+
+  /* Dark theme */
+  body.dark-theme {
+    --bg-primary: #1a1a1a;
+    --bg-secondary: #2d2d2d;
+    --bg-navbar: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    --bg-sidebar: #252525;
+    --bg-code: #2d2d2d;
+    --bg-blockquote: #2a2a1a;
+    --bg-table-header: #c87f0a;
+
+    --text-primary: #e4e4e4;
+    --text-secondary: #b8b8b8;
+    --text-muted: #888888;
+    --text-heading: #f0f0f0;
+    --text-navbar: #e4e4e4;
+
+    --border-primary: #404040;
+    --border-secondary: #333333;
+    --border-accent: #f39c12;
+
+    --link-color: #5dade2;
+    --link-hover: #3498db;
+
+    --shadow-light: 0 2px 8px rgba(0,0,0,0.4);
+    --shadow-medium: 0 4px 12px rgba(0,0,0,0.5);
+  }
+
+  /* Smooth transitions for theme switching */
+  body {
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  /* Respect reduced motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* ===============================================
+     CORPS DE TEXTE
+     =============================================== */
+
+  /* Corps de texte */
+  body {
+    font-family: 'Literata', Georgia, serif;
+    font-size: var(--font-size-base);
+    line-height: 1.65;
+    color: var(--text-primary);
+    background-color: var(--bg-primary);
+    margin: 0;
+    padding: 0;
+    padding-top: 80px; /* Espace pour la navigation fixe */
+    padding-left: 0;
+    transition: padding-left 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+  }
+
+  /* Desktop: sidebar visible, add left padding */
+  @media (min-width: 769px) {
+    body {
+      padding-left: 280px;
+    }
+  }
+
+  #main-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2em;
+  }
+
+  /* Titres */
+  h1 {
+    font-family: 'Lato', 'Helvetica Neue', sans-serif;
+    font-size: var(--font-size-h1);
+    font-weight: 700;
+    color: var(--text-heading);
+    margin-top: 36pt;
+    margin-bottom: 18pt;
+  }
+
+  h2 {
+    font-family: 'Lato', 'Helvetica Neue', sans-serif;
+    font-size: var(--font-size-h2);
+    font-weight: 700;
+    color: var(--text-secondary);
+    margin-top: 24pt;
+    margin-bottom: 12pt;
+  }
+
+  h3 {
+    font-family: 'Lato', 'Helvetica Neue', sans-serif;
+    font-size: var(--font-size-h3);
+    font-weight: 700;
+    color: var(--text-muted);
+    margin-top: 18pt;
+    margin-bottom: 9pt;
+  }
+
+  h4 {
+    font-family: 'Lato', 'Helvetica Neue', sans-serif;
+    font-size: 12pt;
+    font-weight: 700;
+    color: var(--text-muted);
+    margin-top: 12pt;
+    margin-bottom: 6pt;
+  }
+
+  /* Encadrés (blockquotes) */
+  blockquote {
+    background-color: var(--bg-blockquote);
+    border-left: 4px solid var(--border-accent);
+    padding: 1em 1.5em;
+    margin: 1.5em 0;
+    font-style: normal;
+    border-radius: 4px;
+  }
+
+  /* Code inline */
+  code {
+    font-family: 'Courier New', monospace;
+    font-size: var(--font-size-code);
+    background-color: var(--bg-code);
+    color: var(--text-primary);
+    padding: 2px 6px;
+    border-radius: 3px;
+  }
+
+  /* Blocs de code */
+  pre {
+    background-color: var(--bg-code);
+    padding: 1em;
+    border-radius: 4px;
+    overflow-x: auto;
+  }
+
+  pre code {
+    background-color: transparent;
+    padding: 0;
+  }
+
+  /* Tableaux */
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1.5em 0;
+  }
+
+  th, td {
+    border: 1px solid var(--border-primary);
+    padding: 8px 12px;
+    text-align: left;
+    color: var(--text-primary);
+  }
+
+  th {
+    background-color: var(--bg-table-header);
+    color: white;
+    font-weight: 700;
+  }
+
+  /* Images */
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 1.5em auto;
+  }
+
+  /* Listes */
+  ul, ol {
+    margin: 1em 0;
+    padding-left: 2em;
+  }
+
+  li {
+    margin-bottom: 0.5em;
+  }
+
+  /* Liens */
+  a {
+    color: var(--link-color);
+    transition: color 0.2s ease;
+  }
+
+  a:hover {
+    color: var(--link-hover);
+  }
+
+  /* Emphase */
+  strong {
+    font-weight: 700;
+    color: var(--text-heading);
+  }
+
+  em {
+    font-style: italic;
+  }
+
+  /* Paragraphes */
+  p {
+    margin-bottom: 1em;
+  }
+
+  /* ===============================================
+     BARRE DE NAVIGATION FIXE
+     =============================================== */
+
+  .gdoc-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: var(--bg-navbar);
+    color: var(--text-navbar);
+    box-shadow: var(--shadow-light);
+    z-index: 1000;
+  }
+
+  .navbar-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0.75em 1.5em;
+  }
+
+  /* Fil d'Ariane */
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    font-size: 0.85em;
+    color: #ecf0f1;
+    margin-bottom: 0.5em;
+    flex-wrap: wrap;
+  }
+
+  .breadcrumb a {
+    color: var(--link-color);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .breadcrumb a:hover {
+    color: var(--link-hover);
+    text-decoration: underline;
+  }
+
+  .breadcrumb-separator {
+    color: var(--text-muted);
+  }
+
+  .breadcrumb-current {
+    color: var(--text-navbar);
+    font-weight: 600;
+  }
+
+  /* Barre d'outils */
+  .navbar-tools {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    flex-wrap: wrap;
+  }
+
+  /* Barre de recherche */
+  .search-container {
+    position: relative;
+    flex: 1;
+    min-width: 200px;
+    max-width: 500px;
+  }
+
+  .search-input {
+    width: 100%;
+    padding: 0.5em 2.5em 0.5em 0.75em;
+    border: 2px solid var(--border-secondary);
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-family: 'Lato', sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    transition: all 0.3s;
+  }
+
+  .search-input:focus {
+    outline: none;
+    border-color: var(--link-color);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+  }
+
+  .search-input::placeholder {
+    color: var(--text-muted);
+  }
+
+  .search-icon {
+    position: absolute;
+    right: 0.75em;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    pointer-events: none;
+  }
+
+  .search-results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin-top: 0.5em;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-primary);
+    border-radius: 8px;
+    box-shadow: var(--shadow-medium);
+    max-height: 400px;
+    overflow-y: auto;
+    display: none;
+    z-index: 1001;
+  }
+
+  .search-results.show {
+    display: block;
+  }
+
+  .search-count {
+    padding: 0.75em 1em;
+    background: var(--bg-secondary);
+    font-size: 0.85em;
+    color: var(--text-muted);
+    font-weight: 600;
+    border-bottom: 1px solid var(--border-primary);
+  }
+
+  .search-result {
+    padding: 0.75em 1em;
+    border-bottom: 1px solid var(--border-secondary);
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .search-result:hover {
+    background: var(--bg-secondary);
+  }
+
+  .search-snippet {
+    font-size: 0.9em;
+    color: var(--text-primary);
+    line-height: 1.4;
+  }
+
+  .search-snippet mark {
+    background-color: var(--border-accent);
+    color: white;
+    padding: 2px 4px;
+    border-radius: 2px;
+    font-weight: 600;
+  }
+
+  .search-no-results,
+  .search-more {
+    padding: 1em;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.9em;
+  }
+
+  .search-highlight {
+    background-color: #fff9e6 !important;
+    border-left: 4px solid #f39c12 !important;
+    padding-left: 1em !important;
+    transition: all 0.3s;
+  }
+
+  /* Sections de résultats de recherche globale */
+  .search-section-header {
+    padding: 0.75em 1em;
+    background: var(--text-secondary);
+    color: var(--text-navbar);
+    font-size: 0.85em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-top: 1px solid var(--border-primary);
+  }
+
+  /* Info chapitre dans résultats globaux */
+  .search-chapter-info {
+    font-size: 0.85em;
+    color: var(--link-color);
+    margin-bottom: 0.25em;
+    font-weight: 600;
+  }
+
+  .search-part {
+    color: var(--text-muted);
+    font-weight: 400;
+  }
+
+  .search-chapter {
+    color: var(--text-primary);
+  }
+
+  /* Différenciation visuelle */
+  .search-result-local {
+    border-left: 3px solid #27ae60;  /* Vert pour résultats locaux */
+  }
+
+  .search-result-global {
+    border-left: 3px solid #3498db;  /* Bleu pour résultats globaux */
+  }
+
+  .search-result-global:hover {
+    background: #e8f5ff;
+    cursor: pointer;
+  }
+
+  /* Menu déroulant sommaire */
+  .toc-dropdown {
+    position: relative;
+  }
+
+  .toc-toggle {
+    padding: 0.5em 1.25em;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-family: 'Lato', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+  }
+
+  .toc-toggle:hover {
+    background: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3);
+  }
+
+  .toc-toggle::after {
+    content: '▼';
+    font-size: 0.7em;
+    transition: transform 0.3s;
+  }
+
+  .toc-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 0.5em;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-primary);
+    border-radius: 8px;
+    box-shadow: var(--shadow-medium);
+    min-width: 300px;
+    max-height: 500px;
+    overflow-y: auto;
+    display: none;
+    z-index: 1001;
+  }
+
+  .toc-menu.show {
+    display: block;
+  }
+
+  .toc-menu-header {
+    padding: 1em;
+    background: var(--bg-navbar);
+    color: var(--text-navbar);
+    font-weight: 700;
+    font-size: 1.1em;
+    border-radius: 8px 8px 0 0;
+  }
+
+  .toc-menu-content {
+    padding: 0.5em 0;
+  }
+
+  .toc-part {
+    padding: 0.75em 1em;
+    background: var(--bg-secondary);
+    font-weight: 700;
+    font-size: 0.85em;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .toc-item {
+    display: block;
+    padding: 0.75em 1.5em;
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: all 0.2s;
+    border-left: 3px solid transparent;
+  }
+
+  .toc-item:hover {
+    background: var(--bg-secondary);
+    border-left-color: var(--link-color);
+    padding-left: 1.75em;
+  }
+
+  .toc-item.current {
+    background: rgba(52, 152, 219, 0.1);
+    border-left-color: var(--border-accent);
+    font-weight: 600;
+    color: var(--text-heading);
+  }
+
+  /* Navigation Précédent/Suivant */
+  .page-navigation {
+    display: flex;
+    justify-content: space-between;
+    gap: 1em;
+    margin-top: 3em;
+    padding-top: 2em;
+    border-top: 2px solid var(--border-secondary);
+  }
+
+  .nav-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    padding: 0.75em 1.5em;
+    background: var(--link-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 600;
+    transition: all 0.3s;
+    max-width: 45%;
+  }
+
+  .nav-button:hover {
+    background: var(--link-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+  }
+
+  .nav-button.disabled {
+    background: var(--bg-secondary);
+    color: var(--text-muted);
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  .nav-button-prev::before {
+    content: '←';
+    font-size: 1.2em;
+  }
+
+  .nav-button-next::after {
+    content: '→';
+    font-size: 1.2em;
+  }
+
+  .nav-label {
+    display: block;
+    font-size: 0.75em;
+    opacity: 0.8;
+    margin-bottom: 0.25em;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    body {
+      padding-top: 140px; /* Navbar plus haute sur mobile */
+      padding-left: 0; /* Pas de sidebar par défaut */
+    }
+
+    .navbar-container {
+      padding: 0.5em 1em;
+    }
+
+    .breadcrumb {
+      font-size: 0.75em;
+    }
+
+    .navbar-tools {
+      flex-wrap: wrap;
+      gap: 0.5em;
+    }
+
+    .search-container {
+      flex: 1 1 100%;
+      max-width: none;
+    }
+
+    .font-controls {
+      order: 1;
+      margin-left: 0;
+    }
+
+    .theme-toggle {
+      order: 2;
+    }
+
+    .sidebar-toggle {
+      order: 3;
+    }
+
+    .toc-menu {
+      right: 0;
+      left: 0;
+      margin: 0.5em 1em;
+    }
+
+    .page-navigation {
+      flex-direction: column;
+    }
+
+    .nav-button {
+      max-width: none;
+    }
+  }
+
+  /* Footer */
+  .book-footer {
+    background: var(--bg-navbar);
+    color: var(--text-navbar);
+    margin-top: 4em;
+    padding: 2em 0;
+    border-top: 3px solid var(--border-accent);
+  }
+
+  .footer-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 2em;
+    text-align: center;
+  }
+
+  .copyright {
+    margin: 0;
+    font-size: 0.9em;
+    color: var(--text-navbar);
+    font-family: 'Lato', sans-serif;
+  }
+
+  /* ===============================================
+     READING PROGRESS BAR
+     =============================================== */
+
+  .reading-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 4px;
+    background: linear-gradient(90deg, #3498db 0%, #f39c12 100%);
+    z-index: 1002;
+    transition: width 0.1s ease;
+    box-shadow: 0 2px 4px rgba(52, 152, 219, 0.3);
+  }
+
+  body.dark-theme .reading-progress {
+    background: linear-gradient(90deg, #5dade2 0%, #f39c12 100%);
+  }
+
+  /* ===============================================
+     PERSISTENT SIDEBAR
+     =============================================== */
+
+  .book-sidebar {
+    position: fixed;
+    top: 80px;
+    left: 0;
+    width: 280px;
+    height: calc(100vh - 80px);
+    background: var(--bg-sidebar);
+    border-right: 1px solid var(--border-primary);
+    overflow-y: auto;
+    overflow-x: hidden;
+    z-index: 900;
+    transition: left 0.3s ease;
+    box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+  }
+
+  /* Mobile: hidden by default */
+  @media (max-width: 768px) {
+    .book-sidebar {
+      left: -280px;
+    }
+
+    body.sidebar-open .book-sidebar {
+      left: 0;
+    }
+  }
+
+  /* Sidebar header */
+  .sidebar-header {
+    padding: 1.5em 1em;
+    background: var(--bg-navbar);
+    color: var(--text-navbar);
+    border-bottom: 2px solid var(--border-accent);
+  }
+
+  .sidebar-header h2 {
+    margin: 0;
+    font-size: 1.1em;
+    font-weight: 700;
+    color: var(--text-navbar);
+  }
+
+  /* TOC sections */
+  .sidebar-toc {
+    padding: 0.5em 0;
+  }
+
+  .toc-section {
+    margin-bottom: 0.5em;
+  }
+
+  .sidebar-toc .toc-part {
+    padding: 0.75em 1em;
+    background: var(--bg-secondary);
+    font-weight: 700;
+    font-size: 0.85em;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    transition: background 0.2s ease;
+  }
+
+  .sidebar-toc .toc-part:hover {
+    background: var(--border-secondary);
+  }
+
+  .part-toggle {
+    font-size: 0.8em;
+    transition: transform 0.3s ease;
+    display: inline-block;
+  }
+
+  .sidebar-toc .toc-part.collapsed .part-toggle {
+    transform: rotate(-90deg);
+  }
+
+  .toc-part-chapters {
+    max-height: 500px;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+
+  .sidebar-toc .toc-part.collapsed + .toc-part-chapters {
+    max-height: 0;
+  }
+
+  .sidebar-toc .toc-item {
+    display: block;
+    padding: 0.75em 1.5em;
+    color: var(--text-primary);
+    text-decoration: none;
+    font-size: 0.9em;
+    transition: all 0.2s ease;
+    border-left: 3px solid transparent;
+  }
+
+  .sidebar-toc .toc-item:hover {
+    background: var(--bg-secondary);
+    border-left-color: var(--link-color);
+    padding-left: 1.75em;
+  }
+
+  .sidebar-toc .toc-item.current {
+    background: rgba(52, 152, 219, 0.1);
+    border-left-color: var(--border-accent);
+    font-weight: 600;
+    color: var(--text-heading);
+  }
+
+  /* Separator */
+  .sidebar-separator {
+    height: 1px;
+    background: var(--border-primary);
+    margin: 1em 0;
+  }
+
+  /* Chapter outline */
+  .chapter-outline {
+    padding: 0 0 1em 0;
+  }
+
+  .outline-header {
+    padding: 0.75em 1em;
+    font-weight: 700;
+    font-size: 0.85em;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background: var(--bg-secondary);
+  }
+
+  .outline-item {
+    display: block;
+    padding: 0.5em 1em;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.85em;
+    transition: all 0.2s ease;
+    border-left: 3px solid transparent;
+  }
+
+  .outline-item.level-2 {
+    padding-left: 1.5em;
+  }
+
+  .outline-item.level-3 {
+    padding-left: 2.5em;
+    font-size: 0.8em;
+  }
+
+  .outline-item:hover {
+    background: var(--bg-secondary);
+    border-left-color: var(--link-color);
+    color: var(--text-primary);
+  }
+
+  .outline-item.active {
+    background: rgba(52, 152, 219, 0.1);
+    border-left-color: var(--border-accent);
+    font-weight: 600;
+    color: var(--text-heading);
+  }
+
+  /* Scrollbar styling */
+  .book-sidebar::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .book-sidebar::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+  }
+
+  .book-sidebar::-webkit-scrollbar-thumb {
+    background: var(--border-primary);
+    border-radius: 4px;
+  }
+
+  .book-sidebar::-webkit-scrollbar-thumb:hover {
+    background: var(--text-muted);
+  }
+
+  /* ===============================================
+     NAVBAR CONTROLS
+     =============================================== */
+
+  /* Theme toggle */
+  .theme-toggle {
+    padding: 0.5em 1em;
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 20px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.25em;
+  }
+
+  .theme-toggle:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+  }
+
+  .theme-icon {
+    transition: opacity 0.3s ease;
+  }
+
+  body:not(.dark-theme) .theme-icon-light {
+    opacity: 1;
+  }
+
+  body:not(.dark-theme) .theme-icon-dark {
+    opacity: 0;
+    position: absolute;
+  }
+
+  body.dark-theme .theme-icon-light {
+    opacity: 0;
+    position: absolute;
+  }
+
+  body.dark-theme .theme-icon-dark {
+    opacity: 1;
+  }
+
+  /* Font controls */
+  .font-controls {
+    display: flex;
+    gap: 0.25em;
+    align-items: center;
+    margin-left: auto;
+  }
+
+  .font-btn {
+    padding: 0.4em 0.8em;
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.9em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .font-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-1px);
+  }
+
+  .font-btn:active {
+    transform: translateY(0);
+  }
+
+  /* Sidebar toggle (mobile) */
+  .sidebar-toggle {
+    padding: 0.5em 1em;
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 20px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: none;
+  }
+
+  .sidebar-toggle:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: 768px) {
+    .sidebar-toggle {
+      display: block;
+    }
+  }
+
+  /* ===============================================
+     RESPONSIVE
+     =============================================== */
+
+  /* Impression - masquer la navigation et footer */
+  @media print {
+    .gdoc-navbar,
+    .book-sidebar,
+    .reading-progress,
+    .page-navigation,
+    .book-footer,
+    .theme-toggle,
+    .font-controls,
+    .sidebar-toggle {
+      display: none !important;
+    }
+
+    body {
+      padding-top: 0 !important;
+      padding-left: 0 !important;
+    }
+
+    /* Force light theme for printing */
+    body.dark-theme {
+      background: white !important;
+      color: black !important;
+    }
+  }
+  </style>
+</head>
+<body>
+  <!-- Reading Progress Bar -->
+  <div id="reading-progress" class="reading-progress" aria-hidden="true"></div>
+
+  <!-- Barre de navigation fixe -->
+  <nav class="gdoc-navbar">
+    <div class="navbar-container">
+      <!-- Fil d'Ariane -->
+      <div class="breadcrumb">
+        <a href="00_Avant-propos.html">L&#39;Architecte du mouvement</a>
+        <span class="breadcrumb-separator">›</span>
+        <span>Partie I - Le Terrain de Jeu</span>
+        <span class="breadcrumb-separator">›</span>
+        <span class="breadcrumb-current">Chapitre 1 : Stratégie, jeu,
+position et mouvement</span>
+      </div>
+
+      <!-- Barre d'outils -->
+      <div class="navbar-tools">
+        <!-- Barre de recherche -->
+        <div class="search-container">
+          <input type="text" id="search-input" class="search-input" placeholder="Rechercher dans tout le livre... (Ctrl+K)" autocomplete="off"></input>
+          <span class="search-icon">🔍</span>
+          <div id="search-results" class="search-results"></div>
+        </div>
+
+        <!-- Font controls -->
+        <div class="font-controls">
+          <button id="font-decrease" class="font-btn" aria-label="Diminuer la taille du texte" title="A-">A-</button>
+          <button id="font-reset" class="font-btn" aria-label="Réinitialiser la taille du texte" title="Reset">A</button>
+          <button id="font-increase" class="font-btn" aria-label="Augmenter la taille du texte" title="A+">A+</button>
+        </div>
+
+        <!-- Theme toggle -->
+        <button id="theme-toggle" class="theme-toggle" aria-label="Basculer le mode sombre">
+          <span class="theme-icon theme-icon-light">☀️</span>
+          <span class="theme-icon theme-icon-dark">🌙</span>
+        </button>
+
+        <!-- Sidebar toggle (mobile) -->
+        <button id="sidebar-toggle" class="sidebar-toggle" aria-label="Afficher/Masquer le sommaire">
+          <span class="hamburger-icon">☰</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Persistent Sidebar -->
+  <aside id="book-sidebar" class="book-sidebar" aria-label="Navigation du livre">
+    <!-- Header -->
+    <div class="sidebar-header">
+      <h2>L&#39;Architecte du mouvement</h2>
+    </div>
+
+    <!-- Full Book TOC -->
+    <nav class="sidebar-toc" aria-label="Table des matières complète">
+      <div class="toc-section">
+        <a href="00_Avant-propos.html" class="toc-item" data-chapter-id="00">Avant-propos</a>
+        <a href="01_Introduction.html" class="toc-item" data-chapter-id="01">Introduction</a>
+      </div>
+
+      <div class="toc-section">
+        <div class="toc-part" data-part="1">
+          <span class="part-toggle">▼</span>
+          <span class="part-title">Partie I - Le Terrain de Jeu</span>
+        </div>
+        <div class="toc-part-chapters">
+          <a href="02_Chapitre_1.html" class="toc-item" data-chapter-id="02">Chapitre 1 : Stratégie, jeu, position et mouvement</a>
+          <a href="03_Chapitre_2.html" class="toc-item" data-chapter-id="03">Chapitre 2 : Naviguer dans le brouillard</a>
+        </div>
+      </div>
+
+      <div class="toc-section">
+        <div class="toc-part" data-part="2">
+          <span class="part-toggle">▼</span>
+          <span class="part-title">Partie II - L&#39;Organisation face au Mouvement</span>
+        </div>
+        <div class="toc-part-chapters">
+          <a href="04_Chapitre_3.html" class="toc-item" data-chapter-id="04">Chapitre 3 : L&#39;anatomie du mur invisible</a>
+          <a href="05_Chapitre_4.html" class="toc-item" data-chapter-id="05">Chapitre 4 : Structure et pouvoir</a>
+        </div>
+      </div>
+
+      <div class="toc-section">
+        <div class="toc-part" data-part="3">
+          <span class="part-toggle">▼</span>
+          <span class="part-title">Partie III - Les Lois du Mouvement</span>
+        </div>
+        <div class="toc-part-chapters">
+          <a href="06_Chapitre_5.html" class="toc-item" data-chapter-id="06">Chapitre 5 : La loi du climat</a>
+          <a href="07_Chapitre_6.html" class="toc-item" data-chapter-id="07">Chapitre 6 : La loi de l&#39;évolution</a>
+          <a href="08_Chapitre_7.html" class="toc-item" data-chapter-id="08">Chapitre 7 : La loi de l&#39;écosystème</a>
+        </div>
+      </div>
+
+      <div class="toc-section">
+        <div class="toc-part" data-part="4">
+          <span class="part-toggle">▼</span>
+          <span class="part-title">Partie IV - La Pratique du Mouvement</span>
+        </div>
+        <div class="toc-part-chapters">
+          <a href="09_Chapitre_8.html" class="toc-item" data-chapter-id="09">Chapitre 8 : Observer le terrain</a>
+          <a href="10_Chapitre_9.html" class="toc-item" data-chapter-id="10">Chapitre 9 : Orienter et décider</a>
+          <a href="11_Chapitre_10.html" class="toc-item" data-chapter-id="11">Chapitre 10 : Jouer et apprendre</a>
+          <a href="12_Chapitre_11.html" class="toc-item" data-chapter-id="12">Chapitre 11 : Cultiver le mouvement</a>
+        </div>
+      </div>
+
+      <div class="toc-section">
+        <a href="13_Conclusion.html" class="toc-item" data-chapter-id="13">Conclusion</a>
+      </div>
+
+      <div class="toc-section">
+        <div class="toc-part" data-part="annexes">
+          <span class="part-toggle">▼</span>
+          <span class="part-title">Annexes</span>
+        </div>
+        <div class="toc-part-chapters">
+          <a href="14_Annexe_Glossaire.html" class="toc-item" data-chapter-id="14">Glossaire</a>
+          <a href="15_Annexe_Bibliographie.html" class="toc-item" data-chapter-id="15">Bibliographie</a>
+          <a href="16_Annexe_Antisèche_Évolution.html" class="toc-item" data-chapter-id="16">Antisèche Évolution</a>
+          <a href="17_Annexe_Methods_Analysis.html" class="toc-item" data-chapter-id="17">Methods Analysis</a>
+          <a href="18_Annexe_Catalogue_Gameplays.html" class="toc-item" data-chapter-id="18">Catalogue Gameplays</a>
+          <a href="19_Annexe_Grilles_Décision.html" class="toc-item" data-chapter-id="19">Grilles Décision</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Separator -->
+    <div class="sidebar-separator"></div>
+
+    <!-- Chapter Outline (generated by JS) -->
+    <nav id="chapter-outline" class="chapter-outline" aria-label="Plan du chapitre actuel">
+      <!-- Populated dynamically by generateChapterOutline() -->
+    </nav>
+  </aside>
+
+  <!-- Contenu principal -->
+  <div id="main-content">
+<h1 id="chapitre-1-la-stratégie-un-jeu-de-position-et-de-mouvement">Chapitre
+1 : La stratégie, un jeu de position et de mouvement</h1>
+<p>Pour échapper au chaos des opinions, nous allons d’abord construire
+un langage commun en définissant deux termes essentiels : la
+<strong>Position</strong> et le <strong>Mouvement</strong>. Armés de ce
+vocabulaire, nous identifierons ensuite le moteur invisible de notre
+monde : les forces de la concurrence. Nous verrons comment un outil
+d’analyse classique peut nous aider à les cartographier, mais nous
+découvrirons rapidement ses limites.</p>
+<p>Cette prise de conscience nous mènera à la loi fondamentale qui régit
+notre écosystème – l’effet de la Reine Rouge. Celle-ci nous forcera à
+repenser nos entreprises, non plus comme des machines prévisibles, mais
+comme des organismes vivants, condamnés à évoluer pour survivre. Enfin,
+ce chapitre se conclura sur une question fondamentale qui ouvrira la
+suite de notre voyage : tous les mouvements se valent-ils ?</p>
+<h2 id="un-langage-pour-le-jeu-position-et-mouvement">Un langage pour le
+jeu : position et mouvement</h2>
+<p>Pour mettre fin au dialogue de sourds évoqué en introduction, nous
+devons nous accorder sur une chose fondamentale : le nom et les règles
+du jeu auquel nous participons tous. Car si les stratégies diffèrent, le
+terrain, lui, est commun. C’est l’arène où les entreprises s’affrontent,
+où la valeur se crée et se dispute, où les clients sont les ultimes
+arbitres. Ce terrain de jeu universel, c’est <strong>le marché</strong>.
+Et c’est en comprenant sa topographie et ses forces invisibles que nous
+pourrons commencer à lire le jeu. Pour cela, nous avons besoin d’un
+lexique précis, un lexique qui va soutenir la description. Ce lexique
+simple est composé de deux termes : la <strong>Position</strong> et le
+<strong>Mouvement</strong>.</p>
+<p>Commençons par la <strong>Position</strong>. Ce mot n’est pas anodin
+; nous l’empruntons à la stratégie militaire, où « prendre position »
+signifie occuper une portion de terrain qui offre un avantage tactique,
+tout en s’exposant au feu ennemi. De la même manière, votre
+<strong>Position</strong> technologique est la synthèse de vos choix
+passés. Elle définit votre point de départ aujourd’hui, avec ses forces
+et ses rigidités intrinsèques.</p>
+<p>Loin d’être un concept abstrait, votre Position se manifeste très
+concrètement. C’est par exemple :</p>
+<ul>
+<li>Votre dépendance à une <strong>base de données propriétaire et
+coûteuse</strong>, forteresse d’hier devenue un fardeau complexe à
+entretenir.</li>
+<li>L’expertise pointue de vos ingénieurs dans un <strong>cadre de
+développement moderne</strong>, qui vous confère une agilité redoutable
+pour créer des interfaces utilisateurs.</li>
+<li>Ce contrat pluriannuel avec un <strong>fournisseur de cloud
+dominant</strong>, qui vous assure des avantages tarifaires mais bride
+votre capacité à explorer les innovations de ses concurrents.</li>
+</ul>
+<p>La Position est donc un instantané, une photographie de votre état
+actuel. Or, dans l’arène concurrentielle, rien n’est jamais
+statique.</p>
+<p>Si la Position est cet instantané, notre second terme, le
+<strong>Mouvement</strong>, est le film : il représente l’évolution de
+vos atouts et de vos contraintes dans le temps. Attention, un Mouvement
+ne se résume pas à « lancer un projet ». Un projet est une
+<em>intention</em>, une action que vous initiez. Le Mouvement, lui, est
+le <em>résultat</em> : le changement effectif de votre place sur
+l’échiquier, qu’il soit délibéré ou subi.</p>
+<p>Ainsi, adopter une technologie open source pour réduire la dépendance
+à un fournisseur <em>est</em> un Mouvement. Voir un concurrent sortir
+une innovation qui rend votre produit obsolète <em>en est un aussi</em>
+– un que vous subissez cette fois. Saisir la stratégie comme un art du
+mouvement, c’est donc passer de la simple gestion de projets à la
+maîtrise délibérée de sa trajectoire sur le terrain de jeu.</p>
+<h2 id="la-photographie-des-forces-analyser-la-position">La photographie
+des forces : analyser la position</h2>
+<p>Et ce mouvement est perpétuel dans une économie de marché. A peine
+a-t-on pris des positions que le mouvement les fait évoluer.<br />
+Cette observation soulève une question fondamentale. En physique, le
+premier principe de Newton nous enseigne qu’un objet reste immobile
+jusqu’à ce qu’une force s’exerce sur lui. S’il y a mouvement, il y a
+donc nécessairement une force à l’œuvre.</p>
+<p>Puisque nous observons un mouvement perpétuel sur notre terrain de
+jeu, la question devient inévitable : quelles sont la ou les forces
+invisibles qui animent ce mouvement ?</p>
+<p>La force fondamentale, la force de base de notre système, c’est la
+concurrence. Mais avant de la disséquer, demandons-nous d’où elle
+vient.</p>
+<p>La concurrence n’est pas une idéologie ou un choix. Elle naît d’un
+principe économique simple et universel : la rencontre entre les besoins
+des utilisateurs et les multiples manières de les satisfaire. Dès qu’un
+besoin existe (communiquer, analyser des données, gérer des clients),
+plusieurs solutions vont chercher à y répondre pour en capter la valeur.
+Que ces solutions soient des produits directs, des services ou des
+alternatives plus simples, elles entrent mécaniquement en compétition
+pour récupérer l’attention ou les ressources de l’utilisateur. La
+concurrence est donc une conséquence factuelle de l’existence d’un
+marché.</p>
+<p>Mais savoir que cette force existe ne nous dit pas comment la
+comprendre. Comment la mesurer sans retomber dans le piège des opinions
+et des intuitions que nous cherchons précisément à quitter ? Sans un
+cadre partagé, « analyser la concurrence » reste un vœu pieux qui mène
+aux mêmes débats stériles.</p>
+<p>Pour cela, nous allons utiliser la grille de lecture du stratège
+Michael Porter. La véritable puissance de l’œuvre de Porter n’a pas été
+de constater l’évidence de la concurrence, mais de la rendre opérable.
+Il a transformé ce concept intimidant en un système de diagnostic, une
+boîte à outils que tout le monde peut utiliser pour avoir une
+conversation structurée sur les pressions qui s’exercent sur une
+activité.</p>
+<p>Avec cette boîte à outils, nous pouvons cesser de nous fier à nos
+opinions et commencer à analyser le terrain. Appliquons-la immédiatement
+à un cas concret.</p>
+<p>Reprenons l’exemple du CRM évoqué en introduction. Au lieu d’un
+affrontement d’opinions, posons les bonnes questions avec la grille de
+Porter :</p>
+<ol type="1">
+<li><strong>Menace des nouveaux entrants :</strong> Est-il facile pour
+une startup de lancer un nouveau CRM aujourd’hui grâce au Cloud ?<br />
+</li>
+<li><strong>Pouvoir de vos fournisseurs :</strong> Votre CRM dépend-il
+d’un fournisseur unique comme Salesforce ou AWS, vous mettant à sa merci
+?<br />
+</li>
+<li><strong>Pouvoir de vos clients :</strong> Peuvent-ils facilement
+vous quitter pour un concurrent, ou sont-ils prisonniers de votre
+technologie ?<br />
+</li>
+<li><strong>Menace des produits de substitution :</strong> Un simple
+tableur ou un outil sans code peuvent-ils faire le travail et rendre
+votre solution obsolète ?<br />
+</li>
+<li><strong>Intensité de la rivalité :</strong> La bataille sur le
+marché des CRM se fait-elle sur les prix (un signe de commoditisation)
+ou sur l’innovation (un signe de genèse) ?</li>
+</ol>
+<p>Ainsi, le débat n’est pas ‘la vision de Jean-Pierre’ contre ‘l’avis
+de la Directrice Marketing’. C’est une analyse structurée des forces du
+marché. La stratégie commence ici, en regardant la réalité en face.</p>
+<p>L’analyse de Porter est un bon point de départ, voire un outil
+essentiel pour objectiver la discussion et comprendre la structure de la
+concurrence. Cependant, pour celui qui veut devenir un architecte du
+mouvement, elle a une faiblesse majeure : elle est fondamentalement
+statique.</p>
+<p>C’est une photographie parfaite des forces en présence, une carte
+météo qui vous montre où sont les anticyclones et les dépressions
+aujourd’hui. Elle est essentielle pour comprendre votre Position
+actuelle. Mais elle ne vous dit rien sur le Mouvement.</p>
+<p>Elle ne vous dit pas si la pression concurrentielle va augmenter ou
+diminuer. Elle n’anticipe pas qu’une technologie, aujourd’hui une
+curiosité de laboratoire (un substitut inexistant), deviendra un produit
+grand public dans deux ans. Surtout, elle ne décrit pas la dynamique
+d’évolution qui fait qu’un avantage concurrentiel innovant se transforme
+inévitablement en une simple commodité que tout le monde possède.</p>
+<p>En d’autres termes, le modèle de Porter vous aide à comprendre les
+règles du jeu, à comprendre pourquoi le mouvement est nécessaire et
+quelle force a le plus d’impact sur ce mouvement. Mais le modèle de
+Porter ne permet pas d’anticiper les coups suivants.</p>
+<p>Et c’est précisément le vide que les modèles que nous allons exposer
+dans les prochaines parties se proposent de combler. Notre objectif
+n’est donc pas seulement de vous donner une carte des positions, mais
+aussi une boussole pour naviguer le mouvement. Pour cela, nous devons
+aller au-delà de la photographie des forces concurrentielles. Nous
+devons comprendre la loi fondamentale qui régit leur évolution.</p>
+<p>C’est ce qui nous amène à changer de perspective : il ne suffit plus
+de voir l’organisation comme une machine sur un marché, il faut la voir
+comme un organisme dans un écosystème.</p>
+<h2 id="la-loi-de-lécosystème-évoluer-ou-mourir">La loi de l’écosystème
+: évoluer ou mourir</h2>
+<p>En général, nous pensons spontanément aux assets qui évoluent sur
+notre terrain de jeu comme étant des produits échangeables.</p>
+<p>Parmi ces éléments soumis aux règles de la concurrence, on trouve nos
+entreprises. Mais pour comprendre comment elles affrontent ce monde en
+mouvement, nous devons d’abord comprendre ce qu’est vraiment une
+entreprise.</p>
+<p>Pendant des décennies, nous avons géré nos entreprises comme des
+machines à optimiser. La théorie des organisations (Simon &amp; March,
+1958) a changé ce regard : l’entreprise n’est plus une mécanique, mais
+un <strong>organisme vivant</strong> à faire évoluer.</p>
+<p>Ce déplacement est capital pour notre propos. La structure et les
+processus sont exactement ce sur quoi nous avons prise. Quand Amazon
+passe d’une architecture monolithique aux microservices, quand Netflix
+adopte le chaos engineering, ce sont des choix de structure et de
+processus qui transforment l’organisation.</p>
+<p>L’organisation est donc la <strong>couche vivante et
+malléable</strong> que nous façonnons pour nous adapter au marché. C’est
+notre armure évolutive.</p>
+<h3 id="du-biologique-à-léconomique">Du biologique à l’économique</h3>
+<p>Et ici, le langage lui-même nous guide vers l’explication.
+Organisation partage sa racine avec organisme. Cette parenté
+étymologique n’est pas un hasard : elle révèle une analogie profonde qui
+va nous permettre d’appliquer à nos systèmes économiques une des
+théories les plus puissantes de l’évolution biologique.</p>
+<p>Car si nos organisations sont les structures et processus que nous
+modelons pour affronter un monde en mouvement, une question devient
+inévitable : à quelle vitesse devons-nous les faire évoluer ? Comment
+savoir quand nos choix sont urgents, et quand ils peuvent attendre ?</p>
+<p>C’est ici qu’intervient une loi fondamentale formulée par le
+biologiste Leigh Van Valen : l’hypothèse de la Reine Rouge. En référence
+au personnage de Lewis Carroll qui déclare à Alice : « Ici, vois-tu, il
+faut courir tant qu’on peut pour rester au même endroit. »</p>
+<p>Cette métaphore va nous révéler pourquoi l’évolution de nos
+organisations n’est pas optionnelle.</p>
+<p>Dans le pays des merveilles de Carroll, Alice court aux côtés de la
+Reine Rouge à travers un paysage qui défile à toute vitesse. Épuisée,
+elle s’arrête et constate avec stupéfaction qu’elle se trouve exactement
+au même endroit qu’au départ. La Reine lui explique alors cette règle
+étrange : dans ce monde, il faut courir aussi vite que possible
+simplement pour ne pas reculer.</p>
+<p>Leigh Van Valen a emprunté cette image en 1973 pour décrire un
+phénomène qu’il observait dans les archives fossiles : les espèces ne
+disparaissent pas parce qu’elles se dégradent, mais parce que leur
+environnement évolue constamment autour d’elles.</p>
+<p>Un prédateur développe une mâchoire plus puissante ? Ses proies
+doivent développer une carapace plus résistante. Un concurrent devient
+plus rapide ? Il faut le devenir aussi. Chaque adaptation d’un organisme
+modifie l’environnement des autres, les forçant à s’adapter à leur
+tour.</p>
+<h3 id="la-course-sans-ligne-darrivée">La course sans ligne
+d’arrivée</h3>
+<p>Ce qui rend cette dynamique particulièrement impitoyable, c’est qu’il
+n’existe pas d’état final, pas de perfection à atteindre qui permettrait
+de s’arrêter. La victoire n’est jamais définitive car le terrain de jeu
+lui-même se transforme en permanence. Une espèce qui cesse d’évoluer ne
+reste pas simplement statique : elle régresse relativement aux autres,
+et finit par disparaître.</p>
+<p>Transposée au monde économique, cette loi prend une dimension encore
+plus brutale. Vos concurrents innovent ? Vous devez innover. Ils
+optimisent leurs processus ? Vous devez optimiser les vôtres. Ils se
+digitalisent ? Vous devez vous digitaliser. Non pas pour les dépasser
+nécessairement, mais d’abord pour ne pas vous faire distancer.</p>
+<p>L’immobilité n’est pas une option : c’est une sentence de mort
+différée.</p>
+<p>Kodak maîtrisait parfaitement la photographie argentique. Nokia
+dominait le marché du téléphone mobile. Blockbuster régnait sur la
+location de vidéos. Ces organisations n’ont pas disparu parce qu’elles
+sont devenues mauvaises dans leur domaine.</p>
+<p>Elles ont disparu parce que, pendant qu’elles couraient sur leur
+piste habituelle, le monde autour d’elles s’est transformé. Elles
+couraient, certes, mais sur un tapis roulant qui reculait plus vite
+qu’elles n’avançaient.</p>
+<h3 id="laccélération-du-tapis-roulant">L’accélération du tapis
+roulant</h3>
+<p>Et voici peut-être l’aspect le plus vertigineux de notre époque : le
+tapis roulant accélère. Les cycles d’innovation se raccourcissent, la
+diffusion des technologies s’accélère, les barrières à l’entrée
+s’effondrent. Ce qui prenait des décennies dans les années 50 se joue
+désormais en quelques années, parfois en quelques mois. La vitesse
+minimale requise pour simplement « rester en place » augmente sans
+cesse.<br />
+Dans ce contexte, l’évolution n’est plus une stratégie parmi d’autres.
+C’est la condition même de survie.</p>
+<h2 id="reprendre-le-contrôle-choisir-sa-course">Reprendre le contrôle :
+choisir sa course</h2>
+<p>Cette course sans ligne d’arrivée a de quoi donner le vertige. L’idée
+de devoir courir toujours plus vite, juste pour ne pas reculer, est
+épuisante. Face à cette danse frénétique, la tentation est grande de
+vouloir suivre tous les mouvements, de réagir à chaque nouvelle
+technologie, de répondre à chaque innovation concurrente. C’est le
+chemin le plus sûr vers l’épuisement des ressources et des équipes.</p>
+<p>Mais c’est ici que la stratégie redevient un art.</p>
+<p>Ce n’est pas l’art de courir plus vite que tout le monde, partout et
+tout le temps. C’est l’art de choisir sa course. C’est décider sur
+quelle partie du terrain investir son énergie, où une accélération de
+votre part aura un impact maximal. Le but n’est pas d’être bon partout,
+mais d’être décisif là où ça compte.</p>
+<p>Le véritable enjeu stratégique n’est donc pas la vitesse pure, mais
+la pertinence du mouvement. Car, et c’est le point fondamental qui va
+guider le reste de notre réflexion, tous les mouvements ne se valent
+pas.</p>
+<div class="encadre">
+<p><strong>EXERCICE : Le Réflexe des Forces</strong></p>
+<p>Face à une question comme « L’IA va-t-elle remplacer le métier X ? »,
+résistez à l’opinion immédiate. Appliquez ce filtre :</p>
+<ol type="1">
+<li><p><strong>La demande existe-t-elle ?</strong> Y a-t-il une pression
+économique pour automatiser ces tâches ? (Presque toujours oui)</p></li>
+<li><p><strong>L’offre se développe-t-elle ?</strong> Des acteurs
+sont-ils en compétition pour créer des solutions ? (Vérifiez le
+marché)</p></li>
+<li><p><strong>Conclusion :</strong> La question n’est plus « si » mais
+« à quelle vitesse » la convergence de ces forces va transformer ce
+domaine.</p></li>
+</ol>
+<p><strong>Questions à poser systématiquement :</strong> - Si nous ne
+faisons rien, que se passera-t-il ? - Le mouvement est-il déjà enclenché
+chez nos concurrents ? - Mon opinion initiale résiste-t-elle à cette
+analyse ?</p>
+</div>
+<h2 id="tous-les-mouvements-ne-se-valent-pas">Tous les mouvements ne se
+valent pas</h2>
+<p>Le mouvement pour migrer votre infrastructure existante vers une
+nouvelle version d’un data center est-il de même nature que le mouvement
+pour lancer votre premier produit basé sur l’IA générative ? Bien sûr
+que non.</p>
+<p>Le premier s’apparente à la construction d’un pont. C’est une
+entreprise difficile, qui demande une expertise et une planification
+rigoureuse, mais qui obéit à des lois physiques connues. On sait comment
+faire, les plans sont possibles, les risques sont identifiables. C’est
+un problème compliqué.</p>
+<p>Le second s’apparente à l’exploration d’une jungle inconnue. Il n’y a
+pas de carte. Les règles sont à découvrir, le danger peut venir de
+partout et le chemin se dessine en marchant. C’est un problème
+complexe.</p>
+<p>Et voici la source de tant d’échecs, de budgets gaspillés et
+d’équipes épuisées dans nos organisations : nous appliquons
+systématiquement les méthodes de construction de ponts à l’exploration
+de la jungle.</p>
+<p>Nous exigeons des business plans détaillés pour des territoires
+inexplorés. Nous demandons des retour sur investissement (ROI, de
+l’anglais Return on Investment) précis pour des paris sur l’inconnu.
+Nous gérons le complexe avec les outils et la mentalité du compliqué, et
+nous nous étonnons que nos expéditions se perdent dans le
+brouillard.</p>
+<p>Avant même de choisir une direction, un stratège doit donc être
+capable de répondre à une question fondamentale : Sur quel type de
+terrain suis-je en train de m’engager ? Est-ce un territoire connu ou
+inconnu ? Un problème compliqué ou complexe ? Sans cette distinction,
+toute décision est un coup de dé.</p>
+<p>Heureusement, nous ne sommes pas démunis face à ce brouillard. Il
+existe une boussole, un outil simple mais puissant pour qualifier la
+nature de l’incertitude à laquelle nous faisons face. C’est le premier
+axe fondamental de notre grille de lecture, que nous allons découvrir
+dans le prochain chapitre pour apprendre à naviguer du chaos à la
+certitude.</p>
+
+    <!-- Navigation Précédent/Suivant -->
+    <div class="page-navigation">
+      <a href="01_Introduction.html" class="nav-button nav-button-prev">
+        <div>
+          <span class="nav-label">Précédent</span>
+          <div>Introduction</div>
+        </div>
+      </a>
+
+      <a href="03_Chapitre_2.html" class="nav-button nav-button-next">
+        <div>
+          <span class="nav-label">Suivant</span>
+          <div>Chapitre 2 : Naviguer dans le brouillard</div>
+        </div>
+      </a>
+    </div>
+
+    <!-- Footer avec copyright -->
+    <footer class="book-footer">
+      <div class="footer-content">
+        <p class="copyright">© 2026 Olivier Wulveryck - Tous droits réservés</p>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Navigation JavaScript -->
+<script>
+// Navigation pour fichiers HTML Google Docs
+(function() {
+  'use strict';
+
+  // Index de recherche global
+  let searchIndex = null;
+  let indexLoading = false;
+
+  // Charger l'index JSON au démarrage
+  async function loadSearchIndex() {
+    if (searchIndex !== null) return searchIndex;
+    if (indexLoading) return null;
+
+    indexLoading = true;
+    try {
+      const response = await fetch('search-index.json');
+      if (!response.ok) {
+        console.warn('Index de recherche non disponible');
+        return null;
+      }
+      searchIndex = await response.json();
+      console.log(`Index de recherche chargé : ${searchIndex.length} chapitres`);
+      return searchIndex;
+    } catch (error) {
+      console.error('Erreur chargement index de recherche:', error);
+      return null;
+    } finally {
+      indexLoading = false;
+    }
+  }
+
+  // Fonction de recherche
+  const searchInput = document.getElementById('search-input');
+  const searchResults = document.getElementById('search-results');
+  const mainContent = document.getElementById('main-content');
+
+  if (searchInput && searchResults && mainContent) {
+    let searchTimeout;
+
+    searchInput.addEventListener('input', function(e) {
+      clearTimeout(searchTimeout);
+      const query = e.target.value.trim().toLowerCase();
+
+      if (query.length < 2) {
+        searchResults.innerHTML = '';
+        searchResults.classList.remove('show');
+        return;
+      }
+
+      searchTimeout = setTimeout(() => {
+        performSearch(query);
+      }, 300);
+    });
+
+    async function performSearch(query) {
+      const results = [];
+
+      // 1. Recherche GLOBALE dans l'index (autres chapitres)
+      const index = await loadSearchIndex();
+      if (index) {
+        index.forEach(chapter => {
+          const content = chapter.content.toLowerCase();
+          if (content.includes(query.toLowerCase())) {
+            // Extraire un snippet autour du match
+            const snippet = getSnippet(chapter.content, query);
+            results.push({
+              chapterId: chapter.id,
+              chapterTitle: chapter.title,
+              chapterPart: chapter.part,
+              chapterUrl: chapter.url,
+              snippet: snippet,
+              isGlobal: true  // Flag pour résultat global
+            });
+          }
+        });
+      }
+
+      // 2. Recherche LOCALE dans le chapitre actuel
+      const searchableElements = mainContent.querySelectorAll('p, h1, h2, h3, h4, blockquote, li');
+
+      searchableElements.forEach((element, index) => {
+        const text = element.textContent.toLowerCase();
+        if (text.includes(query)) {
+          const snippet = getSnippet(element.textContent, query);
+          results.push({
+            element: element,
+            snippet: snippet,
+            index: index,
+            isGlobal: false  // Résultat local
+          });
+        }
+      });
+
+      // 3. Trier : résultats locaux en premier, puis globaux
+      results.sort((a, b) => {
+        if (a.isGlobal === b.isGlobal) return 0;
+        return a.isGlobal ? 1 : -1;
+      });
+
+      displayResults(results, query);
+    }
+
+    function getSnippet(text, query) {
+      const maxLength = 150;
+      const lowerText = text.toLowerCase();
+      const index = lowerText.indexOf(query.toLowerCase());
+
+      if (index === -1) return text.substring(0, maxLength) + '...';
+
+      const start = Math.max(0, index - 50);
+      const end = Math.min(text.length, index + query.length + 100);
+
+      let snippet = text.substring(start, end);
+      if (start > 0) snippet = '...' + snippet;
+      if (end < text.length) snippet = snippet + '...';
+
+      return snippet;
+    }
+
+    function displayResults(results, query) {
+      if (results.length === 0) {
+        searchResults.innerHTML = '<div class="search-no-results">Aucun résultat trouvé</div>';
+        searchResults.classList.add('show');
+        return;
+      }
+
+      const maxResults = 20;  // Augmenté pour résultats globaux
+      let html = `<div class="search-count">${results.length} résultat${results.length > 1 ? 's' : ''} trouvé${results.length > 1 ? 's' : ''}</div>`;
+
+      // Séparer résultats locaux et globaux
+      const localResults = results.filter(r => !r.isGlobal);
+      const globalResults = results.filter(r => r.isGlobal);
+
+      // Afficher résultats locaux (chapitre actuel)
+      if (localResults.length > 0) {
+        html += '<div class="search-section-header">Dans ce chapitre</div>';
+        localResults.slice(0, 5).forEach((result) => {
+          const highlightedSnippet = highlightQuery(result.snippet, query);
+          html += `
+            <div class="search-result search-result-local" data-index="${result.index}">
+              <div class="search-snippet">${highlightedSnippet}</div>
+            </div>
+          `;
+        });
+      }
+
+      // Afficher résultats globaux (autres chapitres)
+      if (globalResults.length > 0) {
+        html += '<div class="search-section-header">Dans le livre</div>';
+        globalResults.slice(0, 15).forEach((result) => {
+          const highlightedSnippet = highlightQuery(result.snippet, query);
+          html += `
+            <div class="search-result search-result-global" data-url="${result.chapterUrl}">
+              <div class="search-chapter-info">
+                ${result.chapterPart ? `<span class="search-part">${result.chapterPart}</span> › ` : ''}
+                <span class="search-chapter">${result.chapterTitle}</span>
+              </div>
+              <div class="search-snippet">${highlightedSnippet}</div>
+            </div>
+          `;
+        });
+      }
+
+      if (results.length > maxResults) {
+        html += `<div class="search-more">... et ${results.length - maxResults} autres résultats</div>`;
+      }
+
+      searchResults.innerHTML = html;
+      searchResults.classList.add('show');
+
+      // Gestionnaires de clic
+
+      // Résultats locaux : scroll vers l'élément
+      searchResults.querySelectorAll('.search-result-local').forEach(resultDiv => {
+        resultDiv.addEventListener('click', function() {
+          const index = parseInt(this.dataset.index);
+          const element = document.querySelectorAll('#main-content p, #main-content h1, #main-content h2, #main-content h3, #main-content h4, #main-content blockquote, #main-content li')[index];
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            element.classList.add('search-highlight');
+            setTimeout(() => element.classList.remove('search-highlight'), 2000);
+          }
+          searchResults.classList.remove('show');
+          searchInput.value = '';
+        });
+      });
+
+      // Résultats globaux : navigation vers le chapitre
+      searchResults.querySelectorAll('.search-result-global').forEach(resultDiv => {
+        resultDiv.addEventListener('click', function() {
+          const url = this.dataset.url;
+          window.location.href = url;
+        });
+      });
+    }
+
+    function highlightQuery(text, query) {
+      const regex = new RegExp(`(${escapeRegex(query)})`, 'gi');
+      return text.replace(regex, '<mark>$1</mark>');
+    }
+
+    function escapeRegex(str) {
+      return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
+
+    // Fermer les résultats si clic en dehors
+    document.addEventListener('click', function(e) {
+      if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+        searchResults.classList.remove('show');
+      }
+    });
+  }
+
+
+  // ===============================================
+  // THEME MANAGEMENT
+  // ===============================================
+
+  const THEME_KEY = 'gdoc-theme';
+  const THEME_LIGHT = 'light';
+  const THEME_DARK = 'dark';
+
+  function initTheme() {
+    const themeToggle = document.getElementById('theme-toggle');
+    if (!themeToggle) return;
+
+    // Load saved theme or detect system preference
+    let savedTheme = loadThemePreference();
+    if (!savedTheme) {
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      savedTheme = prefersDark ? THEME_DARK : THEME_LIGHT;
+    }
+
+    applyTheme(savedTheme);
+
+    // Toggle on button click
+    themeToggle.addEventListener('click', function() {
+      const currentTheme = document.body.classList.contains('dark-theme') ? THEME_DARK : THEME_LIGHT;
+      const newTheme = currentTheme === THEME_LIGHT ? THEME_DARK : THEME_LIGHT;
+      applyTheme(newTheme);
+      saveThemePreference(newTheme);
+    });
+
+    // Listen for system theme changes
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+      if (!loadThemePreference()) {
+        applyTheme(e.matches ? THEME_DARK : THEME_LIGHT);
+      }
+    });
+  }
+
+  function applyTheme(theme) {
+    if (theme === THEME_DARK) {
+      document.body.classList.add('dark-theme');
+    } else {
+      document.body.classList.remove('dark-theme');
+    }
+  }
+
+  function saveThemePreference(theme) {
+    try {
+      localStorage.setItem(THEME_KEY, theme);
+    } catch (e) {
+      console.warn('Cannot save theme preference:', e);
+    }
+  }
+
+  function loadThemePreference() {
+    try {
+      return localStorage.getItem(THEME_KEY);
+    } catch (e) {
+      console.warn('Cannot load theme preference:', e);
+      return null;
+    }
+  }
+
+  // ===============================================
+  // FONT SIZE CONTROLS
+  // ===============================================
+
+  const FONT_SIZE_KEY = 'gdoc-font-size';
+  const FONT_SIZE_MIN = 10;
+  const FONT_SIZE_MAX = 18;
+  const FONT_SIZE_DEFAULT = 12;
+  const FONT_SIZE_STEP = 1;
+
+  function initFontControls() {
+    const fontIncrease = document.getElementById('font-increase');
+    const fontDecrease = document.getElementById('font-decrease');
+    const fontReset = document.getElementById('font-reset');
+
+    if (!fontIncrease || !fontDecrease || !fontReset) return;
+
+    // Load saved font size
+    let fontSize = loadFontSize();
+    applyFontSize(fontSize);
+
+    fontIncrease.addEventListener('click', function() {
+      if (fontSize < FONT_SIZE_MAX) {
+        fontSize += FONT_SIZE_STEP;
+        applyFontSize(fontSize);
+        saveFontSize(fontSize);
+      }
+    });
+
+    fontDecrease.addEventListener('click', function() {
+      if (fontSize > FONT_SIZE_MIN) {
+        fontSize -= FONT_SIZE_STEP;
+        applyFontSize(fontSize);
+        saveFontSize(fontSize);
+      }
+    });
+
+    fontReset.addEventListener('click', function() {
+      fontSize = FONT_SIZE_DEFAULT;
+      applyFontSize(fontSize);
+      saveFontSize(fontSize);
+    });
+  }
+
+  function applyFontSize(size) {
+    document.documentElement.style.setProperty('--font-size-base', size + 'pt');
+    document.documentElement.style.setProperty('--font-size-h1', (size * 2) + 'pt');
+    document.documentElement.style.setProperty('--font-size-h2', (size * 1.5) + 'pt');
+    document.documentElement.style.setProperty('--font-size-h3', (size * 1.17) + 'pt');
+    document.documentElement.style.setProperty('--font-size-code', (size * 0.83) + 'pt');
+  }
+
+  function saveFontSize(size) {
+    try {
+      localStorage.setItem(FONT_SIZE_KEY, size);
+    } catch (e) {
+      console.warn('Cannot save font size:', e);
+    }
+  }
+
+  function loadFontSize() {
+    try {
+      const saved = localStorage.getItem(FONT_SIZE_KEY);
+      return saved ? parseInt(saved) : FONT_SIZE_DEFAULT;
+    } catch (e) {
+      console.warn('Cannot load font size:', e);
+      return FONT_SIZE_DEFAULT;
+    }
+  }
+
+  // ===============================================
+  // SIDEBAR MANAGEMENT
+  // ===============================================
+
+  function initSidebar() {
+    const sidebarToggle = document.getElementById('sidebar-toggle');
+    const sidebar = document.getElementById('book-sidebar');
+
+    if (!sidebarToggle || !sidebar) return;
+
+    // Toggle on button click
+    sidebarToggle.addEventListener('click', function() {
+      document.body.classList.toggle('sidebar-open');
+    });
+
+    // Close sidebar when clicking outside on mobile
+    document.addEventListener('click', function(e) {
+      if (window.innerWidth <= 768) {
+        if (!sidebar.contains(e.target) && !sidebarToggle.contains(e.target)) {
+          document.body.classList.remove('sidebar-open');
+        }
+      }
+    });
+
+    // Initialize part collapse/expand
+    initPartCollapse();
+
+    // Mark current chapter
+    markCurrentChapter();
+  }
+
+  function initPartCollapse() {
+    const parts = document.querySelectorAll('.sidebar-toc .toc-part');
+
+    parts.forEach(part => {
+      part.addEventListener('click', function() {
+        this.classList.toggle('collapsed');
+      });
+    });
+  }
+
+  function markCurrentChapter() {
+    const currentFile = window.location.pathname.split('/').pop();
+    const tocItems = document.querySelectorAll('.sidebar-toc .toc-item');
+
+    tocItems.forEach(item => {
+      const href = item.getAttribute('href');
+      if (href === currentFile) {
+        item.classList.add('current');
+      }
+    });
+  }
+
+  // ===============================================
+  // CHAPTER OUTLINE GENERATION
+  // ===============================================
+
+  function generateChapterOutline() {
+    const mainContent = document.getElementById('main-content');
+    const outlineContainer = document.getElementById('chapter-outline');
+
+    if (!mainContent || !outlineContainer) return;
+
+    // Find all H2 and H3 headings
+    const headings = mainContent.querySelectorAll('h2, h3');
+
+    if (headings.length === 0) {
+      outlineContainer.style.display = 'none';
+      return;
+    }
+
+    // Generate outline HTML
+    let outlineHTML = '<div class="outline-header">Dans ce chapitre</div>';
+
+    headings.forEach((heading, index) => {
+      const level = heading.tagName.toLowerCase() === 'h2' ? 2 : 3;
+      const text = heading.textContent;
+      const id = heading.id || 'heading-' + index;
+
+      // Add ID if not present
+      if (!heading.id) {
+        heading.id = id;
+      }
+
+      outlineHTML += `
+        <a href="#${id}" class="outline-item level-${level}" data-heading-id="${id}">
+          ${text}
+        </a>
+      `;
+    });
+
+    outlineContainer.innerHTML = outlineHTML;
+
+    // Add click handlers for smooth scrolling
+    outlineContainer.querySelectorAll('.outline-item').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('data-heading-id');
+        const target = document.getElementById(targetId);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+          // Close sidebar on mobile
+          if (window.innerWidth <= 768) {
+            document.body.classList.remove('sidebar-open');
+          }
+        }
+      });
+    });
+  }
+
+  // ===============================================
+  // SCROLL SPY
+  // ===============================================
+
+  let scrollSpyTimeout;
+
+  function initScrollSpy() {
+    const mainContent = document.getElementById('main-content');
+    if (!mainContent) return;
+
+    // Throttled scroll handler
+    window.addEventListener('scroll', function() {
+      clearTimeout(scrollSpyTimeout);
+      scrollSpyTimeout = setTimeout(updateScrollSpy, 100);
+    }, { passive: true });
+
+    // Initial update
+    updateScrollSpy();
+  }
+
+  function updateScrollSpy() {
+    const headings = document.querySelectorAll('#main-content h2, #main-content h3');
+    const outlineItems = document.querySelectorAll('.outline-item');
+
+    if (headings.length === 0 || outlineItems.length === 0) return;
+
+    // Find currently visible heading
+    let activeHeading = null;
+    const scrollPosition = window.scrollY + 100; // Offset for navbar
+
+    headings.forEach(heading => {
+      const headingTop = heading.offsetTop;
+      if (headingTop <= scrollPosition) {
+        activeHeading = heading;
+      }
+    });
+
+    // Update outline highlighting
+    outlineItems.forEach(item => {
+      item.classList.remove('active');
+      if (activeHeading && item.getAttribute('data-heading-id') === activeHeading.id) {
+        item.classList.add('active');
+      }
+    });
+  }
+
+  // ===============================================
+  // READING PROGRESS BAR
+  // ===============================================
+
+  let progressTimeout;
+
+  function initProgressBar() {
+    const progressBar = document.getElementById('reading-progress');
+    if (!progressBar) return;
+
+    window.addEventListener('scroll', function() {
+      clearTimeout(progressTimeout);
+      progressTimeout = setTimeout(updateProgressBar, 50);
+    }, { passive: true });
+
+    // Initial update
+    updateProgressBar();
+  }
+
+  function updateProgressBar() {
+    const progressBar = document.getElementById('reading-progress');
+    if (!progressBar) return;
+
+    const windowHeight = window.innerHeight;
+    const documentHeight = document.documentElement.scrollHeight;
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+    const scrollableDistance = documentHeight - windowHeight;
+    const progress = scrollableDistance > 0 ? (scrollTop / scrollableDistance) * 100 : 0;
+
+    progressBar.style.width = Math.min(progress, 100) + '%';
+  }
+
+  // ===============================================
+  // KEYBOARD SHORTCUTS
+  // ===============================================
+
+  // Extend existing keyboard shortcuts
+  document.addEventListener('keydown', function(e) {
+    // Existing: Ctrl+K for search
+    if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+      e.preventDefault();
+      const searchInput = document.getElementById('search-input');
+      if (searchInput) searchInput.focus();
+    }
+
+    // NEW: 'd' for dark mode toggle
+    if (e.key === 'd' && !e.ctrlKey && !e.metaKey && document.activeElement.tagName !== 'INPUT') {
+      e.preventDefault();
+      const themeToggle = document.getElementById('theme-toggle');
+      if (themeToggle) themeToggle.click();
+    }
+
+    // NEW: 's' for sidebar toggle (mobile)
+    if (e.key === 's' && !e.ctrlKey && !e.metaKey && document.activeElement.tagName !== 'INPUT') {
+      e.preventDefault();
+      if (window.innerWidth <= 768) {
+        document.body.classList.toggle('sidebar-open');
+      }
+    }
+
+    // Escape closes everything
+    if (e.key === 'Escape') {
+      const searchInput = document.getElementById('search-input');
+      const searchResults = document.getElementById('search-results');
+
+      if (searchInput) {
+        searchInput.value = '';
+        searchInput.blur();
+      }
+      if (searchResults) {
+        searchResults.classList.remove('show');
+      }
+      if (window.innerWidth <= 768) {
+        document.body.classList.remove('sidebar-open');
+      }
+    }
+  });
+
+  // ===============================================
+  // INITIALIZATION
+  // ===============================================
+
+  // Charger l'index de recherche au démarrage de la page
+  document.addEventListener('DOMContentLoaded', function() {
+    // Load search index (existing)
+    loadSearchIndex().then(() => {
+      console.log('Index de recherche prêt');
+    });
+
+    // Initialize new features
+    initTheme();
+    initFontControls();
+    initSidebar();
+    generateChapterOutline();
+    initScrollSpy();
+    initProgressBar();
+  });
+})();
+</script>
+
+  <!-- Script pour marquer le chapitre actuel dans le menu -->
+  <script>
+    (function() {
+      const currentFile = '02_Chapitre_1.html';
+      if (currentFile) {
+        const tocItems = document.querySelectorAll('.toc-item');
+        tocItems.forEach(item => {
+          if (item.getAttribute('href') === currentFile) {
+            item.classList.add('current');
+          }
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

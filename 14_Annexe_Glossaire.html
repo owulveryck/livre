@@ -1,0 +1,2242 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Olivier Wulveryck" />
+  <title>Annexe Glossaire</title>
+  <style>
+  /* Import polices Google Fonts */
+  @import url('https://fonts.googleapis.com/css2?family=Literata:ital,wght@0,400;0,700;1,400&family=Lato:wght@400;700&display=swap');
+
+  /* ===============================================
+     CSS CUSTOM PROPERTIES (THEME VARIABLES)
+     =============================================== */
+
+  :root {
+    /* Light theme (default) */
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8f9fa;
+    --bg-navbar: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    --bg-sidebar: #f8f9fa;
+    --bg-code: #f5f5f5;
+    --bg-blockquote: #fff9e6;
+    --bg-table-header: #f39c12;
+
+    --text-primary: #2c3e50;
+    --text-secondary: #34495e;
+    --text-muted: #7f8c8d;
+    --text-heading: #2c3e50;
+    --text-navbar: #ffffff;
+
+    --border-primary: #ddd;
+    --border-secondary: #ecf0f1;
+    --border-accent: #f39c12;
+
+    --link-color: #3498db;
+    --link-hover: #2980b9;
+
+    --shadow-light: 0 2px 8px rgba(0,0,0,0.15);
+    --shadow-medium: 0 4px 12px rgba(0,0,0,0.2);
+
+    /* Font sizes (user-adjustable) */
+    --font-size-base: 12pt;
+    --font-size-h1: 24pt;
+    --font-size-h2: 18pt;
+    --font-size-h3: 14pt;
+    --font-size-code: 10pt;
+  }
+
+  /* Dark theme */
+  body.dark-theme {
+    --bg-primary: #1a1a1a;
+    --bg-secondary: #2d2d2d;
+    --bg-navbar: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    --bg-sidebar: #252525;
+    --bg-code: #2d2d2d;
+    --bg-blockquote: #2a2a1a;
+    --bg-table-header: #c87f0a;
+
+    --text-primary: #e4e4e4;
+    --text-secondary: #b8b8b8;
+    --text-muted: #888888;
+    --text-heading: #f0f0f0;
+    --text-navbar: #e4e4e4;
+
+    --border-primary: #404040;
+    --border-secondary: #333333;
+    --border-accent: #f39c12;
+
+    --link-color: #5dade2;
+    --link-hover: #3498db;
+
+    --shadow-light: 0 2px 8px rgba(0,0,0,0.4);
+    --shadow-medium: 0 4px 12px rgba(0,0,0,0.5);
+  }
+
+  /* Smooth transitions for theme switching */
+  body {
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  /* Respect reduced motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* ===============================================
+     CORPS DE TEXTE
+     =============================================== */
+
+  /* Corps de texte */
+  body {
+    font-family: 'Literata', Georgia, serif;
+    font-size: var(--font-size-base);
+    line-height: 1.65;
+    color: var(--text-primary);
+    background-color: var(--bg-primary);
+    margin: 0;
+    padding: 0;
+    padding-top: 80px; /* Espace pour la navigation fixe */
+    padding-left: 0;
+    transition: padding-left 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+  }
+
+  /* Desktop: sidebar visible, add left padding */
+  @media (min-width: 769px) {
+    body {
+      padding-left: 280px;
+    }
+  }
+
+  #main-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2em;
+  }
+
+  /* Titres */
+  h1 {
+    font-family: 'Lato', 'Helvetica Neue', sans-serif;
+    font-size: var(--font-size-h1);
+    font-weight: 700;
+    color: var(--text-heading);
+    margin-top: 36pt;
+    margin-bottom: 18pt;
+  }
+
+  h2 {
+    font-family: 'Lato', 'Helvetica Neue', sans-serif;
+    font-size: var(--font-size-h2);
+    font-weight: 700;
+    color: var(--text-secondary);
+    margin-top: 24pt;
+    margin-bottom: 12pt;
+  }
+
+  h3 {
+    font-family: 'Lato', 'Helvetica Neue', sans-serif;
+    font-size: var(--font-size-h3);
+    font-weight: 700;
+    color: var(--text-muted);
+    margin-top: 18pt;
+    margin-bottom: 9pt;
+  }
+
+  h4 {
+    font-family: 'Lato', 'Helvetica Neue', sans-serif;
+    font-size: 12pt;
+    font-weight: 700;
+    color: var(--text-muted);
+    margin-top: 12pt;
+    margin-bottom: 6pt;
+  }
+
+  /* Encadrés (blockquotes) */
+  blockquote {
+    background-color: var(--bg-blockquote);
+    border-left: 4px solid var(--border-accent);
+    padding: 1em 1.5em;
+    margin: 1.5em 0;
+    font-style: normal;
+    border-radius: 4px;
+  }
+
+  /* Code inline */
+  code {
+    font-family: 'Courier New', monospace;
+    font-size: var(--font-size-code);
+    background-color: var(--bg-code);
+    color: var(--text-primary);
+    padding: 2px 6px;
+    border-radius: 3px;
+  }
+
+  /* Blocs de code */
+  pre {
+    background-color: var(--bg-code);
+    padding: 1em;
+    border-radius: 4px;
+    overflow-x: auto;
+  }
+
+  pre code {
+    background-color: transparent;
+    padding: 0;
+  }
+
+  /* Tableaux */
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1.5em 0;
+  }
+
+  th, td {
+    border: 1px solid var(--border-primary);
+    padding: 8px 12px;
+    text-align: left;
+    color: var(--text-primary);
+  }
+
+  th {
+    background-color: var(--bg-table-header);
+    color: white;
+    font-weight: 700;
+  }
+
+  /* Images */
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 1.5em auto;
+  }
+
+  /* Listes */
+  ul, ol {
+    margin: 1em 0;
+    padding-left: 2em;
+  }
+
+  li {
+    margin-bottom: 0.5em;
+  }
+
+  /* Liens */
+  a {
+    color: var(--link-color);
+    transition: color 0.2s ease;
+  }
+
+  a:hover {
+    color: var(--link-hover);
+  }
+
+  /* Emphase */
+  strong {
+    font-weight: 700;
+    color: var(--text-heading);
+  }
+
+  em {
+    font-style: italic;
+  }
+
+  /* Paragraphes */
+  p {
+    margin-bottom: 1em;
+  }
+
+  /* ===============================================
+     BARRE DE NAVIGATION FIXE
+     =============================================== */
+
+  .gdoc-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: var(--bg-navbar);
+    color: var(--text-navbar);
+    box-shadow: var(--shadow-light);
+    z-index: 1000;
+  }
+
+  .navbar-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0.75em 1.5em;
+  }
+
+  /* Fil d'Ariane */
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    font-size: 0.85em;
+    color: #ecf0f1;
+    margin-bottom: 0.5em;
+    flex-wrap: wrap;
+  }
+
+  .breadcrumb a {
+    color: var(--link-color);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .breadcrumb a:hover {
+    color: var(--link-hover);
+    text-decoration: underline;
+  }
+
+  .breadcrumb-separator {
+    color: var(--text-muted);
+  }
+
+  .breadcrumb-current {
+    color: var(--text-navbar);
+    font-weight: 600;
+  }
+
+  /* Barre d'outils */
+  .navbar-tools {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    flex-wrap: wrap;
+  }
+
+  /* Barre de recherche */
+  .search-container {
+    position: relative;
+    flex: 1;
+    min-width: 200px;
+    max-width: 500px;
+  }
+
+  .search-input {
+    width: 100%;
+    padding: 0.5em 2.5em 0.5em 0.75em;
+    border: 2px solid var(--border-secondary);
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-family: 'Lato', sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    transition: all 0.3s;
+  }
+
+  .search-input:focus {
+    outline: none;
+    border-color: var(--link-color);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+  }
+
+  .search-input::placeholder {
+    color: var(--text-muted);
+  }
+
+  .search-icon {
+    position: absolute;
+    right: 0.75em;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    pointer-events: none;
+  }
+
+  .search-results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin-top: 0.5em;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-primary);
+    border-radius: 8px;
+    box-shadow: var(--shadow-medium);
+    max-height: 400px;
+    overflow-y: auto;
+    display: none;
+    z-index: 1001;
+  }
+
+  .search-results.show {
+    display: block;
+  }
+
+  .search-count {
+    padding: 0.75em 1em;
+    background: var(--bg-secondary);
+    font-size: 0.85em;
+    color: var(--text-muted);
+    font-weight: 600;
+    border-bottom: 1px solid var(--border-primary);
+  }
+
+  .search-result {
+    padding: 0.75em 1em;
+    border-bottom: 1px solid var(--border-secondary);
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .search-result:hover {
+    background: var(--bg-secondary);
+  }
+
+  .search-snippet {
+    font-size: 0.9em;
+    color: var(--text-primary);
+    line-height: 1.4;
+  }
+
+  .search-snippet mark {
+    background-color: var(--border-accent);
+    color: white;
+    padding: 2px 4px;
+    border-radius: 2px;
+    font-weight: 600;
+  }
+
+  .search-no-results,
+  .search-more {
+    padding: 1em;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.9em;
+  }
+
+  .search-highlight {
+    background-color: #fff9e6 !important;
+    border-left: 4px solid #f39c12 !important;
+    padding-left: 1em !important;
+    transition: all 0.3s;
+  }
+
+  /* Sections de résultats de recherche globale */
+  .search-section-header {
+    padding: 0.75em 1em;
+    background: var(--text-secondary);
+    color: var(--text-navbar);
+    font-size: 0.85em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-top: 1px solid var(--border-primary);
+  }
+
+  /* Info chapitre dans résultats globaux */
+  .search-chapter-info {
+    font-size: 0.85em;
+    color: var(--link-color);
+    margin-bottom: 0.25em;
+    font-weight: 600;
+  }
+
+  .search-part {
+    color: var(--text-muted);
+    font-weight: 400;
+  }
+
+  .search-chapter {
+    color: var(--text-primary);
+  }
+
+  /* Différenciation visuelle */
+  .search-result-local {
+    border-left: 3px solid #27ae60;  /* Vert pour résultats locaux */
+  }
+
+  .search-result-global {
+    border-left: 3px solid #3498db;  /* Bleu pour résultats globaux */
+  }
+
+  .search-result-global:hover {
+    background: #e8f5ff;
+    cursor: pointer;
+  }
+
+  /* Menu déroulant sommaire */
+  .toc-dropdown {
+    position: relative;
+  }
+
+  .toc-toggle {
+    padding: 0.5em 1.25em;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-family: 'Lato', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+  }
+
+  .toc-toggle:hover {
+    background: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3);
+  }
+
+  .toc-toggle::after {
+    content: '▼';
+    font-size: 0.7em;
+    transition: transform 0.3s;
+  }
+
+  .toc-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 0.5em;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-primary);
+    border-radius: 8px;
+    box-shadow: var(--shadow-medium);
+    min-width: 300px;
+    max-height: 500px;
+    overflow-y: auto;
+    display: none;
+    z-index: 1001;
+  }
+
+  .toc-menu.show {
+    display: block;
+  }
+
+  .toc-menu-header {
+    padding: 1em;
+    background: var(--bg-navbar);
+    color: var(--text-navbar);
+    font-weight: 700;
+    font-size: 1.1em;
+    border-radius: 8px 8px 0 0;
+  }
+
+  .toc-menu-content {
+    padding: 0.5em 0;
+  }
+
+  .toc-part {
+    padding: 0.75em 1em;
+    background: var(--bg-secondary);
+    font-weight: 700;
+    font-size: 0.85em;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .toc-item {
+    display: block;
+    padding: 0.75em 1.5em;
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: all 0.2s;
+    border-left: 3px solid transparent;
+  }
+
+  .toc-item:hover {
+    background: var(--bg-secondary);
+    border-left-color: var(--link-color);
+    padding-left: 1.75em;
+  }
+
+  .toc-item.current {
+    background: rgba(52, 152, 219, 0.1);
+    border-left-color: var(--border-accent);
+    font-weight: 600;
+    color: var(--text-heading);
+  }
+
+  /* Navigation Précédent/Suivant */
+  .page-navigation {
+    display: flex;
+    justify-content: space-between;
+    gap: 1em;
+    margin-top: 3em;
+    padding-top: 2em;
+    border-top: 2px solid var(--border-secondary);
+  }
+
+  .nav-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    padding: 0.75em 1.5em;
+    background: var(--link-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 600;
+    transition: all 0.3s;
+    max-width: 45%;
+  }
+
+  .nav-button:hover {
+    background: var(--link-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+  }
+
+  .nav-button.disabled {
+    background: var(--bg-secondary);
+    color: var(--text-muted);
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  .nav-button-prev::before {
+    content: '←';
+    font-size: 1.2em;
+  }
+
+  .nav-button-next::after {
+    content: '→';
+    font-size: 1.2em;
+  }
+
+  .nav-label {
+    display: block;
+    font-size: 0.75em;
+    opacity: 0.8;
+    margin-bottom: 0.25em;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    body {
+      padding-top: 140px; /* Navbar plus haute sur mobile */
+      padding-left: 0; /* Pas de sidebar par défaut */
+    }
+
+    .navbar-container {
+      padding: 0.5em 1em;
+    }
+
+    .breadcrumb {
+      font-size: 0.75em;
+    }
+
+    .navbar-tools {
+      flex-wrap: wrap;
+      gap: 0.5em;
+    }
+
+    .search-container {
+      flex: 1 1 100%;
+      max-width: none;
+    }
+
+    .font-controls {
+      order: 1;
+      margin-left: 0;
+    }
+
+    .theme-toggle {
+      order: 2;
+    }
+
+    .sidebar-toggle {
+      order: 3;
+    }
+
+    .toc-menu {
+      right: 0;
+      left: 0;
+      margin: 0.5em 1em;
+    }
+
+    .page-navigation {
+      flex-direction: column;
+    }
+
+    .nav-button {
+      max-width: none;
+    }
+  }
+
+  /* Footer */
+  .book-footer {
+    background: var(--bg-navbar);
+    color: var(--text-navbar);
+    margin-top: 4em;
+    padding: 2em 0;
+    border-top: 3px solid var(--border-accent);
+  }
+
+  .footer-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 2em;
+    text-align: center;
+  }
+
+  .copyright {
+    margin: 0;
+    font-size: 0.9em;
+    color: var(--text-navbar);
+    font-family: 'Lato', sans-serif;
+  }
+
+  /* ===============================================
+     READING PROGRESS BAR
+     =============================================== */
+
+  .reading-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 4px;
+    background: linear-gradient(90deg, #3498db 0%, #f39c12 100%);
+    z-index: 1002;
+    transition: width 0.1s ease;
+    box-shadow: 0 2px 4px rgba(52, 152, 219, 0.3);
+  }
+
+  body.dark-theme .reading-progress {
+    background: linear-gradient(90deg, #5dade2 0%, #f39c12 100%);
+  }
+
+  /* ===============================================
+     PERSISTENT SIDEBAR
+     =============================================== */
+
+  .book-sidebar {
+    position: fixed;
+    top: 80px;
+    left: 0;
+    width: 280px;
+    height: calc(100vh - 80px);
+    background: var(--bg-sidebar);
+    border-right: 1px solid var(--border-primary);
+    overflow-y: auto;
+    overflow-x: hidden;
+    z-index: 900;
+    transition: left 0.3s ease;
+    box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+  }
+
+  /* Mobile: hidden by default */
+  @media (max-width: 768px) {
+    .book-sidebar {
+      left: -280px;
+    }
+
+    body.sidebar-open .book-sidebar {
+      left: 0;
+    }
+  }
+
+  /* Sidebar header */
+  .sidebar-header {
+    padding: 1.5em 1em;
+    background: var(--bg-navbar);
+    color: var(--text-navbar);
+    border-bottom: 2px solid var(--border-accent);
+  }
+
+  .sidebar-header h2 {
+    margin: 0;
+    font-size: 1.1em;
+    font-weight: 700;
+    color: var(--text-navbar);
+  }
+
+  /* TOC sections */
+  .sidebar-toc {
+    padding: 0.5em 0;
+  }
+
+  .toc-section {
+    margin-bottom: 0.5em;
+  }
+
+  .sidebar-toc .toc-part {
+    padding: 0.75em 1em;
+    background: var(--bg-secondary);
+    font-weight: 700;
+    font-size: 0.85em;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    transition: background 0.2s ease;
+  }
+
+  .sidebar-toc .toc-part:hover {
+    background: var(--border-secondary);
+  }
+
+  .part-toggle {
+    font-size: 0.8em;
+    transition: transform 0.3s ease;
+    display: inline-block;
+  }
+
+  .sidebar-toc .toc-part.collapsed .part-toggle {
+    transform: rotate(-90deg);
+  }
+
+  .toc-part-chapters {
+    max-height: 500px;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+
+  .sidebar-toc .toc-part.collapsed + .toc-part-chapters {
+    max-height: 0;
+  }
+
+  .sidebar-toc .toc-item {
+    display: block;
+    padding: 0.75em 1.5em;
+    color: var(--text-primary);
+    text-decoration: none;
+    font-size: 0.9em;
+    transition: all 0.2s ease;
+    border-left: 3px solid transparent;
+  }
+
+  .sidebar-toc .toc-item:hover {
+    background: var(--bg-secondary);
+    border-left-color: var(--link-color);
+    padding-left: 1.75em;
+  }
+
+  .sidebar-toc .toc-item.current {
+    background: rgba(52, 152, 219, 0.1);
+    border-left-color: var(--border-accent);
+    font-weight: 600;
+    color: var(--text-heading);
+  }
+
+  /* Separator */
+  .sidebar-separator {
+    height: 1px;
+    background: var(--border-primary);
+    margin: 1em 0;
+  }
+
+  /* Chapter outline */
+  .chapter-outline {
+    padding: 0 0 1em 0;
+  }
+
+  .outline-header {
+    padding: 0.75em 1em;
+    font-weight: 700;
+    font-size: 0.85em;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background: var(--bg-secondary);
+  }
+
+  .outline-item {
+    display: block;
+    padding: 0.5em 1em;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.85em;
+    transition: all 0.2s ease;
+    border-left: 3px solid transparent;
+  }
+
+  .outline-item.level-2 {
+    padding-left: 1.5em;
+  }
+
+  .outline-item.level-3 {
+    padding-left: 2.5em;
+    font-size: 0.8em;
+  }
+
+  .outline-item:hover {
+    background: var(--bg-secondary);
+    border-left-color: var(--link-color);
+    color: var(--text-primary);
+  }
+
+  .outline-item.active {
+    background: rgba(52, 152, 219, 0.1);
+    border-left-color: var(--border-accent);
+    font-weight: 600;
+    color: var(--text-heading);
+  }
+
+  /* Scrollbar styling */
+  .book-sidebar::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .book-sidebar::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+  }
+
+  .book-sidebar::-webkit-scrollbar-thumb {
+    background: var(--border-primary);
+    border-radius: 4px;
+  }
+
+  .book-sidebar::-webkit-scrollbar-thumb:hover {
+    background: var(--text-muted);
+  }
+
+  /* ===============================================
+     NAVBAR CONTROLS
+     =============================================== */
+
+  /* Theme toggle */
+  .theme-toggle {
+    padding: 0.5em 1em;
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 20px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.25em;
+  }
+
+  .theme-toggle:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+  }
+
+  .theme-icon {
+    transition: opacity 0.3s ease;
+  }
+
+  body:not(.dark-theme) .theme-icon-light {
+    opacity: 1;
+  }
+
+  body:not(.dark-theme) .theme-icon-dark {
+    opacity: 0;
+    position: absolute;
+  }
+
+  body.dark-theme .theme-icon-light {
+    opacity: 0;
+    position: absolute;
+  }
+
+  body.dark-theme .theme-icon-dark {
+    opacity: 1;
+  }
+
+  /* Font controls */
+  .font-controls {
+    display: flex;
+    gap: 0.25em;
+    align-items: center;
+    margin-left: auto;
+  }
+
+  .font-btn {
+    padding: 0.4em 0.8em;
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.9em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .font-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-1px);
+  }
+
+  .font-btn:active {
+    transform: translateY(0);
+  }
+
+  /* Sidebar toggle (mobile) */
+  .sidebar-toggle {
+    padding: 0.5em 1em;
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 20px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: none;
+  }
+
+  .sidebar-toggle:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: 768px) {
+    .sidebar-toggle {
+      display: block;
+    }
+  }
+
+  /* ===============================================
+     RESPONSIVE
+     =============================================== */
+
+  /* Impression - masquer la navigation et footer */
+  @media print {
+    .gdoc-navbar,
+    .book-sidebar,
+    .reading-progress,
+    .page-navigation,
+    .book-footer,
+    .theme-toggle,
+    .font-controls,
+    .sidebar-toggle {
+      display: none !important;
+    }
+
+    body {
+      padding-top: 0 !important;
+      padding-left: 0 !important;
+    }
+
+    /* Force light theme for printing */
+    body.dark-theme {
+      background: white !important;
+      color: black !important;
+    }
+  }
+  </style>
+</head>
+<body>
+  <!-- Reading Progress Bar -->
+  <div id="reading-progress" class="reading-progress" aria-hidden="true"></div>
+
+  <!-- Barre de navigation fixe -->
+  <nav class="gdoc-navbar">
+    <div class="navbar-container">
+      <!-- Fil d'Ariane -->
+      <div class="breadcrumb">
+        <a href="00_Avant-propos.html">L&#39;Architecte du mouvement</a>
+        <span class="breadcrumb-separator">›</span>
+        <span>Annexes</span>
+        <span class="breadcrumb-separator">›</span>
+        <span class="breadcrumb-current">Glossaire</span>
+      </div>
+
+      <!-- Barre d'outils -->
+      <div class="navbar-tools">
+        <!-- Barre de recherche -->
+        <div class="search-container">
+          <input type="text" id="search-input" class="search-input" placeholder="Rechercher dans tout le livre... (Ctrl+K)" autocomplete="off"></input>
+          <span class="search-icon">🔍</span>
+          <div id="search-results" class="search-results"></div>
+        </div>
+
+        <!-- Font controls -->
+        <div class="font-controls">
+          <button id="font-decrease" class="font-btn" aria-label="Diminuer la taille du texte" title="A-">A-</button>
+          <button id="font-reset" class="font-btn" aria-label="Réinitialiser la taille du texte" title="Reset">A</button>
+          <button id="font-increase" class="font-btn" aria-label="Augmenter la taille du texte" title="A+">A+</button>
+        </div>
+
+        <!-- Theme toggle -->
+        <button id="theme-toggle" class="theme-toggle" aria-label="Basculer le mode sombre">
+          <span class="theme-icon theme-icon-light">☀️</span>
+          <span class="theme-icon theme-icon-dark">🌙</span>
+        </button>
+
+        <!-- Sidebar toggle (mobile) -->
+        <button id="sidebar-toggle" class="sidebar-toggle" aria-label="Afficher/Masquer le sommaire">
+          <span class="hamburger-icon">☰</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Persistent Sidebar -->
+  <aside id="book-sidebar" class="book-sidebar" aria-label="Navigation du livre">
+    <!-- Header -->
+    <div class="sidebar-header">
+      <h2>L&#39;Architecte du mouvement</h2>
+    </div>
+
+    <!-- Full Book TOC -->
+    <nav class="sidebar-toc" aria-label="Table des matières complète">
+      <div class="toc-section">
+        <a href="00_Avant-propos.html" class="toc-item" data-chapter-id="00">Avant-propos</a>
+        <a href="01_Introduction.html" class="toc-item" data-chapter-id="01">Introduction</a>
+      </div>
+
+      <div class="toc-section">
+        <div class="toc-part" data-part="1">
+          <span class="part-toggle">▼</span>
+          <span class="part-title">Partie I - Le Terrain de Jeu</span>
+        </div>
+        <div class="toc-part-chapters">
+          <a href="02_Chapitre_1.html" class="toc-item" data-chapter-id="02">Chapitre 1 : Stratégie, jeu, position et mouvement</a>
+          <a href="03_Chapitre_2.html" class="toc-item" data-chapter-id="03">Chapitre 2 : Naviguer dans le brouillard</a>
+        </div>
+      </div>
+
+      <div class="toc-section">
+        <div class="toc-part" data-part="2">
+          <span class="part-toggle">▼</span>
+          <span class="part-title">Partie II - L&#39;Organisation face au Mouvement</span>
+        </div>
+        <div class="toc-part-chapters">
+          <a href="04_Chapitre_3.html" class="toc-item" data-chapter-id="04">Chapitre 3 : L&#39;anatomie du mur invisible</a>
+          <a href="05_Chapitre_4.html" class="toc-item" data-chapter-id="05">Chapitre 4 : Structure et pouvoir</a>
+        </div>
+      </div>
+
+      <div class="toc-section">
+        <div class="toc-part" data-part="3">
+          <span class="part-toggle">▼</span>
+          <span class="part-title">Partie III - Les Lois du Mouvement</span>
+        </div>
+        <div class="toc-part-chapters">
+          <a href="06_Chapitre_5.html" class="toc-item" data-chapter-id="06">Chapitre 5 : La loi du climat</a>
+          <a href="07_Chapitre_6.html" class="toc-item" data-chapter-id="07">Chapitre 6 : La loi de l&#39;évolution</a>
+          <a href="08_Chapitre_7.html" class="toc-item" data-chapter-id="08">Chapitre 7 : La loi de l&#39;écosystème</a>
+        </div>
+      </div>
+
+      <div class="toc-section">
+        <div class="toc-part" data-part="4">
+          <span class="part-toggle">▼</span>
+          <span class="part-title">Partie IV - La Pratique du Mouvement</span>
+        </div>
+        <div class="toc-part-chapters">
+          <a href="09_Chapitre_8.html" class="toc-item" data-chapter-id="09">Chapitre 8 : Observer le terrain</a>
+          <a href="10_Chapitre_9.html" class="toc-item" data-chapter-id="10">Chapitre 9 : Orienter et décider</a>
+          <a href="11_Chapitre_10.html" class="toc-item" data-chapter-id="11">Chapitre 10 : Jouer et apprendre</a>
+          <a href="12_Chapitre_11.html" class="toc-item" data-chapter-id="12">Chapitre 11 : Cultiver le mouvement</a>
+        </div>
+      </div>
+
+      <div class="toc-section">
+        <a href="13_Conclusion.html" class="toc-item" data-chapter-id="13">Conclusion</a>
+      </div>
+
+      <div class="toc-section">
+        <div class="toc-part" data-part="annexes">
+          <span class="part-toggle">▼</span>
+          <span class="part-title">Annexes</span>
+        </div>
+        <div class="toc-part-chapters">
+          <a href="14_Annexe_Glossaire.html" class="toc-item" data-chapter-id="14">Glossaire</a>
+          <a href="15_Annexe_Bibliographie.html" class="toc-item" data-chapter-id="15">Bibliographie</a>
+          <a href="16_Annexe_Antisèche_Évolution.html" class="toc-item" data-chapter-id="16">Antisèche Évolution</a>
+          <a href="17_Annexe_Methods_Analysis.html" class="toc-item" data-chapter-id="17">Methods Analysis</a>
+          <a href="18_Annexe_Catalogue_Gameplays.html" class="toc-item" data-chapter-id="18">Catalogue Gameplays</a>
+          <a href="19_Annexe_Grilles_Décision.html" class="toc-item" data-chapter-id="19">Grilles Décision</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Separator -->
+    <div class="sidebar-separator"></div>
+
+    <!-- Chapter Outline (generated by JS) -->
+    <nav id="chapter-outline" class="chapter-outline" aria-label="Plan du chapitre actuel">
+      <!-- Populated dynamically by generateChapterOutline() -->
+    </nav>
+  </aside>
+
+  <!-- Contenu principal -->
+  <div id="main-content">
+<h2 id="glossaire">Glossaire</h2>
+<p>Ce glossaire définit les termes clés utilisés tout au long de cet
+ouvrage. Les définitions sont orientées vers l’usage stratégique et
+technologique, pas vers l’acception académique générale.</p>
+<hr />
+<h3 id="a">A</h3>
+<p><strong>Actif (stratégique)</strong> Toute ressource — technologique,
+humaine, financière, relationnelle ou réputationnelle — qui contribue à
+la capacité d’action de l’organisation. Contrairement à la définition
+comptable, un actif stratégique possède une double nature : il confère
+une capacité tout en générant de l’inertie.</p>
+<p><strong>API (Application Programming Interface)</strong> Interface de
+programmation permettant à des systèmes différents de communiquer. Dans
+une stratégie ILC, les API sont les instruments du <em>Leverage</em> —
+elles permettent de mesurer l’usage et de détecter les innovations
+émergentes. Sans stratégie API, pas de moteur de détection possible.
+<em>Voir aussi :</em> ILC, Moteur de Détection</p>
+<hr />
+<h3 id="c">C</h3>
+<p><strong>CAPEX (Capital Expenditure)</strong> Dépenses
+d’investissement immobilisées au bilan comptable. Argent « solide » qui
+crée de l’inertie : une fois investi dans un data center ou une licence
+perpétuelle, il lie l’organisation à des choix passés. <em>Voir aussi
+:</em> OPEX</p>
+<p><strong>Capacité stratégique</strong> Ce qu’un actif permet de faire
+: livrer de la valeur, traiter des transactions, résoudre des problèmes,
+coordonner l’action. C’est le versant positif de tout actif.
+<em>Antonyme :</em> Inertie</p>
+<p><strong>Carrying Cost (Coût de Portage)</strong> Coût annuel de
+maintenance, d’exploitation et d’opportunité d’un actif. Invisible au
+bilan comptable, il représente souvent 25 à 40% du coût initial de
+développement, chaque année. Un actif de 2M€ peut coûter 5M€ sur 5 ans
+en Coût de Portage.</p>
+<p><strong>Chaleur latente (métaphore)</strong> Par analogie avec la
+thermodynamique, énergie nécessaire pour « casser les liens » de l’état
+précédent lors d’une transition de phase. Dans le contexte
+organisationnel : l’effort invisible (reconversion des experts,
+migration des dépendances, acceptation des pertes comptables) requis
+avant que le changement ne devienne visible.</p>
+<p><strong>Climat</strong> Ensemble des forces économiques et
+technologiques que vous subissez mais ne contrôlez pas. Le climat
+représente les règles du jeu qui s’imposent à tous les acteurs :
+évolution vers la commodité, effets de réseau, offre et demande, inertie
+des clients. Contrairement à la Doctrine (que vous contrôlez) et à la
+Manœuvre stratégique (que vous choisissez), le climat est subi. Le
+stratège avisé ne combat pas le climat — il l’utilise. <em>Voir aussi
+:</em> Schémas climatiques, Doctrine, Manœuvre stratégique</p>
+<p><strong>Commodité (Phase IV)</strong> État final de l’évolution
+technologique où un composant devient standardisé, ubiquitaire,
+interchangeable et invisible. Caractéristiques : marché mature, volumes
+élevés, marges faibles, compétition sur les coûts. Exemples :
+l’électricité, le stockage cloud, les bases de données relationnelles.
+<em>Voir aussi :</em> Genèse, Sur Mesure, Produit</p>
+<p><strong>Complexe (domaine)</strong> Dans le cadre Cynefin : domaine
+des « inconnus inconnus » où les relations de cause à effet ne sont
+compréhensibles qu’en rétrospective. Le système ne peut pas être
+décomposé sans être détruit. Approche recommandée : sonder, sentir,
+répondre. <em>Voir aussi :</em> Compliqué, Cynefin</p>
+<p><strong>Compliqué (domaine)</strong> Dans le cadre Cynefin : domaine
+des « connus inconnus » où une solution existe mais est cachée. Le
+système peut être analysé et décomposé. Approche recommandée : analyser,
+puis répondre. <em>Voir aussi :</em> Complexe, Cynefin</p>
+<p><strong>Cynefin</strong> Cadre de diagnostic des systèmes développé
+par Dave Snowden, distinguant les domaines Simple, Compliqué, Complexe
+et Chaotique. Le mot gallois signifie « habitat » ou « lieu
+d’appartenance ». Cynefin aide à choisir l’approche adaptée à la nature
+du problème.</p>
+<p><strong>Cygne Noir</strong> Événement imprévisible à fort impact.
+Concept développé par Nassim Nicholas Taleb. Un Cygne Noir possède trois
+caractéristiques : il est extrêmement rare, son impact est majeur, et il
+semble rétrospectivement prévisible. Dans le contexte de la cartographie
+Wardley, le Cygne Noir ne change pas les règles du jeu — il change le
+jeu lui-même. Il peut tuer des composants instantanément, faire surgir
+de nouveaux besoins, ou changer brutalement la visibilité. La carte ne
+prédit pas le Cygne Noir, mais elle vous prépare à l’identifier
+rapidement. <em>Voir aussi :</em> Extreministan, Visibilité</p>
+<hr />
+<h3 id="d">D</h3>
+<p><strong>Dette technique</strong> Terme euphémique désignant le coût
+futur des raccourcis pris aujourd’hui dans le développement logiciel.
+Dans ce livre, nous préférons parler de « dette stratégique » car
+l’impact dépasse le code : il affecte la capacité de mouvement de
+l’organisation.</p>
+<p><strong>Doctrine</strong> Ensemble des principes et disciplines qui
+régissent le fonctionnement d’une organisation. Terme emprunté à Sun Tzu
+(Fa) et formalisé par Simon Wardley. La doctrine est le seul facteur
+stratégique que vous contrôlez totalement. Elle se développe en quatre
+phases : Hygiène, Contexte, Excellence, Évolution.</p>
+<p><strong>Due diligence stratégique</strong> Évaluation de la cohérence
+stratégique des actifs technologiques lors d’une fusion ou acquisition.
+Au-delà de l’audit financier et technique traditionnel, la due diligence
+stratégique utilise la carte de Wardley pour détecter les anomalies
+(composants Custom là où ils devraient être Commodité), évaluer
+l’adéquation des compétences (profils EVT vs phases des composants), et
+visualiser les synergies réelles. <em>Voir aussi :</em> EVT</p>
+<hr />
+<h3 id="e">E</h3>
+<p><strong>Efficacité (Effectiveness)</strong> Faire la bonne chose.
+Mesure de l’utilité réelle d’une action. Une équipe peut être très
+efficiente (rapide, économe) tout en étant inefficace (produisant
+quelque chose d’inutile). <em>Voir aussi :</em> Efficience</p>
+<p><strong>Efficience (Efficiency)</strong> Bien faire la chose. Mesure
+du rapport entre les ressources consommées et le résultat obtenu.
+L’efficience ne doit être optimisée qu’après avoir validé l’efficacité.
+<em>Voir aussi :</em> Efficacité</p>
+<p><strong>Effets de réseau croisés</strong> Dynamique de plateforme où
+la valeur pour chaque groupe (producteurs et consommateurs) dépend de la
+taille de l’autre groupe. Plus il y a de producteurs, plus les
+consommateurs affluent ; plus il y a de consommateurs, plus les
+producteurs veulent être présents. Ce cercle vertueux crée des barrières
+à l’entrée considérables une fois la masse critique atteinte.
+Caractéristique distinctive des modèles plateforme. <em>Voir aussi
+:</em> Plateforme, ILC</p>
+<p><strong>Embrace and Extend</strong> Stratégie agressive consistant à
+adopter un standard ouvert (Embrace), puis à ajouter des extensions
+propriétaires (Extend) qui créent une dépendance à votre écosystème.
+Popularisée par Microsoft dans les années 1990. La phase implicite
+finale est « Extinguish » (éteindre) — les utilisateurs dépendent des
+extensions propriétaires et le standard ouvert est de facto abandonné.
+<em>Voir aussi :</em> Manœuvre stratégique</p>
+<p><strong>EVT (Explorateurs, Villageois, Town Planners)</strong> Modèle
+d’alignement des talents selon les phases d’évolution. Dérivé du travail
+de Robert X. Cringely (Commandos, Infanterie, Police). Les Explorateurs
+excellent en Genèse et Sur-mesure. Les Villageois transforment les
+prototypes en produits fiables. Les Urbanistes (Town Planners)
+industrialisent et optimisent les commodités. L’erreur fatale consiste à
+mal assigner les profils aux phases. <em>Voir aussi :</em> Explorateur,
+Villageois, Urbaniste</p>
+<p><strong>Explorateur</strong> Profil humain ou organisationnel adapté
+aux phases de Genèse et Sur Mesure. À l’aise avec l’incertitude, l’échec
+et l’expérimentation. Se définit par la mission plutôt que par l’outil.
+Premier profil du modèle EVT. <em>Voir aussi :</em> EVT, Villageois,
+Urbaniste</p>
+<p><strong>Extreministan</strong> Monde statistique où les événements
+suivent des lois de puissance, un seul événement peut dominer tous les
+autres, et la moyenne est trompeuse. Concept développé par Nassim
+Nicholas Taleb. Sur une carte de Wardley, les phases de Genèse et
+Sur-mesure relèvent de l’Extreministan : impossible de prédire le ROI ou
+la durée, une idée sur mille réussit (« winner takes all »). Les Cygnes
+Noirs surgissent en Extreministan. <em>Antonyme :</em> Médiocristan
+<em>Voir aussi :</em> Cygne Noir</p>
+<hr />
+<h3 id="f">F</h3>
+<p><strong>F.I.R.E.</strong> Acronyme pour Fast, Inexpensive,
+Restrained, Elegant. Principe d’ingénierie développé par Dan Ward (US
+Air Force) pour des initiatives légères et réversibles. Opposé aux
+projets « Étoile de la Mort » massifs et fragiles.</p>
+<p><strong>Flow Analysis</strong> Analyse des flux circulant dans une
+carte de Wardley. Distingue deux types de flux : le flux évolutif
+(toujours de gauche à droite, représentant la gravité économique) et le
+flux de capital (bidirectionnel, représentant les échanges de valeur —
+argent, données, connaissance, travail). La Flow Analysis révèle les
+fuites de valeur, les asymétries et les goulots d’étranglement
+invisibles sur une carte statique. <em>Voir aussi :</em> SPOF</p>
+<hr />
+<h3 id="g">G</h3>
+<p><strong>Manœuvre stratégique</strong> Ensemble des actions délibérées
+qu’une organisation peut choisir d’exécuter pour modifier sa position
+relative sur la carte. Contrairement au Climat (subi) et à la Doctrine
+(universelle), la Manœuvre est intrinsèquement contextuelle — sa valeur
+dépend de votre position, celle de vos adversaires, et les forces
+climatiques en cours. Une même manœuvre peut être brillante dans un
+contexte et suicidaire dans un autre.</p>
+<p>À ne pas confondre avec <strong>tactique</strong> : la manœuvre
+change le <strong>contexte</strong> de l’affrontement (positionnement
+sur la carte), tandis que la tactique optimise la <strong>performance
+dans ce contexte</strong> (efficacité de l’exécution). Wardley utilise
+le terme anglais <em>Gameplay</em> pour désigner ce concept.</p>
+<p>Exemples : ILC, Open Source, PID, Strangler Fig, Embrace and Extend.
+<em>Voir aussi :</em> Climat, Doctrine, Tactique</p>
+<p><strong>Genèse (Phase I)</strong> Phase initiale de l’évolution
+technologique où un composant est nouveau, incertain et expérimental.
+Caractéristiques : marché indéfini, échec fréquent et attendu,
+différenciation maximale, absence de standards. <em>Voir aussi :</em>
+Sur Mesure, Produit, Commodité</p>
+<hr />
+<h3 id="i">I</h3>
+<p><strong>ILC (Innovate, Leverage, Commoditize)</strong> Modèle
+stratégique de plateforme développé par Simon Wardley, associé à Amazon
+Web Services. Phase 1 (Innovate) : fournir des briques technologiques de
+base et externaliser le risque d’innovation à l’écosystème. Phase 2
+(Leverage) : utiliser l’asymétrie d’information pour détecter les
+signaux de succès via un Moteur de Détection. Phase 3 (Commoditize) :
+lancer sa propre version des innovations validées, commoditiser et
+intégrer. Machine à croissance perpétuelle mais intrinsèquement
+prédatrice. <em>Voir aussi :</em> Plateforme, Moteur de Détection,
+API</p>
+<p><strong>Inertie</strong> Propriété (pas une force) proportionnelle à
+la « masse » organisationnelle, résistant au changement de direction.
+L’inertie n’est pas un défaut — c’est une conséquence mécanique du
+succès passé. Elle se manifeste dans les trois dimensions :
+investissements passés, dépendances systémiques, identités
+professionnelles.</p>
+<p><strong>Intuition éclairée</strong> Capacité à identifier
+instantanément une configuration stratégique sans repasser consciemment
+par toutes les étapes du raisonnement analytique. Résulte de la
+reconnaissance de patterns acquise par la pratique répétée avec feedback
+observable. Contrairement à l’opinion (nourrie par les biais cognitifs),
+l’intuition éclairée s’appuie sur une régularité observable de
+l’environnement (les lois de l’évolution) et une expérience validée.
+L’analyse rigoureuse est l’entraînement ; l’intuition éclairée est la
+performance. <em>Voir aussi :</em> Value Flywheel Effect, Vélocité
+d’adaptation</p>
+<hr />
+<h3 id="l">L</h3>
+<p><strong>Land Grab</strong> Course à l’occupation d’un nouveau marché
+émergent. Consiste à sacrifier la rentabilité à court terme pour
+conquérir rapidement des parts de marché et devenir le standard de facto
+avant la concurrence. Particulièrement pertinent dans les marchés à
+forts effets de réseau où le premier à atteindre la masse critique
+devient difficile à déloger. Risque : épuiser ses ressources avant
+d’avoir atteint le point de bascule. <em>Voir aussi :</em> Manœuvre
+stratégique, Effets de réseau croisés</p>
+<hr />
+<h3 id="m">M</h3>
+<p><strong>Matrice de Stacey</strong> Outil de diagnostic croisant deux
+axes : le niveau d’accord entre parties prenantes (sur les objectifs) et
+le niveau de certitude (sur les moyens). Permet de distinguer les
+problèmes Simples, Compliqués, Complexes et Chaotiques.</p>
+<p><strong>Médiocristan</strong> Monde statistique où les événements
+suivent une distribution normale (courbe de Gauss), les écarts sont
+limités, et la prédiction est possible. Concept développé par Nassim
+Nicholas Taleb. Sur une carte de Wardley, les phases Produit et
+Commodité relèvent du Médiocristan : on peut appliquer Six Sigma,
+optimiser les processus, prévoir les coûts. Tout ce qui survit finit au
+Médiocristan. <em>Antonyme :</em> Extreministan</p>
+<p><strong>Momentum</strong> Inertie positive construite délibérément
+dans une direction stratégique choisie. Contrairement à l’inertie subie
+(poids du passé qui empêche de pivoter), le momentum est un élan
+accumulé qui propulse l’organisation plus loin, plus vite. Chaque
+ressource mobilisée, chaque compétence développée, chaque itération du
+cycle stratégique devient un actif qui alimente le mouvement. La
+différence entre inertie subie et momentum construit réside dans
+l’intention et la conscience. L’architecte novice subit l’inertie ;
+l’architecte expérimenté construit du momentum. <em>Voir aussi :</em>
+Inertie, Volant d’inertie, Value Flywheel Effect</p>
+<p><strong>Moteur de Détection (Sensing Engine)</strong> Capacité d’une
+plateforme à observer les patterns d’usage et détecter les signaux
+faibles de succès avant le reste du marché. En tant que fournisseur de
+l’infrastructure sous-jacente, la plateforme possède une vue omnisciente
+sur les données de consommation. Elle voit le futur se dessiner dans ses
+métriques de facturation. Composante centrale de la phase
+<em>Leverage</em> du modèle ILC. <em>Voir aussi :</em> ILC, API</p>
+<hr />
+<h3 id="n">N</h3>
+<p><strong>NIH (Not Invented Here)</strong> Syndrome organisationnel
+poussant à réinventer ce qui existe déjà, par ego ou ignorance. Se
+manifeste par le refus d’utiliser des composants standards alors qu’ils
+répondraient au besoin. Exemple : reconstruire un CRM « maison » alors
+que Salesforce existe.</p>
+<p><strong>No Core (principe)</strong> Doctrine stratégique affirmant
+qu’il n’existe pas de « cœur de métier » permanent. Tout est
+transitoire. L’organisation doit être capable de cannibaliser ses
+propres succès avant que le marché ne le fasse à sa place.</p>
+<hr />
+<h3 id="o">O</h3>
+<p><strong>OPEX (Operational Expenditure)</strong> Dépenses de
+fonctionnement. Argent « liquide » qui préserve la flexibilité : vous
+payez à l’usage, vous pouvez pivoter sans coûts irrécupérables. Le
+passage au Cloud ou au SaaS est avant tout une stratégie de liquidité
+financière. <em>Voir aussi :</em> CAPEX</p>
+<hr />
+<h3 id="p">P</h3>
+<p><strong>PID (Peur, Incertitude, Doute)</strong> De l’anglais FUD
+(Fear, Uncertainty, Doubt). Frein artificiel conçu pour ralentir
+l’évolution en disseminant stratégiquement des informations — vraies,
+partiellement vraies, ou délibérément vagues — pour induire la peur du
+changement chez les clients des concurrents. Exemple : « Cette
+technologie Open Source n’a pas de support entreprise. Qui
+appellera-t-on à trois heures du matin ? » Objectif : gagner du temps
+pour adapter sa propre offre. Arme à double tranchant qui peut nuire à
+la réputation si découverte. <em>Voir aussi :</em> Manœuvre
+stratégique</p>
+<p><strong>Plateforme</strong> Modèle d’affaires qui crée de la valeur
+en facilitant les échanges entre deux ou plusieurs groupes
+interdépendants — généralement producteurs et consommateurs. Ne possède
+pas nécessairement les moyens de production. Orchestre les interactions
+et capture une partie de la valeur qui transite. Sa puissance réside
+dans les effets de réseau croisés. Exemples : App Store, Uber, Amazon
+Marketplace. <em>Voir aussi :</em> Effets de réseau croisés, ILC</p>
+<p><strong>Produit (Phase III)</strong> Phase où un composant
+technologique est standardisé, les fonctionnalités sont comparables
+entre fournisseurs, et la compétition s’intensifie. Caractéristiques :
+marché défini, benchmarks disponibles, focus sur les fonctionnalités et
+le prix. <em>Voir aussi :</em> Genèse, Sur Mesure, Commodité</p>
+<hr />
+<h3 id="r">R</h3>
+<p><strong>Reine Rouge (Effet)</strong> Hypothèse évolutive tirée
+d’Alice au Pays des Merveilles : « Il faut courir aussi vite que
+possible simplement pour rester sur place. » Dans le contexte économique
+: la compétition copie et améliore constamment, ce qui transforme
+l’innovation d’hier en commodité de demain.</p>
+<hr />
+<h3 id="s">S</h3>
+<p><strong>Schémas climatiques</strong> Patterns récurrents de forces
+économiques et technologiques qui s’exercent sur toute carte de Wardley,
+indépendamment du contexte spécifique. Forces accélératrices : effets de
+réseau, économies d’échelle, open source, réglementation
+pro-concurrence. Forces freinatrices : inertie organisationnelle, effets
+de verrouillage, réglementation protectrice, fragmentation des
+standards. Ces forces sont l’équivalent des courants marins pour le
+navigateur — on ne peut pas les arrêter, mais on peut les utiliser.
+<em>Voir aussi :</em> Climat</p>
+<p><strong>SPOF (Single Point of Failure)</strong> Point de défaillance
+unique. Composant par lequel tous les flux passent, créant un risque de
+panne totale du système. La Flow Analysis révèle les SPOF invisibles sur
+une carte statique. Action recommandée : diversifier ou créer des
+redondances. <em>Voir aussi :</em> Flow Analysis</p>
+<p><strong>Stacey</strong> <em>Voir :</em> Matrice de Stacey</p>
+<p><strong>Strangler Fig (Figuier Étrangleur)</strong> Pattern de
+migration progressive où un nouveau système enveloppe progressivement
+l’ancien jusqu’à le remplacer entièrement, sans interruption de service.
+Métaphore botanique : le figuier parasite enveloppe son hôte. Opposé au
+Big Bang (tout réécrire d’un coup). Stratégie recommandée : identifier
+les composants à commoditiser, isoler le cœur de valeur, remplacer
+progressivement. La carte permet de planifier ce remplacement composant
+par composant en visualisant les dépendances. <em>Voir aussi :</em>
+Manœuvre stratégique</p>
+<p><strong>Sur Mesure (Phase II)</strong> Phase où un composant
+technologique fonctionne mais reste artisanal, nécessitant des experts
+pour chaque implémentation. Caractéristiques : solutions sur-mesure,
+faible reproductibilité, dépendance aux talents rares. <em>Voir aussi
+:</em> Genèse, Produit, Commodité</p>
+<hr />
+<h3 id="t">T</h3>
+<p><strong>Tactique</strong> Du grec <em>tassein</em> (ordonner,
+arranger). Art de l’engagement direct et de l’optimisation de
+l’exécution dans un contexte donné. La tactique cherche à faire mieux ce
+que vous faites déjà — améliorer l’efficience, coordonner les actions,
+optimiser les processus. Elle se distingue de la <strong>manœuvre
+stratégique</strong>, qui cherche à changer le contexte lui-même.</p>
+<p>Exemples tactiques : mise en place de Six Sigma pour réduire les
+défauts, adoption d’Agile pour accélérer les itérations, refactoring de
+code pour améliorer la maintenabilité. Ces actions sont précieuses, mais
+elles n’altèrent pas votre position relative sur la carte de
+Wardley.</p>
+<p>La confusion entre tactique et manœuvre est courante. Wardley
+critique les organisations qui sur-investissent dans les tactiques
+(faire mieux) au détriment des manœuvres (changer le terrain). <em>Voir
+aussi :</em> Manœuvre stratégique, Doctrine</p>
+<p><strong>Théâtre de la Stratégie</strong> Expression désignant les
+rituels organisationnels qui simulent la réflexion stratégique sans
+produire de décisions réelles. Symptômes : PowerPoints interminables,
+consensus mous, absence de choix explicites.</p>
+<p><strong>Tour et Douves (Tower and Moat)</strong> Stratégie défensive
+consistant à ériger des barrières artificielles (douves) pour empêcher
+les concurrents d’attaquer le produit différenciant (tour) ou les
+clients d’en sortir. Douves typiques : protocoles propriétaires, formats
+fermés, brevets, frais de sortie, clauses d’exclusivité. Critiquée par
+Wardley pour sa vision statique : dans un climat d’évolution
+perpétuelle, les douves finissent par s’assécher. Tactique de moisson
+(<em>harvesting</em>) temporaire, pas une stratégie de long terme.
+<em>Voir aussi :</em> Manœuvre stratégique, Climat</p>
+<hr />
+<h3 id="u">U</h3>
+<p><strong>Urbaniste</strong> Profil humain ou organisationnel adapté
+aux phases de Produit et Commodité. Expert en standardisation,
+optimisation et industrialisation. Se définit par la maîtrise de l’outil
+et la rigueur du processus. Troisième profil du modèle EVT. <em>Voir
+aussi :</em> EVT, Explorateur, Villageois</p>
+<hr />
+<h3 id="v">V</h3>
+<p><strong>Value Flywheel Effect</strong> Modèle de boucle
+auto-renforçante développé par David Anderson, Mark McCann et Michael
+O’Reilly, inspiré par les pratiques d’Amazon. La création de valeur suit
+un cycle en quatre phases : <strong>Clarity of Purpose</strong>
+(comprendre le besoin utilisateur), <strong>Challenge and
+Landscape</strong> (diagnostiquer le terrain), <strong>Next Best
+Actions</strong> (décider et agir), <strong>Long Term Value</strong>
+(récolter la valeur et la réinvestir). Chaque itération du cycle
+alimente la suivante : les capacités développées lors de la première
+carte facilitent la deuxième, les patterns reconnus lors du deuxième
+diagnostic accélèrent le troisième. Le volant tourne de plus en plus
+vite à effort égal, transformant le cycle stratégique permanent en
+avantage cumulatif. <em>Voir aussi :</em> Volant d’inertie, Momentum,
+Vélocité d’adaptation</p>
+<p><strong>Vélocité d’adaptation</strong> Rapidité à laquelle une
+organisation parcourt le cycle stratégique complet (Observer → Orienter
+→ Décider → Agir). Dans un monde en mouvement perpétuel, l’avantage
+concurrentiel va à celui qui s’adapte le plus vite, pas nécessairement à
+celui qui possède le meilleur plan initial. Le volant d’inertie
+stratégique n’a pas pour but de réduire l’effort, mais d’augmenter la
+vélocité à effort égal : tracer des cartes plus vite, identifier les
+manœuvres pertinentes plus rapidement, pivoter avant les concurrents. La
+victoire va au plus véloce. <em>Voir aussi :</em> Value Flywheel Effect,
+Volant d’inertie, Reine Rouge</p>
+<p><strong>Villageois</strong> Profil humain ou organisationnel adapté à
+la phase Produit. Transforme les prototypes des Explorateurs en produits
+fiables et rentables. Construit, stabilise, documente. Courroie de
+transmission entre Explorateurs et Urbanistes. Deuxième profil du modèle
+EVT. <em>Voir aussi :</em> EVT, Explorateur, Urbaniste</p>
+<p><strong>Visibilité</strong> Mesure de la proximité d’un composant
+avec le besoin utilisateur, calculée par le nombre minimum de sauts
+(liens de dépendance) qui l’en séparent. Un composant à un ou deux sauts
+est visible — il influence directement la décision d’achat. Un composant
+à quatre ou cinq sauts est invisible — c’est de l’infrastructure
+technique. La visibilité peut changer brutalement suite à un Cygne Noir
+: un changement de contexte (réglementaire, concurrentiel) peut remonter
+un composant invisible au premier plan. <em>Voir aussi :</em> Cygne
+Noir</p>
+<p><strong>Volant d’inertie (Flywheel)</strong> Métaphore physique du
+moteur stratégique qui s’accélère avec la pratique. Comme un volant
+mécanique, les premiers tours demandent une force colossale, mais chaque
+rotation accumule de l’énergie cinétique. Plus il tourne vite, moins il
+demande d’énergie pour maintenir sa vitesse. Transposé à la stratégie,
+chaque itération du cycle — tracer une carte, diagnostiquer l’inertie,
+choisir un gameplay — alimente la suivante. Le volant accumule des
+capacités de diagnostic, des patterns reconnus, des ressources
+mobilisables, et une culture du mouvement. Après une rupture (Cygne
+Noir), le volant ralentit temporairement mais ne repart pas de
+l’immobilité — il conserve son momentum. <em>Voir aussi :</em> Value
+Flywheel Effect, Momentum, Vélocité d’adaptation</p>
+<hr />
+<h3 id="w">W</h3>
+<p><strong>Wardley Map (Carte de Wardley)</strong> Représentation
+visuelle de la chaîne de valeur positionnant chaque composant selon deux
+axes : sa position dans la chaîne (des besoins utilisateurs aux
+composants techniques) et son niveau d’évolution (de Genèse à
+Commodité). Outil central de la stratégie technologique, développé par
+Simon Wardley.</p>
+<hr />
+<p><em>Ce glossaire sera enrichi dans les éditions futures. Les
+suggestions sont bienvenues.</em></p>
+
+    <!-- Navigation Précédent/Suivant -->
+    <div class="page-navigation">
+      <a href="13_Conclusion.html" class="nav-button nav-button-prev">
+        <div>
+          <span class="nav-label">Précédent</span>
+          <div>Conclusion</div>
+        </div>
+      </a>
+
+      <a href="15_Annexe_Bibliographie.html" class="nav-button nav-button-next">
+        <div>
+          <span class="nav-label">Suivant</span>
+          <div>Bibliographie</div>
+        </div>
+      </a>
+    </div>
+
+    <!-- Footer avec copyright -->
+    <footer class="book-footer">
+      <div class="footer-content">
+        <p class="copyright">© 2026 Olivier Wulveryck - Tous droits réservés</p>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Navigation JavaScript -->
+<script>
+// Navigation pour fichiers HTML Google Docs
+(function() {
+  'use strict';
+
+  // Index de recherche global
+  let searchIndex = null;
+  let indexLoading = false;
+
+  // Charger l'index JSON au démarrage
+  async function loadSearchIndex() {
+    if (searchIndex !== null) return searchIndex;
+    if (indexLoading) return null;
+
+    indexLoading = true;
+    try {
+      const response = await fetch('search-index.json');
+      if (!response.ok) {
+        console.warn('Index de recherche non disponible');
+        return null;
+      }
+      searchIndex = await response.json();
+      console.log(`Index de recherche chargé : ${searchIndex.length} chapitres`);
+      return searchIndex;
+    } catch (error) {
+      console.error('Erreur chargement index de recherche:', error);
+      return null;
+    } finally {
+      indexLoading = false;
+    }
+  }
+
+  // Fonction de recherche
+  const searchInput = document.getElementById('search-input');
+  const searchResults = document.getElementById('search-results');
+  const mainContent = document.getElementById('main-content');
+
+  if (searchInput && searchResults && mainContent) {
+    let searchTimeout;
+
+    searchInput.addEventListener('input', function(e) {
+      clearTimeout(searchTimeout);
+      const query = e.target.value.trim().toLowerCase();
+
+      if (query.length < 2) {
+        searchResults.innerHTML = '';
+        searchResults.classList.remove('show');
+        return;
+      }
+
+      searchTimeout = setTimeout(() => {
+        performSearch(query);
+      }, 300);
+    });
+
+    async function performSearch(query) {
+      const results = [];
+
+      // 1. Recherche GLOBALE dans l'index (autres chapitres)
+      const index = await loadSearchIndex();
+      if (index) {
+        index.forEach(chapter => {
+          const content = chapter.content.toLowerCase();
+          if (content.includes(query.toLowerCase())) {
+            // Extraire un snippet autour du match
+            const snippet = getSnippet(chapter.content, query);
+            results.push({
+              chapterId: chapter.id,
+              chapterTitle: chapter.title,
+              chapterPart: chapter.part,
+              chapterUrl: chapter.url,
+              snippet: snippet,
+              isGlobal: true  // Flag pour résultat global
+            });
+          }
+        });
+      }
+
+      // 2. Recherche LOCALE dans le chapitre actuel
+      const searchableElements = mainContent.querySelectorAll('p, h1, h2, h3, h4, blockquote, li');
+
+      searchableElements.forEach((element, index) => {
+        const text = element.textContent.toLowerCase();
+        if (text.includes(query)) {
+          const snippet = getSnippet(element.textContent, query);
+          results.push({
+            element: element,
+            snippet: snippet,
+            index: index,
+            isGlobal: false  // Résultat local
+          });
+        }
+      });
+
+      // 3. Trier : résultats locaux en premier, puis globaux
+      results.sort((a, b) => {
+        if (a.isGlobal === b.isGlobal) return 0;
+        return a.isGlobal ? 1 : -1;
+      });
+
+      displayResults(results, query);
+    }
+
+    function getSnippet(text, query) {
+      const maxLength = 150;
+      const lowerText = text.toLowerCase();
+      const index = lowerText.indexOf(query.toLowerCase());
+
+      if (index === -1) return text.substring(0, maxLength) + '...';
+
+      const start = Math.max(0, index - 50);
+      const end = Math.min(text.length, index + query.length + 100);
+
+      let snippet = text.substring(start, end);
+      if (start > 0) snippet = '...' + snippet;
+      if (end < text.length) snippet = snippet + '...';
+
+      return snippet;
+    }
+
+    function displayResults(results, query) {
+      if (results.length === 0) {
+        searchResults.innerHTML = '<div class="search-no-results">Aucun résultat trouvé</div>';
+        searchResults.classList.add('show');
+        return;
+      }
+
+      const maxResults = 20;  // Augmenté pour résultats globaux
+      let html = `<div class="search-count">${results.length} résultat${results.length > 1 ? 's' : ''} trouvé${results.length > 1 ? 's' : ''}</div>`;
+
+      // Séparer résultats locaux et globaux
+      const localResults = results.filter(r => !r.isGlobal);
+      const globalResults = results.filter(r => r.isGlobal);
+
+      // Afficher résultats locaux (chapitre actuel)
+      if (localResults.length > 0) {
+        html += '<div class="search-section-header">Dans ce chapitre</div>';
+        localResults.slice(0, 5).forEach((result) => {
+          const highlightedSnippet = highlightQuery(result.snippet, query);
+          html += `
+            <div class="search-result search-result-local" data-index="${result.index}">
+              <div class="search-snippet">${highlightedSnippet}</div>
+            </div>
+          `;
+        });
+      }
+
+      // Afficher résultats globaux (autres chapitres)
+      if (globalResults.length > 0) {
+        html += '<div class="search-section-header">Dans le livre</div>';
+        globalResults.slice(0, 15).forEach((result) => {
+          const highlightedSnippet = highlightQuery(result.snippet, query);
+          html += `
+            <div class="search-result search-result-global" data-url="${result.chapterUrl}">
+              <div class="search-chapter-info">
+                ${result.chapterPart ? `<span class="search-part">${result.chapterPart}</span> › ` : ''}
+                <span class="search-chapter">${result.chapterTitle}</span>
+              </div>
+              <div class="search-snippet">${highlightedSnippet}</div>
+            </div>
+          `;
+        });
+      }
+
+      if (results.length > maxResults) {
+        html += `<div class="search-more">... et ${results.length - maxResults} autres résultats</div>`;
+      }
+
+      searchResults.innerHTML = html;
+      searchResults.classList.add('show');
+
+      // Gestionnaires de clic
+
+      // Résultats locaux : scroll vers l'élément
+      searchResults.querySelectorAll('.search-result-local').forEach(resultDiv => {
+        resultDiv.addEventListener('click', function() {
+          const index = parseInt(this.dataset.index);
+          const element = document.querySelectorAll('#main-content p, #main-content h1, #main-content h2, #main-content h3, #main-content h4, #main-content blockquote, #main-content li')[index];
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            element.classList.add('search-highlight');
+            setTimeout(() => element.classList.remove('search-highlight'), 2000);
+          }
+          searchResults.classList.remove('show');
+          searchInput.value = '';
+        });
+      });
+
+      // Résultats globaux : navigation vers le chapitre
+      searchResults.querySelectorAll('.search-result-global').forEach(resultDiv => {
+        resultDiv.addEventListener('click', function() {
+          const url = this.dataset.url;
+          window.location.href = url;
+        });
+      });
+    }
+
+    function highlightQuery(text, query) {
+      const regex = new RegExp(`(${escapeRegex(query)})`, 'gi');
+      return text.replace(regex, '<mark>$1</mark>');
+    }
+
+    function escapeRegex(str) {
+      return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
+
+    // Fermer les résultats si clic en dehors
+    document.addEventListener('click', function(e) {
+      if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+        searchResults.classList.remove('show');
+      }
+    });
+  }
+
+
+  // ===============================================
+  // THEME MANAGEMENT
+  // ===============================================
+
+  const THEME_KEY = 'gdoc-theme';
+  const THEME_LIGHT = 'light';
+  const THEME_DARK = 'dark';
+
+  function initTheme() {
+    const themeToggle = document.getElementById('theme-toggle');
+    if (!themeToggle) return;
+
+    // Load saved theme or detect system preference
+    let savedTheme = loadThemePreference();
+    if (!savedTheme) {
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      savedTheme = prefersDark ? THEME_DARK : THEME_LIGHT;
+    }
+
+    applyTheme(savedTheme);
+
+    // Toggle on button click
+    themeToggle.addEventListener('click', function() {
+      const currentTheme = document.body.classList.contains('dark-theme') ? THEME_DARK : THEME_LIGHT;
+      const newTheme = currentTheme === THEME_LIGHT ? THEME_DARK : THEME_LIGHT;
+      applyTheme(newTheme);
+      saveThemePreference(newTheme);
+    });
+
+    // Listen for system theme changes
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+      if (!loadThemePreference()) {
+        applyTheme(e.matches ? THEME_DARK : THEME_LIGHT);
+      }
+    });
+  }
+
+  function applyTheme(theme) {
+    if (theme === THEME_DARK) {
+      document.body.classList.add('dark-theme');
+    } else {
+      document.body.classList.remove('dark-theme');
+    }
+  }
+
+  function saveThemePreference(theme) {
+    try {
+      localStorage.setItem(THEME_KEY, theme);
+    } catch (e) {
+      console.warn('Cannot save theme preference:', e);
+    }
+  }
+
+  function loadThemePreference() {
+    try {
+      return localStorage.getItem(THEME_KEY);
+    } catch (e) {
+      console.warn('Cannot load theme preference:', e);
+      return null;
+    }
+  }
+
+  // ===============================================
+  // FONT SIZE CONTROLS
+  // ===============================================
+
+  const FONT_SIZE_KEY = 'gdoc-font-size';
+  const FONT_SIZE_MIN = 10;
+  const FONT_SIZE_MAX = 18;
+  const FONT_SIZE_DEFAULT = 12;
+  const FONT_SIZE_STEP = 1;
+
+  function initFontControls() {
+    const fontIncrease = document.getElementById('font-increase');
+    const fontDecrease = document.getElementById('font-decrease');
+    const fontReset = document.getElementById('font-reset');
+
+    if (!fontIncrease || !fontDecrease || !fontReset) return;
+
+    // Load saved font size
+    let fontSize = loadFontSize();
+    applyFontSize(fontSize);
+
+    fontIncrease.addEventListener('click', function() {
+      if (fontSize < FONT_SIZE_MAX) {
+        fontSize += FONT_SIZE_STEP;
+        applyFontSize(fontSize);
+        saveFontSize(fontSize);
+      }
+    });
+
+    fontDecrease.addEventListener('click', function() {
+      if (fontSize > FONT_SIZE_MIN) {
+        fontSize -= FONT_SIZE_STEP;
+        applyFontSize(fontSize);
+        saveFontSize(fontSize);
+      }
+    });
+
+    fontReset.addEventListener('click', function() {
+      fontSize = FONT_SIZE_DEFAULT;
+      applyFontSize(fontSize);
+      saveFontSize(fontSize);
+    });
+  }
+
+  function applyFontSize(size) {
+    document.documentElement.style.setProperty('--font-size-base', size + 'pt');
+    document.documentElement.style.setProperty('--font-size-h1', (size * 2) + 'pt');
+    document.documentElement.style.setProperty('--font-size-h2', (size * 1.5) + 'pt');
+    document.documentElement.style.setProperty('--font-size-h3', (size * 1.17) + 'pt');
+    document.documentElement.style.setProperty('--font-size-code', (size * 0.83) + 'pt');
+  }
+
+  function saveFontSize(size) {
+    try {
+      localStorage.setItem(FONT_SIZE_KEY, size);
+    } catch (e) {
+      console.warn('Cannot save font size:', e);
+    }
+  }
+
+  function loadFontSize() {
+    try {
+      const saved = localStorage.getItem(FONT_SIZE_KEY);
+      return saved ? parseInt(saved) : FONT_SIZE_DEFAULT;
+    } catch (e) {
+      console.warn('Cannot load font size:', e);
+      return FONT_SIZE_DEFAULT;
+    }
+  }
+
+  // ===============================================
+  // SIDEBAR MANAGEMENT
+  // ===============================================
+
+  function initSidebar() {
+    const sidebarToggle = document.getElementById('sidebar-toggle');
+    const sidebar = document.getElementById('book-sidebar');
+
+    if (!sidebarToggle || !sidebar) return;
+
+    // Toggle on button click
+    sidebarToggle.addEventListener('click', function() {
+      document.body.classList.toggle('sidebar-open');
+    });
+
+    // Close sidebar when clicking outside on mobile
+    document.addEventListener('click', function(e) {
+      if (window.innerWidth <= 768) {
+        if (!sidebar.contains(e.target) && !sidebarToggle.contains(e.target)) {
+          document.body.classList.remove('sidebar-open');
+        }
+      }
+    });
+
+    // Initialize part collapse/expand
+    initPartCollapse();
+
+    // Mark current chapter
+    markCurrentChapter();
+  }
+
+  function initPartCollapse() {
+    const parts = document.querySelectorAll('.sidebar-toc .toc-part');
+
+    parts.forEach(part => {
+      part.addEventListener('click', function() {
+        this.classList.toggle('collapsed');
+      });
+    });
+  }
+
+  function markCurrentChapter() {
+    const currentFile = window.location.pathname.split('/').pop();
+    const tocItems = document.querySelectorAll('.sidebar-toc .toc-item');
+
+    tocItems.forEach(item => {
+      const href = item.getAttribute('href');
+      if (href === currentFile) {
+        item.classList.add('current');
+      }
+    });
+  }
+
+  // ===============================================
+  // CHAPTER OUTLINE GENERATION
+  // ===============================================
+
+  function generateChapterOutline() {
+    const mainContent = document.getElementById('main-content');
+    const outlineContainer = document.getElementById('chapter-outline');
+
+    if (!mainContent || !outlineContainer) return;
+
+    // Find all H2 and H3 headings
+    const headings = mainContent.querySelectorAll('h2, h3');
+
+    if (headings.length === 0) {
+      outlineContainer.style.display = 'none';
+      return;
+    }
+
+    // Generate outline HTML
+    let outlineHTML = '<div class="outline-header">Dans ce chapitre</div>';
+
+    headings.forEach((heading, index) => {
+      const level = heading.tagName.toLowerCase() === 'h2' ? 2 : 3;
+      const text = heading.textContent;
+      const id = heading.id || 'heading-' + index;
+
+      // Add ID if not present
+      if (!heading.id) {
+        heading.id = id;
+      }
+
+      outlineHTML += `
+        <a href="#${id}" class="outline-item level-${level}" data-heading-id="${id}">
+          ${text}
+        </a>
+      `;
+    });
+
+    outlineContainer.innerHTML = outlineHTML;
+
+    // Add click handlers for smooth scrolling
+    outlineContainer.querySelectorAll('.outline-item').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('data-heading-id');
+        const target = document.getElementById(targetId);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+          // Close sidebar on mobile
+          if (window.innerWidth <= 768) {
+            document.body.classList.remove('sidebar-open');
+          }
+        }
+      });
+    });
+  }
+
+  // ===============================================
+  // SCROLL SPY
+  // ===============================================
+
+  let scrollSpyTimeout;
+
+  function initScrollSpy() {
+    const mainContent = document.getElementById('main-content');
+    if (!mainContent) return;
+
+    // Throttled scroll handler
+    window.addEventListener('scroll', function() {
+      clearTimeout(scrollSpyTimeout);
+      scrollSpyTimeout = setTimeout(updateScrollSpy, 100);
+    }, { passive: true });
+
+    // Initial update
+    updateScrollSpy();
+  }
+
+  function updateScrollSpy() {
+    const headings = document.querySelectorAll('#main-content h2, #main-content h3');
+    const outlineItems = document.querySelectorAll('.outline-item');
+
+    if (headings.length === 0 || outlineItems.length === 0) return;
+
+    // Find currently visible heading
+    let activeHeading = null;
+    const scrollPosition = window.scrollY + 100; // Offset for navbar
+
+    headings.forEach(heading => {
+      const headingTop = heading.offsetTop;
+      if (headingTop <= scrollPosition) {
+        activeHeading = heading;
+      }
+    });
+
+    // Update outline highlighting
+    outlineItems.forEach(item => {
+      item.classList.remove('active');
+      if (activeHeading && item.getAttribute('data-heading-id') === activeHeading.id) {
+        item.classList.add('active');
+      }
+    });
+  }
+
+  // ===============================================
+  // READING PROGRESS BAR
+  // ===============================================
+
+  let progressTimeout;
+
+  function initProgressBar() {
+    const progressBar = document.getElementById('reading-progress');
+    if (!progressBar) return;
+
+    window.addEventListener('scroll', function() {
+      clearTimeout(progressTimeout);
+      progressTimeout = setTimeout(updateProgressBar, 50);
+    }, { passive: true });
+
+    // Initial update
+    updateProgressBar();
+  }
+
+  function updateProgressBar() {
+    const progressBar = document.getElementById('reading-progress');
+    if (!progressBar) return;
+
+    const windowHeight = window.innerHeight;
+    const documentHeight = document.documentElement.scrollHeight;
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+    const scrollableDistance = documentHeight - windowHeight;
+    const progress = scrollableDistance > 0 ? (scrollTop / scrollableDistance) * 100 : 0;
+
+    progressBar.style.width = Math.min(progress, 100) + '%';
+  }
+
+  // ===============================================
+  // KEYBOARD SHORTCUTS
+  // ===============================================
+
+  // Extend existing keyboard shortcuts
+  document.addEventListener('keydown', function(e) {
+    // Existing: Ctrl+K for search
+    if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+      e.preventDefault();
+      const searchInput = document.getElementById('search-input');
+      if (searchInput) searchInput.focus();
+    }
+
+    // NEW: 'd' for dark mode toggle
+    if (e.key === 'd' && !e.ctrlKey && !e.metaKey && document.activeElement.tagName !== 'INPUT') {
+      e.preventDefault();
+      const themeToggle = document.getElementById('theme-toggle');
+      if (themeToggle) themeToggle.click();
+    }
+
+    // NEW: 's' for sidebar toggle (mobile)
+    if (e.key === 's' && !e.ctrlKey && !e.metaKey && document.activeElement.tagName !== 'INPUT') {
+      e.preventDefault();
+      if (window.innerWidth <= 768) {
+        document.body.classList.toggle('sidebar-open');
+      }
+    }
+
+    // Escape closes everything
+    if (e.key === 'Escape') {
+      const searchInput = document.getElementById('search-input');
+      const searchResults = document.getElementById('search-results');
+
+      if (searchInput) {
+        searchInput.value = '';
+        searchInput.blur();
+      }
+      if (searchResults) {
+        searchResults.classList.remove('show');
+      }
+      if (window.innerWidth <= 768) {
+        document.body.classList.remove('sidebar-open');
+      }
+    }
+  });
+
+  // ===============================================
+  // INITIALIZATION
+  // ===============================================
+
+  // Charger l'index de recherche au démarrage de la page
+  document.addEventListener('DOMContentLoaded', function() {
+    // Load search index (existing)
+    loadSearchIndex().then(() => {
+      console.log('Index de recherche prêt');
+    });
+
+    // Initialize new features
+    initTheme();
+    initFontControls();
+    initSidebar();
+    generateChapterOutline();
+    initScrollSpy();
+    initProgressBar();
+  });
+})();
+</script>
+
+  <!-- Script pour marquer le chapitre actuel dans le menu -->
+  <script>
+    (function() {
+      const currentFile = '14_Annexe_Glossaire.html';
+      if (currentFile) {
+        const tocItems = document.querySelectorAll('.toc-item');
+        tocItems.forEach(item => {
+          if (item.getAttribute('href') === currentFile) {
+            item.classList.add('current');
+          }
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

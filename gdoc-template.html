@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Olivier Wulveryck" />
+  <title>$if(title)$$title$$else$L'Architecte du mouvement$endif$</title>
+$for(header-includes)$
+  $header-includes$
+$endfor$
+</head>
+<body>
+  <!-- Reading Progress Bar -->
+  <div id="reading-progress" class="reading-progress" aria-hidden="true"></div>
+
+  <!-- Barre de navigation fixe -->
+  <nav class="gdoc-navbar">
+    <div class="navbar-container">
+      <!-- Fil d'Ariane -->
+      <div class="breadcrumb">
+        <a href="00_Avant-propos.html">L'Architecte du mouvement</a>
+        <span class="breadcrumb-separator">›</span>
+$if(chapter-part)$
+        <span>$chapter-part$</span>
+        <span class="breadcrumb-separator">›</span>
+$endif$
+        <span class="breadcrumb-current">$if(chapter-title)$$chapter-title$$else$$title$$endif$</span>
+      </div>
+
+      <!-- Barre d'outils -->
+      <div class="navbar-tools">
+        <!-- Barre de recherche -->
+        <div class="search-container">
+          <input type="text"
+                 id="search-input"
+                 class="search-input"
+                 placeholder="Rechercher dans tout le livre... (Ctrl+K)"
+                 autocomplete="off" />
+          <span class="search-icon">🔍</span>
+          <div id="search-results" class="search-results"></div>
+        </div>
+
+        <!-- Font controls -->
+        <div class="font-controls">
+          <button id="font-decrease" class="font-btn" aria-label="Diminuer la taille du texte" title="A-">A-</button>
+          <button id="font-reset" class="font-btn" aria-label="Réinitialiser la taille du texte" title="Reset">A</button>
+          <button id="font-increase" class="font-btn" aria-label="Augmenter la taille du texte" title="A+">A+</button>
+        </div>
+
+        <!-- Theme toggle -->
+        <button id="theme-toggle" class="theme-toggle" aria-label="Basculer le mode sombre">
+          <span class="theme-icon theme-icon-light">☀️</span>
+          <span class="theme-icon theme-icon-dark">🌙</span>
+        </button>
+
+        <!-- Sidebar toggle (mobile) -->
+        <button id="sidebar-toggle" class="sidebar-toggle" aria-label="Afficher/Masquer le sommaire">
+          <span class="hamburger-icon">☰</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Persistent Sidebar -->
+  <aside id="book-sidebar" class="book-sidebar" aria-label="Navigation du livre">
+    <!-- Header -->
+    <div class="sidebar-header">
+      <h2>L'Architecte du mouvement</h2>
+    </div>
+
+    <!-- Full Book TOC -->
+    <nav class="sidebar-toc" aria-label="Table des matières complète">
+      <div class="toc-section">
+        <a href="00_Avant-propos.html" class="toc-item" data-chapter-id="00">Avant-propos</a>
+        <a href="01_Introduction.html" class="toc-item" data-chapter-id="01">Introduction</a>
+      </div>
+
+      <div class="toc-section">
+        <div class="toc-part" data-part="1">
+          <span class="part-toggle">▼</span>
+          <span class="part-title">Partie I - Le Terrain de Jeu</span>
+        </div>
+        <div class="toc-part-chapters">
+          <a href="02_Chapitre_1.html" class="toc-item" data-chapter-id="02">Chapitre 1 : Stratégie, jeu, position et mouvement</a>
+          <a href="03_Chapitre_2.html" class="toc-item" data-chapter-id="03">Chapitre 2 : Naviguer dans le brouillard</a>
+        </div>
+      </div>
+
+      <div class="toc-section">
+        <div class="toc-part" data-part="2">
+          <span class="part-toggle">▼</span>
+          <span class="part-title">Partie II - L'Organisation face au Mouvement</span>
+        </div>
+        <div class="toc-part-chapters">
+          <a href="04_Chapitre_3.html" class="toc-item" data-chapter-id="04">Chapitre 3 : L'anatomie du mur invisible</a>
+          <a href="05_Chapitre_4.html" class="toc-item" data-chapter-id="05">Chapitre 4 : Structure et pouvoir</a>
+        </div>
+      </div>
+
+      <div class="toc-section">
+        <div class="toc-part" data-part="3">
+          <span class="part-toggle">▼</span>
+          <span class="part-title">Partie III - Les Lois du Mouvement</span>
+        </div>
+        <div class="toc-part-chapters">
+          <a href="06_Chapitre_5.html" class="toc-item" data-chapter-id="06">Chapitre 5 : La loi du climat</a>
+          <a href="07_Chapitre_6.html" class="toc-item" data-chapter-id="07">Chapitre 6 : La loi de l'évolution</a>
+          <a href="08_Chapitre_7.html" class="toc-item" data-chapter-id="08">Chapitre 7 : La loi de l'écosystème</a>
+        </div>
+      </div>
+
+      <div class="toc-section">
+        <div class="toc-part" data-part="4">
+          <span class="part-toggle">▼</span>
+          <span class="part-title">Partie IV - La Pratique du Mouvement</span>
+        </div>
+        <div class="toc-part-chapters">
+          <a href="09_Chapitre_8.html" class="toc-item" data-chapter-id="09">Chapitre 8 : Observer le terrain</a>
+          <a href="10_Chapitre_9.html" class="toc-item" data-chapter-id="10">Chapitre 9 : Orienter et décider</a>
+          <a href="11_Chapitre_10.html" class="toc-item" data-chapter-id="11">Chapitre 10 : Jouer et apprendre</a>
+          <a href="12_Chapitre_11.html" class="toc-item" data-chapter-id="12">Chapitre 11 : Cultiver le mouvement</a>
+        </div>
+      </div>
+
+      <div class="toc-section">
+        <a href="13_Conclusion.html" class="toc-item" data-chapter-id="13">Conclusion</a>
+      </div>
+
+      <div class="toc-section">
+        <div class="toc-part" data-part="annexes">
+          <span class="part-toggle">▼</span>
+          <span class="part-title">Annexes</span>
+        </div>
+        <div class="toc-part-chapters">
+          <a href="14_Annexe_Glossaire.html" class="toc-item" data-chapter-id="14">Glossaire</a>
+          <a href="15_Annexe_Bibliographie.html" class="toc-item" data-chapter-id="15">Bibliographie</a>
+          <a href="16_Annexe_Antisèche_Évolution.html" class="toc-item" data-chapter-id="16">Antisèche Évolution</a>
+          <a href="17_Annexe_Methods_Analysis.html" class="toc-item" data-chapter-id="17">Methods Analysis</a>
+          <a href="18_Annexe_Catalogue_Gameplays.html" class="toc-item" data-chapter-id="18">Catalogue Gameplays</a>
+          <a href="19_Annexe_Grilles_Décision.html" class="toc-item" data-chapter-id="19">Grilles Décision</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Separator -->
+    <div class="sidebar-separator"></div>
+
+    <!-- Chapter Outline (generated by JS) -->
+    <nav id="chapter-outline" class="chapter-outline" aria-label="Plan du chapitre actuel">
+      <!-- Populated dynamically by generateChapterOutline() -->
+    </nav>
+  </aside>
+
+  <!-- Contenu principal -->
+  <div id="main-content">
+$body$
+
+    <!-- Navigation Précédent/Suivant -->
+    <div class="page-navigation">
+$if(prev-url)$
+      <a href="$prev-url$" class="nav-button nav-button-prev">
+        <div>
+          <span class="nav-label">Précédent</span>
+          <div>$prev-title$</div>
+        </div>
+      </a>
+$else$
+      <div class="nav-button nav-button-prev disabled">
+        <div>
+          <span class="nav-label">Précédent</span>
+          <div>—</div>
+        </div>
+      </div>
+$endif$
+
+$if(next-url)$
+      <a href="$next-url$" class="nav-button nav-button-next">
+        <div>
+          <span class="nav-label">Suivant</span>
+          <div>$next-title$</div>
+        </div>
+      </a>
+$else$
+      <div class="nav-button nav-button-next disabled">
+        <div>
+          <span class="nav-label">Suivant</span>
+          <div>—</div>
+        </div>
+      </div>
+$endif$
+    </div>
+
+    <!-- Footer avec copyright -->
+    <footer class="book-footer">
+      <div class="footer-content">
+        <p class="copyright">© 2026 Olivier Wulveryck - Tous droits réservés</p>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Navigation JavaScript -->
+$for(include-after)$
+$include-after$
+$endfor$
+
+  <!-- Script pour marquer le chapitre actuel dans le menu -->
+  <script>
+    (function() {
+      const currentFile = '$if(chapter-file)$$chapter-file$$endif$';
+      if (currentFile) {
+        const tocItems = document.querySelectorAll('.toc-item');
+        tocItems.forEach(item => {
+          if (item.getAttribute('href') === currentFile) {
+            item.classList.add('current');
+          }
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,2317 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Olivier Wulveryck" />
+  <title>Chapitre 11</title>
+  <style>
+  /* Import polices Google Fonts */
+  @import url('https://fonts.googleapis.com/css2?family=Literata:ital,wght@0,400;0,700;1,400&family=Lato:wght@400;700&display=swap');
+
+  /* ===============================================
+     CSS CUSTOM PROPERTIES (THEME VARIABLES)
+     =============================================== */
+
+  :root {
+    /* Light theme (default) */
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8f9fa;
+    --bg-navbar: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    --bg-sidebar: #f8f9fa;
+    --bg-code: #f5f5f5;
+    --bg-blockquote: #fff9e6;
+    --bg-table-header: #f39c12;
+
+    --text-primary: #2c3e50;
+    --text-secondary: #34495e;
+    --text-muted: #7f8c8d;
+    --text-heading: #2c3e50;
+    --text-navbar: #ffffff;
+
+    --border-primary: #ddd;
+    --border-secondary: #ecf0f1;
+    --border-accent: #f39c12;
+
+    --link-color: #3498db;
+    --link-hover: #2980b9;
+
+    --shadow-light: 0 2px 8px rgba(0,0,0,0.15);
+    --shadow-medium: 0 4px 12px rgba(0,0,0,0.2);
+
+    /* Font sizes (user-adjustable) */
+    --font-size-base: 12pt;
+    --font-size-h1: 24pt;
+    --font-size-h2: 18pt;
+    --font-size-h3: 14pt;
+    --font-size-code: 10pt;
+  }
+
+  /* Dark theme */
+  body.dark-theme {
+    --bg-primary: #1a1a1a;
+    --bg-secondary: #2d2d2d;
+    --bg-navbar: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    --bg-sidebar: #252525;
+    --bg-code: #2d2d2d;
+    --bg-blockquote: #2a2a1a;
+    --bg-table-header: #c87f0a;
+
+    --text-primary: #e4e4e4;
+    --text-secondary: #b8b8b8;
+    --text-muted: #888888;
+    --text-heading: #f0f0f0;
+    --text-navbar: #e4e4e4;
+
+    --border-primary: #404040;
+    --border-secondary: #333333;
+    --border-accent: #f39c12;
+
+    --link-color: #5dade2;
+    --link-hover: #3498db;
+
+    --shadow-light: 0 2px 8px rgba(0,0,0,0.4);
+    --shadow-medium: 0 4px 12px rgba(0,0,0,0.5);
+  }
+
+  /* Smooth transitions for theme switching */
+  body {
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  /* Respect reduced motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* ===============================================
+     CORPS DE TEXTE
+     =============================================== */
+
+  /* Corps de texte */
+  body {
+    font-family: 'Literata', Georgia, serif;
+    font-size: var(--font-size-base);
+    line-height: 1.65;
+    color: var(--text-primary);
+    background-color: var(--bg-primary);
+    margin: 0;
+    padding: 0;
+    padding-top: 80px; /* Espace pour la navigation fixe */
+    padding-left: 0;
+    transition: padding-left 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+  }
+
+  /* Desktop: sidebar visible, add left padding */
+  @media (min-width: 769px) {
+    body {
+      padding-left: 280px;
+    }
+  }
+
+  #main-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2em;
+  }
+
+  /* Titres */
+  h1 {
+    font-family: 'Lato', 'Helvetica Neue', sans-serif;
+    font-size: var(--font-size-h1);
+    font-weight: 700;
+    color: var(--text-heading);
+    margin-top: 36pt;
+    margin-bottom: 18pt;
+  }
+
+  h2 {
+    font-family: 'Lato', 'Helvetica Neue', sans-serif;
+    font-size: var(--font-size-h2);
+    font-weight: 700;
+    color: var(--text-secondary);
+    margin-top: 24pt;
+    margin-bottom: 12pt;
+  }
+
+  h3 {
+    font-family: 'Lato', 'Helvetica Neue', sans-serif;
+    font-size: var(--font-size-h3);
+    font-weight: 700;
+    color: var(--text-muted);
+    margin-top: 18pt;
+    margin-bottom: 9pt;
+  }
+
+  h4 {
+    font-family: 'Lato', 'Helvetica Neue', sans-serif;
+    font-size: 12pt;
+    font-weight: 700;
+    color: var(--text-muted);
+    margin-top: 12pt;
+    margin-bottom: 6pt;
+  }
+
+  /* Encadrés (blockquotes) */
+  blockquote {
+    background-color: var(--bg-blockquote);
+    border-left: 4px solid var(--border-accent);
+    padding: 1em 1.5em;
+    margin: 1.5em 0;
+    font-style: normal;
+    border-radius: 4px;
+  }
+
+  /* Code inline */
+  code {
+    font-family: 'Courier New', monospace;
+    font-size: var(--font-size-code);
+    background-color: var(--bg-code);
+    color: var(--text-primary);
+    padding: 2px 6px;
+    border-radius: 3px;
+  }
+
+  /* Blocs de code */
+  pre {
+    background-color: var(--bg-code);
+    padding: 1em;
+    border-radius: 4px;
+    overflow-x: auto;
+  }
+
+  pre code {
+    background-color: transparent;
+    padding: 0;
+  }
+
+  /* Tableaux */
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1.5em 0;
+  }
+
+  th, td {
+    border: 1px solid var(--border-primary);
+    padding: 8px 12px;
+    text-align: left;
+    color: var(--text-primary);
+  }
+
+  th {
+    background-color: var(--bg-table-header);
+    color: white;
+    font-weight: 700;
+  }
+
+  /* Images */
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 1.5em auto;
+  }
+
+  /* Listes */
+  ul, ol {
+    margin: 1em 0;
+    padding-left: 2em;
+  }
+
+  li {
+    margin-bottom: 0.5em;
+  }
+
+  /* Liens */
+  a {
+    color: var(--link-color);
+    transition: color 0.2s ease;
+  }
+
+  a:hover {
+    color: var(--link-hover);
+  }
+
+  /* Emphase */
+  strong {
+    font-weight: 700;
+    color: var(--text-heading);
+  }
+
+  em {
+    font-style: italic;
+  }
+
+  /* Paragraphes */
+  p {
+    margin-bottom: 1em;
+  }
+
+  /* ===============================================
+     BARRE DE NAVIGATION FIXE
+     =============================================== */
+
+  .gdoc-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: var(--bg-navbar);
+    color: var(--text-navbar);
+    box-shadow: var(--shadow-light);
+    z-index: 1000;
+  }
+
+  .navbar-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0.75em 1.5em;
+  }
+
+  /* Fil d'Ariane */
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    font-size: 0.85em;
+    color: #ecf0f1;
+    margin-bottom: 0.5em;
+    flex-wrap: wrap;
+  }
+
+  .breadcrumb a {
+    color: var(--link-color);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .breadcrumb a:hover {
+    color: var(--link-hover);
+    text-decoration: underline;
+  }
+
+  .breadcrumb-separator {
+    color: var(--text-muted);
+  }
+
+  .breadcrumb-current {
+    color: var(--text-navbar);
+    font-weight: 600;
+  }
+
+  /* Barre d'outils */
+  .navbar-tools {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    flex-wrap: wrap;
+  }
+
+  /* Barre de recherche */
+  .search-container {
+    position: relative;
+    flex: 1;
+    min-width: 200px;
+    max-width: 500px;
+  }
+
+  .search-input {
+    width: 100%;
+    padding: 0.5em 2.5em 0.5em 0.75em;
+    border: 2px solid var(--border-secondary);
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-family: 'Lato', sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    transition: all 0.3s;
+  }
+
+  .search-input:focus {
+    outline: none;
+    border-color: var(--link-color);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+  }
+
+  .search-input::placeholder {
+    color: var(--text-muted);
+  }
+
+  .search-icon {
+    position: absolute;
+    right: 0.75em;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    pointer-events: none;
+  }
+
+  .search-results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin-top: 0.5em;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-primary);
+    border-radius: 8px;
+    box-shadow: var(--shadow-medium);
+    max-height: 400px;
+    overflow-y: auto;
+    display: none;
+    z-index: 1001;
+  }
+
+  .search-results.show {
+    display: block;
+  }
+
+  .search-count {
+    padding: 0.75em 1em;
+    background: var(--bg-secondary);
+    font-size: 0.85em;
+    color: var(--text-muted);
+    font-weight: 600;
+    border-bottom: 1px solid var(--border-primary);
+  }
+
+  .search-result {
+    padding: 0.75em 1em;
+    border-bottom: 1px solid var(--border-secondary);
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .search-result:hover {
+    background: var(--bg-secondary);
+  }
+
+  .search-snippet {
+    font-size: 0.9em;
+    color: var(--text-primary);
+    line-height: 1.4;
+  }
+
+  .search-snippet mark {
+    background-color: var(--border-accent);
+    color: white;
+    padding: 2px 4px;
+    border-radius: 2px;
+    font-weight: 600;
+  }
+
+  .search-no-results,
+  .search-more {
+    padding: 1em;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.9em;
+  }
+
+  .search-highlight {
+    background-color: #fff9e6 !important;
+    border-left: 4px solid #f39c12 !important;
+    padding-left: 1em !important;
+    transition: all 0.3s;
+  }
+
+  /* Sections de résultats de recherche globale */
+  .search-section-header {
+    padding: 0.75em 1em;
+    background: var(--text-secondary);
+    color: var(--text-navbar);
+    font-size: 0.85em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-top: 1px solid var(--border-primary);
+  }
+
+  /* Info chapitre dans résultats globaux */
+  .search-chapter-info {
+    font-size: 0.85em;
+    color: var(--link-color);
+    margin-bottom: 0.25em;
+    font-weight: 600;
+  }
+
+  .search-part {
+    color: var(--text-muted);
+    font-weight: 400;
+  }
+
+  .search-chapter {
+    color: var(--text-primary);
+  }
+
+  /* Différenciation visuelle */
+  .search-result-local {
+    border-left: 3px solid #27ae60;  /* Vert pour résultats locaux */
+  }
+
+  .search-result-global {
+    border-left: 3px solid #3498db;  /* Bleu pour résultats globaux */
+  }
+
+  .search-result-global:hover {
+    background: #e8f5ff;
+    cursor: pointer;
+  }
+
+  /* Menu déroulant sommaire */
+  .toc-dropdown {
+    position: relative;
+  }
+
+  .toc-toggle {
+    padding: 0.5em 1.25em;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-family: 'Lato', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+  }
+
+  .toc-toggle:hover {
+    background: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3);
+  }
+
+  .toc-toggle::after {
+    content: '▼';
+    font-size: 0.7em;
+    transition: transform 0.3s;
+  }
+
+  .toc-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 0.5em;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-primary);
+    border-radius: 8px;
+    box-shadow: var(--shadow-medium);
+    min-width: 300px;
+    max-height: 500px;
+    overflow-y: auto;
+    display: none;
+    z-index: 1001;
+  }
+
+  .toc-menu.show {
+    display: block;
+  }
+
+  .toc-menu-header {
+    padding: 1em;
+    background: var(--bg-navbar);
+    color: var(--text-navbar);
+    font-weight: 700;
+    font-size: 1.1em;
+    border-radius: 8px 8px 0 0;
+  }
+
+  .toc-menu-content {
+    padding: 0.5em 0;
+  }
+
+  .toc-part {
+    padding: 0.75em 1em;
+    background: var(--bg-secondary);
+    font-weight: 700;
+    font-size: 0.85em;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .toc-item {
+    display: block;
+    padding: 0.75em 1.5em;
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: all 0.2s;
+    border-left: 3px solid transparent;
+  }
+
+  .toc-item:hover {
+    background: var(--bg-secondary);
+    border-left-color: var(--link-color);
+    padding-left: 1.75em;
+  }
+
+  .toc-item.current {
+    background: rgba(52, 152, 219, 0.1);
+    border-left-color: var(--border-accent);
+    font-weight: 600;
+    color: var(--text-heading);
+  }
+
+  /* Navigation Précédent/Suivant */
+  .page-navigation {
+    display: flex;
+    justify-content: space-between;
+    gap: 1em;
+    margin-top: 3em;
+    padding-top: 2em;
+    border-top: 2px solid var(--border-secondary);
+  }
+
+  .nav-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    padding: 0.75em 1.5em;
+    background: var(--link-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 600;
+    transition: all 0.3s;
+    max-width: 45%;
+  }
+
+  .nav-button:hover {
+    background: var(--link-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+  }
+
+  .nav-button.disabled {
+    background: var(--bg-secondary);
+    color: var(--text-muted);
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  .nav-button-prev::before {
+    content: '←';
+    font-size: 1.2em;
+  }
+
+  .nav-button-next::after {
+    content: '→';
+    font-size: 1.2em;
+  }
+
+  .nav-label {
+    display: block;
+    font-size: 0.75em;
+    opacity: 0.8;
+    margin-bottom: 0.25em;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    body {
+      padding-top: 140px; /* Navbar plus haute sur mobile */
+      padding-left: 0; /* Pas de sidebar par défaut */
+    }
+
+    .navbar-container {
+      padding: 0.5em 1em;
+    }
+
+    .breadcrumb {
+      font-size: 0.75em;
+    }
+
+    .navbar-tools {
+      flex-wrap: wrap;
+      gap: 0.5em;
+    }
+
+    .search-container {
+      flex: 1 1 100%;
+      max-width: none;
+    }
+
+    .font-controls {
+      order: 1;
+      margin-left: 0;
+    }
+
+    .theme-toggle {
+      order: 2;
+    }
+
+    .sidebar-toggle {
+      order: 3;
+    }
+
+    .toc-menu {
+      right: 0;
+      left: 0;
+      margin: 0.5em 1em;
+    }
+
+    .page-navigation {
+      flex-direction: column;
+    }
+
+    .nav-button {
+      max-width: none;
+    }
+  }
+
+  /* Footer */
+  .book-footer {
+    background: var(--bg-navbar);
+    color: var(--text-navbar);
+    margin-top: 4em;
+    padding: 2em 0;
+    border-top: 3px solid var(--border-accent);
+  }
+
+  .footer-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 2em;
+    text-align: center;
+  }
+
+  .copyright {
+    margin: 0;
+    font-size: 0.9em;
+    color: var(--text-navbar);
+    font-family: 'Lato', sans-serif;
+  }
+
+  /* ===============================================
+     READING PROGRESS BAR
+     =============================================== */
+
+  .reading-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 4px;
+    background: linear-gradient(90deg, #3498db 0%, #f39c12 100%);
+    z-index: 1002;
+    transition: width 0.1s ease;
+    box-shadow: 0 2px 4px rgba(52, 152, 219, 0.3);
+  }
+
+  body.dark-theme .reading-progress {
+    background: linear-gradient(90deg, #5dade2 0%, #f39c12 100%);
+  }
+
+  /* ===============================================
+     PERSISTENT SIDEBAR
+     =============================================== */
+
+  .book-sidebar {
+    position: fixed;
+    top: 80px;
+    left: 0;
+    width: 280px;
+    height: calc(100vh - 80px);
+    background: var(--bg-sidebar);
+    border-right: 1px solid var(--border-primary);
+    overflow-y: auto;
+    overflow-x: hidden;
+    z-index: 900;
+    transition: left 0.3s ease;
+    box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+  }
+
+  /* Mobile: hidden by default */
+  @media (max-width: 768px) {
+    .book-sidebar {
+      left: -280px;
+    }
+
+    body.sidebar-open .book-sidebar {
+      left: 0;
+    }
+  }
+
+  /* Sidebar header */
+  .sidebar-header {
+    padding: 1.5em 1em;
+    background: var(--bg-navbar);
+    color: var(--text-navbar);
+    border-bottom: 2px solid var(--border-accent);
+  }
+
+  .sidebar-header h2 {
+    margin: 0;
+    font-size: 1.1em;
+    font-weight: 700;
+    color: var(--text-navbar);
+  }
+
+  /* TOC sections */
+  .sidebar-toc {
+    padding: 0.5em 0;
+  }
+
+  .toc-section {
+    margin-bottom: 0.5em;
+  }
+
+  .sidebar-toc .toc-part {
+    padding: 0.75em 1em;
+    background: var(--bg-secondary);
+    font-weight: 700;
+    font-size: 0.85em;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    transition: background 0.2s ease;
+  }
+
+  .sidebar-toc .toc-part:hover {
+    background: var(--border-secondary);
+  }
+
+  .part-toggle {
+    font-size: 0.8em;
+    transition: transform 0.3s ease;
+    display: inline-block;
+  }
+
+  .sidebar-toc .toc-part.collapsed .part-toggle {
+    transform: rotate(-90deg);
+  }
+
+  .toc-part-chapters {
+    max-height: 500px;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+
+  .sidebar-toc .toc-part.collapsed + .toc-part-chapters {
+    max-height: 0;
+  }
+
+  .sidebar-toc .toc-item {
+    display: block;
+    padding: 0.75em 1.5em;
+    color: var(--text-primary);
+    text-decoration: none;
+    font-size: 0.9em;
+    transition: all 0.2s ease;
+    border-left: 3px solid transparent;
+  }
+
+  .sidebar-toc .toc-item:hover {
+    background: var(--bg-secondary);
+    border-left-color: var(--link-color);
+    padding-left: 1.75em;
+  }
+
+  .sidebar-toc .toc-item.current {
+    background: rgba(52, 152, 219, 0.1);
+    border-left-color: var(--border-accent);
+    font-weight: 600;
+    color: var(--text-heading);
+  }
+
+  /* Separator */
+  .sidebar-separator {
+    height: 1px;
+    background: var(--border-primary);
+    margin: 1em 0;
+  }
+
+  /* Chapter outline */
+  .chapter-outline {
+    padding: 0 0 1em 0;
+  }
+
+  .outline-header {
+    padding: 0.75em 1em;
+    font-weight: 700;
+    font-size: 0.85em;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background: var(--bg-secondary);
+  }
+
+  .outline-item {
+    display: block;
+    padding: 0.5em 1em;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.85em;
+    transition: all 0.2s ease;
+    border-left: 3px solid transparent;
+  }
+
+  .outline-item.level-2 {
+    padding-left: 1.5em;
+  }
+
+  .outline-item.level-3 {
+    padding-left: 2.5em;
+    font-size: 0.8em;
+  }
+
+  .outline-item:hover {
+    background: var(--bg-secondary);
+    border-left-color: var(--link-color);
+    color: var(--text-primary);
+  }
+
+  .outline-item.active {
+    background: rgba(52, 152, 219, 0.1);
+    border-left-color: var(--border-accent);
+    font-weight: 600;
+    color: var(--text-heading);
+  }
+
+  /* Scrollbar styling */
+  .book-sidebar::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .book-sidebar::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+  }
+
+  .book-sidebar::-webkit-scrollbar-thumb {
+    background: var(--border-primary);
+    border-radius: 4px;
+  }
+
+  .book-sidebar::-webkit-scrollbar-thumb:hover {
+    background: var(--text-muted);
+  }
+
+  /* ===============================================
+     NAVBAR CONTROLS
+     =============================================== */
+
+  /* Theme toggle */
+  .theme-toggle {
+    padding: 0.5em 1em;
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 20px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.25em;
+  }
+
+  .theme-toggle:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+  }
+
+  .theme-icon {
+    transition: opacity 0.3s ease;
+  }
+
+  body:not(.dark-theme) .theme-icon-light {
+    opacity: 1;
+  }
+
+  body:not(.dark-theme) .theme-icon-dark {
+    opacity: 0;
+    position: absolute;
+  }
+
+  body.dark-theme .theme-icon-light {
+    opacity: 0;
+    position: absolute;
+  }
+
+  body.dark-theme .theme-icon-dark {
+    opacity: 1;
+  }
+
+  /* Font controls */
+  .font-controls {
+    display: flex;
+    gap: 0.25em;
+    align-items: center;
+    margin-left: auto;
+  }
+
+  .font-btn {
+    padding: 0.4em 0.8em;
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.9em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .font-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-1px);
+  }
+
+  .font-btn:active {
+    transform: translateY(0);
+  }
+
+  /* Sidebar toggle (mobile) */
+  .sidebar-toggle {
+    padding: 0.5em 1em;
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 20px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: none;
+  }
+
+  .sidebar-toggle:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: 768px) {
+    .sidebar-toggle {
+      display: block;
+    }
+  }
+
+  /* ===============================================
+     RESPONSIVE
+     =============================================== */
+
+  /* Impression - masquer la navigation et footer */
+  @media print {
+    .gdoc-navbar,
+    .book-sidebar,
+    .reading-progress,
+    .page-navigation,
+    .book-footer,
+    .theme-toggle,
+    .font-controls,
+    .sidebar-toggle {
+      display: none !important;
+    }
+
+    body {
+      padding-top: 0 !important;
+      padding-left: 0 !important;
+    }
+
+    /* Force light theme for printing */
+    body.dark-theme {
+      background: white !important;
+      color: black !important;
+    }
+  }
+  </style>
+</head>
+<body>
+  <!-- Reading Progress Bar -->
+  <div id="reading-progress" class="reading-progress" aria-hidden="true"></div>
+
+  <!-- Barre de navigation fixe -->
+  <nav class="gdoc-navbar">
+    <div class="navbar-container">
+      <!-- Fil d'Ariane -->
+      <div class="breadcrumb">
+        <a href="00_Avant-propos.html">L&#39;Architecte du mouvement</a>
+        <span class="breadcrumb-separator">›</span>
+        <span>Partie IV - La Pratique du Mouvement</span>
+        <span class="breadcrumb-separator">›</span>
+        <span class="breadcrumb-current">Chapitre 11 : Cultiver le
+mouvement</span>
+      </div>
+
+      <!-- Barre d'outils -->
+      <div class="navbar-tools">
+        <!-- Barre de recherche -->
+        <div class="search-container">
+          <input type="text" id="search-input" class="search-input" placeholder="Rechercher dans tout le livre... (Ctrl+K)" autocomplete="off"></input>
+          <span class="search-icon">🔍</span>
+          <div id="search-results" class="search-results"></div>
+        </div>
+
+        <!-- Font controls -->
+        <div class="font-controls">
+          <button id="font-decrease" class="font-btn" aria-label="Diminuer la taille du texte" title="A-">A-</button>
+          <button id="font-reset" class="font-btn" aria-label="Réinitialiser la taille du texte" title="Reset">A</button>
+          <button id="font-increase" class="font-btn" aria-label="Augmenter la taille du texte" title="A+">A+</button>
+        </div>
+
+        <!-- Theme toggle -->
+        <button id="theme-toggle" class="theme-toggle" aria-label="Basculer le mode sombre">
+          <span class="theme-icon theme-icon-light">☀️</span>
+          <span class="theme-icon theme-icon-dark">🌙</span>
+        </button>
+
+        <!-- Sidebar toggle (mobile) -->
+        <button id="sidebar-toggle" class="sidebar-toggle" aria-label="Afficher/Masquer le sommaire">
+          <span class="hamburger-icon">☰</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Persistent Sidebar -->
+  <aside id="book-sidebar" class="book-sidebar" aria-label="Navigation du livre">
+    <!-- Header -->
+    <div class="sidebar-header">
+      <h2>L&#39;Architecte du mouvement</h2>
+    </div>
+
+    <!-- Full Book TOC -->
+    <nav class="sidebar-toc" aria-label="Table des matières complète">
+      <div class="toc-section">
+        <a href="00_Avant-propos.html" class="toc-item" data-chapter-id="00">Avant-propos</a>
+        <a href="01_Introduction.html" class="toc-item" data-chapter-id="01">Introduction</a>
+      </div>
+
+      <div class="toc-section">
+        <div class="toc-part" data-part="1">
+          <span class="part-toggle">▼</span>
+          <span class="part-title">Partie I - Le Terrain de Jeu</span>
+        </div>
+        <div class="toc-part-chapters">
+          <a href="02_Chapitre_1.html" class="toc-item" data-chapter-id="02">Chapitre 1 : Stratégie, jeu, position et mouvement</a>
+          <a href="03_Chapitre_2.html" class="toc-item" data-chapter-id="03">Chapitre 2 : Naviguer dans le brouillard</a>
+        </div>
+      </div>
+
+      <div class="toc-section">
+        <div class="toc-part" data-part="2">
+          <span class="part-toggle">▼</span>
+          <span class="part-title">Partie II - L&#39;Organisation face au Mouvement</span>
+        </div>
+        <div class="toc-part-chapters">
+          <a href="04_Chapitre_3.html" class="toc-item" data-chapter-id="04">Chapitre 3 : L&#39;anatomie du mur invisible</a>
+          <a href="05_Chapitre_4.html" class="toc-item" data-chapter-id="05">Chapitre 4 : Structure et pouvoir</a>
+        </div>
+      </div>
+
+      <div class="toc-section">
+        <div class="toc-part" data-part="3">
+          <span class="part-toggle">▼</span>
+          <span class="part-title">Partie III - Les Lois du Mouvement</span>
+        </div>
+        <div class="toc-part-chapters">
+          <a href="06_Chapitre_5.html" class="toc-item" data-chapter-id="06">Chapitre 5 : La loi du climat</a>
+          <a href="07_Chapitre_6.html" class="toc-item" data-chapter-id="07">Chapitre 6 : La loi de l&#39;évolution</a>
+          <a href="08_Chapitre_7.html" class="toc-item" data-chapter-id="08">Chapitre 7 : La loi de l&#39;écosystème</a>
+        </div>
+      </div>
+
+      <div class="toc-section">
+        <div class="toc-part" data-part="4">
+          <span class="part-toggle">▼</span>
+          <span class="part-title">Partie IV - La Pratique du Mouvement</span>
+        </div>
+        <div class="toc-part-chapters">
+          <a href="09_Chapitre_8.html" class="toc-item" data-chapter-id="09">Chapitre 8 : Observer le terrain</a>
+          <a href="10_Chapitre_9.html" class="toc-item" data-chapter-id="10">Chapitre 9 : Orienter et décider</a>
+          <a href="11_Chapitre_10.html" class="toc-item" data-chapter-id="11">Chapitre 10 : Jouer et apprendre</a>
+          <a href="12_Chapitre_11.html" class="toc-item" data-chapter-id="12">Chapitre 11 : Cultiver le mouvement</a>
+        </div>
+      </div>
+
+      <div class="toc-section">
+        <a href="13_Conclusion.html" class="toc-item" data-chapter-id="13">Conclusion</a>
+      </div>
+
+      <div class="toc-section">
+        <div class="toc-part" data-part="annexes">
+          <span class="part-toggle">▼</span>
+          <span class="part-title">Annexes</span>
+        </div>
+        <div class="toc-part-chapters">
+          <a href="14_Annexe_Glossaire.html" class="toc-item" data-chapter-id="14">Glossaire</a>
+          <a href="15_Annexe_Bibliographie.html" class="toc-item" data-chapter-id="15">Bibliographie</a>
+          <a href="16_Annexe_Antisèche_Évolution.html" class="toc-item" data-chapter-id="16">Antisèche Évolution</a>
+          <a href="17_Annexe_Methods_Analysis.html" class="toc-item" data-chapter-id="17">Methods Analysis</a>
+          <a href="18_Annexe_Catalogue_Gameplays.html" class="toc-item" data-chapter-id="18">Catalogue Gameplays</a>
+          <a href="19_Annexe_Grilles_Décision.html" class="toc-item" data-chapter-id="19">Grilles Décision</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Separator -->
+    <div class="sidebar-separator"></div>
+
+    <!-- Chapter Outline (generated by JS) -->
+    <nav id="chapter-outline" class="chapter-outline" aria-label="Plan du chapitre actuel">
+      <!-- Populated dynamically by generateChapterOutline() -->
+    </nav>
+  </aside>
+
+  <!-- Contenu principal -->
+  <div id="main-content">
+<h1 id="chapitre-11-créer-son-propre-moteur-leffet-dentraînement-de-la-valeur">Chapitre
+11 : Créer son propre moteur — L’effet d’entraînement de la valeur</h1>
+<p>Vous voici arrivé au terme d’un long parcours. Vous avez exploré le
+terrain de jeu, diagnostiqué l’organisation, dévoilé les lois du
+mouvement, et pratiqué la cartographie. Vous avez appris à lire les
+forces qui façonnent votre environnement, à identifier les blocages qui
+paralysent vos équipes, et à mobiliser un catalogue de manœuvres
+stratégiques pour transformer votre position.</p>
+<p>Mais un piège mental vous guette — celui de croire que la stratégie
+est désormais « faite ». Que la carte est tracée, le plan établi, les
+manœuvres identifiées. Que vous pouvez maintenant passer à l’exécution
+et cocher des cases.</p>
+<p>Cette croyance est une illusion dangereuse. Car le terrain que vous
+avez cartographié ne vous attend pas. Pendant que vous lisez ces lignes,
+vos concurrents bougent, les technologies évoluent, les besoins de vos
+utilisateurs mutent. La carte que vous avez tracée au chapitre 8 n’est
+déjà plus exactement celle d’aujourd’hui.</p>
+<p>La stratégie n’est pas un livrable. C’est un cycle permanent. Et ce
+chapitre vous révélera comment transformer ce cycle potentiellement
+épuisant en un moteur qui s’accélère de lui-même.</p>
+<h2 id="le-cycle-qui-ne-sarrête-jamais">Le cycle qui ne s’arrête
+jamais</h2>
+<p>Reprenons le fil de notre voyage. Vous avez d’abord compris que le
+marché est un terrain de jeu régi par des forces concurrentielles
+(Partie I). Vous avez ensuite diagnostiqué votre organisation pour
+identifier vos capitaux et vos inerties (Partie II). Vous avez découvert
+les lois de l’évolution qui gouvernent le mouvement des composants
+(Partie III). Enfin, vous avez appris à construire une carte, à lire les
+schémas climatiques, et à jouer avec le répertoire des manœuvres (Partie
+IV).</p>
+<p>Chacune de ces étapes vous a demandé un effort considérable.
+Comprendre le cadre théorique. Cartographier votre système. Identifier
+les blocages. Choisir une manœuvre. L’exécuter. Mesurer les
+résultats.</p>
+<p>Et maintenant que cette boucle est parcourue une première fois, une
+question naturelle émerge : « Et ensuite ? »</p>
+<p>La réponse pourrait sembler décourageante : vous recommencez. Le
+terrain a changé pendant que vous agiissiez. De nouveaux concurrents
+sont apparus. Une technologie que vous aviez positionnée en phase
+Produit a glissé vers la Commodité plus vite que prévu. Un Cygne Noir
+réglementaire a rebattu les cartes. Votre carte d’hier ne suffit plus
+pour naviguer aujourd’hui.</p>
+<p>Cela peut ressembler à une condamnation — celle de Sisyphe poussant
+éternellement son rocher. Mais c’est ici que réside la subtilité. Le
+piège serait de croire que vous recommencez <em>de zéro</em>. En
+réalité, chaque itération du cycle s’appuie sur la précédente. Vous ne
+repartez pas à la case départ. Vous montez d’un cran.</p>
+<p>Imaginez un architecte qui construit un immeuble pendant qu’une
+tempête fait rage. Il ne peut pas attendre que le vent cesse — le
+bâtiment doit tenir <em>pendant</em> qu’il le construit. Chaque étage
+achevé devient une plateforme stable pour ériger le suivant. Certes, la
+tempête continue de souffler. Mais l’architecte n’est plus au
+rez-de-chaussée. Il est déjà au troisième étage, puis au cinquième, et
+il voit plus loin à chaque niveau.</p>
+<p>C’est exactement ce qui se passe avec votre pratique stratégique. La
+deuxième carte que vous tracerez sera plus rapide que la première. Vous
+reconnaîtrez des patterns que vous aviez mis des heures à identifier
+lors de votre première tentative. Les diagnostics d’inertie qui vous
+semblaient obscurs au chapitre 6 seront devenus des réflexes au bout de
+quelques itérations. Le catalogue des manœuvres, intimidant au chapitre
+10, deviendra un langage naturel.</p>
+<p>Mais si la stratégie est un cycle permanent, comment éviter
+l’épuisement ? Comment ne pas finir par tourner en rond, consumé par
+l’effort de recommencer sans cesse ?</p>
+<p>La réponse réside dans un phénomène que les ingénieurs connaissent
+bien, mais que peu de stratèges exploitent consciemment : l’effet
+d’entraînement du volant d’inertie.</p>
+<h2 id="leffet-dentraînement-le-volant-dinertie-stratégique">L’effet
+d’entraînement — Le volant d’inertie stratégique</h2>
+<h3 id="la-métaphore-du-volant-dinertie">La métaphore du volant
+d’inertie</h3>
+<p>Si vous avez déjà tenté de faire démarrer un vieux moteur à
+manivelle, vous connaissez cette sensation. Les premiers tours demandent
+une force colossale. Vos bras tirent de toutes leurs forces, le volant
+résiste, il semble presque immobile. Vous vous demandez si le mécanisme
+est grippé. Puis, tour après tour, quelque chose change. Le volant prend
+de la vitesse. Vos efforts ne diminuent pas nécessairement, mais leur
+effet s’amplifie. Et soudain, le moteur démarre — le volant tourne
+maintenant si vite qu’il vous entraînerait presque.</p>
+<p>Cette image physique n’est pas qu’une métaphore poétique. C’est une
+description précise de ce qui se passe quand vous pratiquez la stratégie
+comme une discipline itérative.</p>
+<p>Un volant d’inertie possède une propriété remarquable : il accumule
+de l’énergie cinétique à chaque rotation. Plus il tourne vite, moins il
+demande d’énergie pour maintenir sa vitesse — et plus il devient
+difficile de l’arrêter. La physique nomme ce phénomène le « momentum
+».</p>
+<p>Transposé à la stratégie, cela signifie que chaque itération de votre
+cycle — Observer, Orienter, Décider, Agir — alimente la suivante. Les
+capacités que vous développez lors de la première carte facilitent la
+deuxième. Les patterns que vous reconnaissez lors du deuxième diagnostic
+accélèrent le troisième. Chaque tour du cycle réduit la friction du
+suivant.</p>
+<p>Le point critique est celui du démarrage. Votre première carte vous a
+probablement pris plusieurs jours. Vous avez tâtonné, effacé,
+recommencé. Vous vous êtes demandé si vous placiez correctement les
+composants sur l’axe d’évolution. Vous avez débattu avec vos collègues
+sur les dépendances. C’était laborieux, parfois frustrant.</p>
+<p>Mais ce premier tour du volant était essentiel. Sans lui, rien ne
+démarre.</p>
+<h3 id="le-value-flywheel-effect">Le Value Flywheel Effect</h3>
+<p>David Anderson, Mark McCann et Michael O’Reilly ont formalisé cette
+dynamique dans leur ouvrage <em>The Value Flywheel Effect</em>. Leur
+intuition fondamentale — inspirée par l’observation des pratiques
+d’Amazon — est que la création de valeur n’est pas linéaire. Elle suit
+une boucle auto-renforçante composée de quatre phases distinctes.</p>
+<p><strong>Clarity of Purpose</strong> : savoir pourquoi on agit, quel
+besoin on sert. C’est l’ancrage de toute stratégie. Sans clarté sur
+l’utilisateur et son besoin, vous optimisez dans le vide. Cette phase
+correspond à ce que vous avez appris aux chapitres 1 et 2 : identifier
+le besoin utilisateur comme repère fondamental, et comprendre que la
+stratégie est un jeu de position et de mouvement. Sans cet ancrage, vous
+partez dans n’importe quelle direction.</p>
+<p><strong>Challenge and Landscape</strong> : comprendre le terrain,
+diagnostiquer les forces en présence. Cette phase mobilise tout ce que
+vous avez appris dans les parties II et III du livre. Vous identifiez
+vos capitaux, vous mesurez votre inertie, vous comprenez les lois de
+l’évolution qui façonnent le terrain. Vous cartographiez les forces
+climatiques qui poussent les composants vers la droite, et les blocages
+qui ralentissent votre organisation.</p>
+<p><strong>Next Best Actions</strong> : décider et agir sur la base de
+cette compréhension. C’est le cœur de la Partie IV. Vous tracez votre
+carte, vous lisez les schémas de Flow et d’inertie, vous choisissez une
+manœuvre adaptée à votre contexte. Vous ne cherchez pas le plan parfait
+à trois ans. Vous identifiez la <em>prochaine</em> meilleure action —
+celle qui vous fera progresser sans nécessiter une omniscience que vous
+ne pouvez pas avoir.</p>
+<p><strong>Long Term Value</strong> : récolter la valeur créée et la
+réinvestir dans le cycle suivant. C’est la phase souvent oubliée — celle
+où vous mesurez ce que vos actions ont produit. Avez-vous réduit votre
+dette technique ? Gagné de nouveaux clients ? Libéré du temps d’équipe ?
+Cette valeur ne disparaît pas. Elle devient la ressource que vous
+réinjectez dans le prochain cycle. Vous repartez de plus haut.</p>
+<p>Ces quatre phases forment une boucle fermée. La valeur récoltée à la
+fin nourrit la clarté initiale du cycle suivant. Vous comprenez mieux
+vos utilisateurs parce que vous avez observé l’impact de vos actions.
+Vous diagnostiquez plus vite parce que vous avez déjà cartographié le
+terrain une fois. Vous décidez avec plus d’assurance parce que vous avez
+déjà exécuté des manœuvres similaires.</p>
+<p>Le volant tourne. Et à chaque tour, il demande un peu moins d’effort
+pour produire un peu plus de résultats.</p>
+<h3 id="le-livre-comme-première-itération">Le livre comme première
+itération</h3>
+<p>Faisons maintenant un mapping explicite entre le <em>Value Flywheel
+Effect</em> et ce que vous venez de parcourir dans ce livre.</p>
+<table>
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 52%" />
+<col style="width: 23%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Phase VFE</th>
+<th>Ce que vous avez appris</th>
+<th>Chapitres</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Clarity of Purpose</strong></td>
+<td>Le repère utilisateur, le besoin comme ancrage stratégique</td>
+<td>Ch. 1-2, Ch. 8</td>
+</tr>
+<tr class="even">
+<td><strong>Challenge and Landscape</strong></td>
+<td>Diagnostic de l’organisation, lois de l’évolution, mécanique de
+l’inertie</td>
+<td>Ch. 3-7</td>
+</tr>
+<tr class="odd">
+<td><strong>Next Best Actions</strong></td>
+<td>Construction de cartes, lecture stratégique, catalogue des
+manœuvres</td>
+<td>Ch. 8-10</td>
+</tr>
+<tr class="even">
+<td><strong>Long Term Value</strong></td>
+<td>Ce chapitre — et votre prochain cycle</td>
+<td>Ch. 11</td>
+</tr>
+</tbody>
+</table>
+<p>Vous n’avez pas simplement lu un livre sur la stratégie. Vous venez
+de parcourir une itération complète du cycle. Vous avez compris
+<em>pourquoi</em> agir (les forces concurrentielles, la course de la
+Reine Rouge). Vous avez appris à <em>diagnostiquer</em> (capitaux,
+doctrines, inertie). Vous avez identifié <em>comment</em> agir
+(cartographie, schémas climatiques, manœuvres). Et maintenant, ce
+chapitre vous explique comment <em>réinvestir</em> ce que vous avez
+appris dans le cycle suivant.</p>
+<p>Le message est simple mais fondamental : <strong>vous venez de
+parcourir une itération complète. La prochaine sera plus
+rapide.</strong></p>
+<p>La deuxième carte que vous tracerez ne partira pas de zéro. Vous
+saurez déjà où chercher les composants critiques. Vous reconnaîtrez les
+schémas d’inertie sans avoir à relire le chapitre 6. Vous identifierez
+les manœuvres pertinents sans parcourir tout le catalogue du chapitre
+10.</p>
+<p>Le volant a commencé à tourner. Votre rôle maintenant est de
+maintenir le mouvement — et de comprendre comment ce mouvement change de
+nature avec l’accumulation des itérations.</p>
+<h2 id="linertie-retournée-du-frein-au-propulseur">L’inertie retournée —
+Du frein au propulseur</h2>
+<p>Nous avons consacré deux chapitres entiers (chapitres 6 et 7) à
+comprendre l’inertie comme une force de résistance. L’inertie,
+avons-nous dit, est une propriété proportionnelle au succès passé. Plus
+une organisation a réussi dans une direction donnée, plus il devient
+difficile de changer de cap. L’inertie se manifeste dans les cinq
+capitaux — technologique, humain, organisationnel, relationnel,
+financier. Elle freine le mouvement. Elle vous empêche de tourner quand
+le terrain l’exige.</p>
+<p>C’est une description exacte de l’inertie subie. Mais ce n’est qu’une
+face de la médaille.</p>
+<p>Car l’inertie n’est pas intrinsèquement bonne ou mauvaise. C’est une
+propriété physique neutre. Le même phénomène qui vous empêche de pivoter
+peut aussi vous propulser — si vous le construisez délibérément.</p>
+<h3 id="rappel-linertie-comme-frein">Rappel : l’inertie comme frein</h3>
+<p>Rappelez-vous le cas de Nokia au chapitre 6. L’entreprise finlandaise
+dominait le marché du téléphone mobile dans les années 2000. Elle avait
+accumulé une expertise gigantesque dans le hardware, une chaîne
+d’approvisionnement optimisée, des relations solides avec les opérateurs
+télécoms. Son inertie était colossale — et c’était une force tant que le
+jeu consistait à produire des téléphones de meilleure qualité, plus
+robustes, avec une meilleure autonomie.</p>
+<p>Mais en 2007, Apple a changé les règles du jeu. Le téléphone n’était
+plus un appareil de communication robuste. C’était une plateforme
+logicielle tactile. Nokia possédait tout le capital nécessaire pour
+dominer l’ancien jeu — et c’est précisément ce capital qui l’a empêchée
+de pivoter vers le nouveau.</p>
+<p>L’inertie était un poids mort. Nokia courait dans la mauvaise
+direction, et son propre élan l’empêchait de tourner à temps.</p>
+<h3 id="le-retournement-linertie-comme-momentum">Le retournement :
+l’inertie comme momentum</h3>
+<p>Mais imaginez maintenant Amazon Web Services. Depuis 2006,
+l’entreprise accumule des capacités dans le cloud computing. Chaque
+service lancé — EC2, S3, Lambda, DynamoDB — devient une brique qui
+alimente le suivant. Chaque client acquis génère des données d’usage qui
+permettent d’identifier les prochains besoins à commoditiser (le modèle
+ILC du chapitre 10). Chaque dollar réinvesti dans l’infrastructure
+réduit les coûts unitaires et crée un avantage de prix sur les
+concurrents.</p>
+<p>Ici aussi, il y a de l’inertie. AWS possède un élan colossal dans le
+cloud. Mais cet élan est dirigé <em>dans la bonne direction</em>. Il
+propulse l’entreprise plus loin, plus vite. Chaque itération du cycle
+renforce la position au lieu de la fragiliser.</p>
+<p>C’est le même phénomène physique que chez Nokia — l’accumulation de
+capacités dans une direction donnée. Mais la relation à cette
+accumulation est radicalement différente.</p>
+<p><strong>L’inertie subie</strong>, c’est quand vous êtes lancé dans
+une direction que vous n’avez pas choisie, ou que vous avez choisie
+autrefois mais qui n’est plus pertinente aujourd’hui. Le poids du passé
+vous empêche de tourner. Vous savez que vous devriez pivoter, mais vos
+structures, vos compétences, vos contrats, votre culture vous
+retiennent.</p>
+<p><strong>Le momentum construit</strong>, c’est quand vous êtes lancé
+dans une direction délibérée, celle que votre diagnostic vous a révélée
+comme stratégiquement pertinente. L’accumulation de capacités ne vous
+freine pas — elle vous accélère. Chaque ressource mobilisée, chaque
+compétence développée, chaque partenariat noué devient un actif qui
+alimente le mouvement.</p>
+<p>La différence entre les deux n’est pas dans la physique du phénomène.
+C’est dans l’intention et la conscience. L’architecte novice subit
+l’inertie. L’architecte expérimenté la construit.</p>
+<h3 id="ce-que-le-volant-dinertie-accumule">Ce que le volant d’inertie
+accumule</h3>
+<p>Alors, concrètement, qu’est-ce qui s’accumule au fil des itérations
+du cycle stratégique ?</p>
+<p><strong>Des capacités de diagnostic.</strong> Votre première analyse
+des cinq capitaux (chapitre 4) vous a peut-être pris une journée
+entière. La dixième vous prendra une heure. Vous « voyez » désormais les
+patterns. Vous repérez l’inertie culturelle en écoutant une simple
+réunion d’équipe. Vous identifiez les blocages technologiques en
+parcourant une architecture. Ce qui était autrefois laborieux est devenu
+un réflexe.</p>
+<p><strong>Des patterns reconnus.</strong> Après avoir tracé dix cartes
+de Wardley, certaines configurations deviennent familières. Vous
+reconnaissez immédiatement le schéma d’une commodité reconstruite en
+interne (chapitre 3, violation de la doctrine). Vous identifiez sans
+analyse formelle les situations où le modèle ILC est pertinent, ou où le
+Strangler Fig s’impose. Vous n’avez plus besoin de consulter le
+catalogue des manœuvres — il est devenu votre langage naturel.</p>
+<p><strong>Des ressources mobilisables.</strong> Chaque cycle réussi
+vous laisse des actifs. Vous avez réduit votre dette technique via une
+migration Strangler Fig. Vous avez formé vos équipes à la cartographie.
+Vous avez créé une couche d’abstraction qui préserve vos options
+stratégiques. Ces ressources ne disparaissent pas. Elles deviennent les
+fondations du prochain mouvement.</p>
+<p><strong>Une culture du mouvement.</strong> Le changement le plus
+profond n’est pas technique, il est culturel. Après plusieurs
+itérations, votre organisation apprend à pivoter. Les équipes ne voient
+plus une nouvelle carte comme une remise en question, mais comme une
+mise à jour naturelle. Elles acceptent que ce qui était vrai hier ne le
+soit plus aujourd’hui. Elles développent ce que Carol Dweck appelle un «
+état d’esprit de croissance » — la conviction que les capacités se
+développent par la pratique, pas par le talent inné.</p>
+<p>C’est cette accumulation qui transforme le cycle en volant d’inertie.
+Vous ne recommencez pas de zéro. Vous montez d’un cran à chaque
+tour.</p>
+<p>Mais attention : cette accumulation révèle le véritable objectif du
+volant. Il ne s’agit pas de travailler moins dur. Il s’agit d’aller plus
+vite.</p>
+<h2 id="le-but-du-jeu-accélérer">Le but du jeu — Accélérer</h2>
+<h3 id="la-fausse-promesse-de-lefficience">La fausse promesse de
+l’efficience</h3>
+<p>Une tentation naturelle émerge à ce stade de notre raisonnement. Si
+chaque itération du cycle devient plus facile, si les diagnostics
+s’accélèrent, si les décisions deviennent plus rapides, alors —
+pense-t-on — l’effort total va diminuer. Avec l’expérience, nous
+finirons par travailler moins.</p>
+<p>C’est une vision séduisante, presque réconfortante. Après des années
+de pratique, vous pourriez enfin vous reposer sur vos lauriers, tracer
+vos cartes en pilote automatique, et consacrer votre énergie libérée à
+d’autres activités.</p>
+<p>Mais c’est une illusion. Et c’est même, osons le dire, un piège.</p>
+<p>Cette vision est défensive. Elle suppose que le but du jeu est
+d’atteindre un état de confort où la stratégie devient une routine
+indolore. Mais rappelez-vous le chapitre 1 et la loi de la Reine Rouge :
+dans un monde en mouvement perpétuel, il n’existe pas d’état de confort
+durable. Vos concurrents ne vous attendent pas. Le terrain ne se fige
+pas.</p>
+<p>Si vous utilisez les gains d’efficience du volant d’inertie pour
+ralentir votre effort, vous retombez dans le piège que nous avons
+dénoncé dès le premier chapitre : courir sur un tapis roulant qui recule
+plus vite que vous n’avancez.</p>
+<p>Ce n’est pas le but du jeu.</p>
+<h3 id="la-vraie-promesse-la-vélocité-dadaptation">La vraie promesse :
+la vélocité d’adaptation</h3>
+<p>Alors, à quoi sert le volant d’inertie s’il ne réduit pas l’effort
+?</p>
+<p>Il augmente la vélocité à effort égal.</p>
+<p>Le volant ne vous permet pas de travailler moins. Il vous permet de
+parcourir plus de chemin dans le même temps. Vous tracez des cartes plus
+vite, donc vous pouvez en tracer davantage. Vous identifiez les
+manœuvres pertinents plus rapidement, donc vous pouvez en tester
+plusieurs au lieu d’un seul. Vous pivotez avec moins de friction, donc
+vous pouvez ajuster votre trajectoire avant que vos concurrents ne
+réagissent.</p>
+<p>Dans un monde où l’avantage concurrentiel va à celui qui s’adapte le
+plus vite, cette vélocité est l’atout décisif.</p>
+<p>Pensez à Spotify. L’entreprise suédoise ne possède pas un avantage
+technologique inattaquable. Elle n’a pas de brevet sur le streaming
+musical. Elle ne détient pas les droits exclusifs sur les catalogues
+musicaux. Son avantage réside dans sa capacité à itérer plus vite que
+ses concurrents — à tester de nouvelles fonctionnalités, à mesurer leur
+adoption, à pivoter si nécessaire, et à recommencer. Pendant que
+d’autres entreprises discutent encore de la feuille de route annuelle,
+Spotify a déjà testé, validé ou abandonné trois nouvelles
+hypothèses.</p>
+<p>Le volant d’inertie de Spotify tourne vite. Et cette vitesse
+elle-même devient un avantage concurrentiel.</p>
+<p>Concrètement, qu’est-ce que cela signifie pour vous ?</p>
+<p><strong>Plus vous itérez, plus vos analyses sont rapides.</strong> Ce
+qui prenait trois jours prend maintenant trois heures. Vous libérez du
+temps — non pas pour vous reposer, mais pour analyser davantage de
+scénarios.</p>
+<p><strong>Plus vous itérez, plus vos décisions sont informées.</strong>
+Vous avez déjà vu ce pattern dix fois. Vous savez ce qui a fonctionné,
+ce qui a échoué, et pourquoi. Vous ne recommencez pas l’analyse depuis
+zéro. Vous ajustez en fonction de ce qui a changé.</p>
+<p><strong>Plus vous itérez, plus vous pouvez pivoter avant les
+autres.</strong> Pendant que vos concurrents en sont encore à tracer
+leur première carte, vous en êtes déjà à la cinquième. Vous détectez les
+signaux faibles plus tôt. Vous agissez avant que le mouvement ne
+devienne évident pour tout le monde.</p>
+<p><strong>Plus vous itérez, plus vous captez les opportunités
+émergentes.</strong> Les Cygnes Noirs (chapitre 9) créent des fenêtres
+d’opportunité qui se referment vite. Celui qui réagit le premier capte
+la valeur. Le volant d’inertie vous donne cette réactivité.</p>
+<h3 id="retour-au-jeu">Retour au jeu</h3>
+<p>Le chapitre 1 posait les règles fondamentales : le marché est un
+terrain de jeu en mouvement perpétuel, régi par les forces de la
+concurrence. Votre stratégie repose sur deux variables — votre position
+actuelle, et le mouvement que vous choisissez pour l’améliorer. Tous les
+mouvements ne se valent pas, et l’art du stratège consiste à choisir le
+bon mouvement au bon moment.</p>
+<p>Le chapitre 11 boucle cette logique en donnant la réponse finale :
+pour gagner, il ne suffit pas d’avoir le meilleur plan initial. Il faut
+ajuster le plus vite.</p>
+<p>L’architecte du mouvement n’est pas celui qui trace la carte la plus
+parfaite. C’est celui qui la retrace assez vite pour que sa carte soit
+toujours pertinente. C’est celui qui enchaîne les cycles avant que ses
+concurrents n’aient terminé le premier.</p>
+<p>La victoire ne va pas au plus intelligent, ni au mieux financé. Elle
+va au plus véloce — à celui dont le volant d’inertie tourne assez vite
+pour transformer le mouvement perpétuel en avantage durable.</p>
+<p>Mais même le volant le plus puissant n’est pas éternel. Le terrain
+peut changer brutalement, sans prévenir. C’est là que la vélocité
+acquise devient votre meilleure assurance.</p>
+<h2 id="quand-le-terrain-change-la-résilience-du-stratège">Quand le
+terrain change — La résilience du stratège</h2>
+<h3 id="le-cygne-noir-ne-respecte-pas-le-volant-dinertie">Le Cygne Noir
+ne respecte pas le volant d’inertie</h3>
+<p>Nous avons consacré une large section du chapitre 9 aux Cygnes Noirs
+— ces événements imprévisibles et impactants qui rebattent soudainement
+les cartes. Une pandémie mondiale qui force la digitalisation en
+quelques semaines. Une régulation inattendue qui ferme un marché ou en
+ouvre un nouveau. Une innovation technologique qui rend obsolète toute
+une industrie du jour au lendemain.</p>
+<p>Le volant d’inertie que vous avez patiemment construit ne vous
+immunise pas contre ces ruptures. Vous pouvez avoir tracé cent cartes,
+diagnostiqué mille fois votre organisation, enchaîné les manœuvres avec
+une maestria parfaite — et voir tout cela remis en question par un
+événement que personne n’avait anticipé.</p>
+<p>C’est la réalité brutale du monde complexe dans lequel nous évoluons.
+Le terrain ne vous doit rien. Il peut se dérober sous vos pieds au
+moment où vous pensiez avoir trouvé votre rythme.</p>
+<p>Faut-il en conclure que le volant d’inertie est inutile face aux
+ruptures ? Absolument pas. Mais il faut comprendre ce qu’il vous apporte
+dans ces moments critiques.</p>
+<h3 id="ce-que-le-volant-vous-donne-face-à-la-rupture">Ce que le volant
+vous donne face à la rupture</h3>
+<p><strong>Des ressources accumulées.</strong> Chaque itération du cycle
+vous a laissé des actifs. Vous avez réduit votre dette technique via le
+Strangler Fig. Vous avez formé vos équipes à la cartographie. Vous avez
+construit une couche d’abstraction qui préserve vos options
+stratégiques. Vous avez diversifié vos capitaux au lieu de tout miser
+sur un seul pari. Quand la rupture survient, vous n’êtes pas démuni.
+Vous avez des options, du capital, des compétences mobilisables.</p>
+<p><strong>Une vélocité d’analyse.</strong> Face à un Cygne Noir, tout
+le monde est surpris. Mais tout le monde ne réagit pas à la même
+vitesse. Celui qui a pratiqué la cartographie cent fois comprendra la
+nouvelle donne plus vite que celui qui découvre l’outil. Vous savez déjà
+comment tracer une carte sous pression. Vous savez identifier les
+composants critiques, repérer les nouvelles dépendances, anticiper les
+déplacements sur l’axe d’évolution. Pendant que d’autres organisations
+tâtonnent encore, vous avez déjà tracé deux scénarios.</p>
+<p><strong>Une habitude du pivot.</strong> Chaque itération du cycle
+stratégique était, d’une certaine manière, un mini-pivot. Vous avez
+découvert que votre carte d’hier n’était plus exacte. Vous avez ajusté.
+Vous avez changé de gameplay. Vous avez réalloué des ressources. Cette
+pratique répétée du pivot crée une capacité organisationnelle rare : la
+tolérance au changement brutal. Vos équipes ne voient plus le changement
+comme une catastrophe, mais comme un signal qu’il est temps de retourner
+au tableau blanc.</p>
+<p><strong>Un réseau de sensing.</strong> Plus vous avez tracé de
+cartes, plus vous avez développé un réseau de capteurs — formels ou
+informels — qui vous alertent sur les signaux faibles. Vous avez appris
+à observer les mouvements de vos concurrents, à surveiller les
+évolutions technologiques, à écouter les frustrations de vos
+utilisateurs. Quand un Cygne Noir se profile, vous n’êtes peut-être pas
+capable de le prédire, mais vous détectez les tremblements
+avant-coureurs avant qu’il ne frappe.</p>
+<p>Ces quatre éléments ne vous garantissent pas d’éviter la rupture.
+Personne ne peut vous garantir cela. Mais ils transforment radicalement
+votre capacité à rebondir.</p>
+<h3 id="le-cycle-recommence-mais-pas-de-zéro">Le cycle recommence, mais
+pas de zéro</h3>
+<p>Après une rupture majeure, vous repassez nécessairement par les
+quatre phases du <em>Value Flywheel Effect</em>.</p>
+<p><strong>Clarity of Purpose.</strong> Quel besoin utilisateur sert-on
+maintenant que le terrain a changé ? La pandémie a transformé la
+collaboration à distance d’un « nice to have » en un besoin vital. La
+régulation NIS2 a fait de la souveraineté numérique un critère d’achat
+prioritaire. Vous devez redéfinir votre ancrage.</p>
+<p><strong>Challenge and Landscape.</strong> Quelles sont les nouvelles
+forces en présence ? Quels composants ont soudainement glissé vers la
+droite ou vers la gauche sur l’axe d’évolution ? Quels nouveaux acteurs
+sont apparus ? Quelles vos ressources sont encore pertinentes, et
+lesquelles sont devenues obsolètes ?</p>
+<p><strong>Next Best Actions.</strong> Quel est le prochain mouvement le
+plus judicieux dans ce nouveau contexte ? Peut-être que la manœuvre qui
+marchait avant ne fonctionne plus. Peut-être que la fenêtre
+d’opportunité pour un Land Grab (chapitre 10) vient de s’ouvrir.</p>
+<p><strong>Long Term Value.</strong> Qu’avez-vous appris de cette
+rupture ? Comment pouvez-vous renforcer votre résilience pour la
+prochaine ?</p>
+<p>Le cycle recommence, certes. Mais — et c’est le point capital — vous
+gardez les capacités acquises.</p>
+<p>Votre volant d’inertie ralentit temporairement. Il ne s’arrête pas.
+Il ne repart pas de l’immobilité. Il conserve une partie de son élan. Et
+parce que vous savez déjà comment le faire tourner, le redémarrage est
+plus rapide que le démarrage initial.</p>
+<h3 id="message-final-le-stratège-résilient">Message final : le stratège
+résilient</h3>
+<p>Le stratège résilient n’est pas celui qui évite les ruptures.
+Personne ne peut les éviter. Le stratège résilient est celui qui s’en
+remet le plus vite.</p>
+<p>La résilience, dans ce contexte, n’est pas une capacité à encaisser
+les chocs sans broncher. C’est une capacité à se réorganiser rapidement
+après le choc. À retomber sur ses pieds. À retrouver sa vélocité.</p>
+<p>Le volant d’inertie stratégique est votre assurance de rebond. Il ne
+vous garantit pas d’éviter l’accident. Mais il garantit que vous
+repartirez plus vite que ceux qui n’ont jamais construit le leur.</p>
+<hr />
+<p>Vous voici donc équipé d’un moteur, pas d’un plan.</p>
+<p>La différence est fondamentale. Un plan s’exécute et se termine. Il
+suppose un terrain stable, prévisible, où les hypothèses de départ
+restent valides jusqu’à la fin. Nous savons maintenant que ce terrain
+n’existe pas.</p>
+<p>Un moteur, lui, tourne et s’accélère. Il transforme le mouvement
+perpétuel — cette réalité épuisante de la Reine Rouge — en avantage
+cumulatif. Chaque tour du volant vous rend plus rapide, plus perspicace,
+plus résilient.</p>
+<p>Le chapitre suivant — la conclusion de ce livre — vous appartient.
+C’est vous qui l’écrirez, carte après carte, décision après décision,
+cycle après cycle.</p>
+
+    <!-- Navigation Précédent/Suivant -->
+    <div class="page-navigation">
+      <a href="11_Chapitre_10.html" class="nav-button nav-button-prev">
+        <div>
+          <span class="nav-label">Précédent</span>
+          <div>Chapitre 10 : Jouer et apprendre</div>
+        </div>
+      </a>
+
+      <a href="13_Conclusion.html" class="nav-button nav-button-next">
+        <div>
+          <span class="nav-label">Suivant</span>
+          <div>Conclusion</div>
+        </div>
+      </a>
+    </div>
+
+    <!-- Footer avec copyright -->
+    <footer class="book-footer">
+      <div class="footer-content">
+        <p class="copyright">© 2026 Olivier Wulveryck - Tous droits réservés</p>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Navigation JavaScript -->
+<script>
+// Navigation pour fichiers HTML Google Docs
+(function() {
+  'use strict';
+
+  // Index de recherche global
+  let searchIndex = null;
+  let indexLoading = false;
+
+  // Charger l'index JSON au démarrage
+  async function loadSearchIndex() {
+    if (searchIndex !== null) return searchIndex;
+    if (indexLoading) return null;
+
+    indexLoading = true;
+    try {
+      const response = await fetch('search-index.json');
+      if (!response.ok) {
+        console.warn('Index de recherche non disponible');
+        return null;
+      }
+      searchIndex = await response.json();
+      console.log(`Index de recherche chargé : ${searchIndex.length} chapitres`);
+      return searchIndex;
+    } catch (error) {
+      console.error('Erreur chargement index de recherche:', error);
+      return null;
+    } finally {
+      indexLoading = false;
+    }
+  }
+
+  // Fonction de recherche
+  const searchInput = document.getElementById('search-input');
+  const searchResults = document.getElementById('search-results');
+  const mainContent = document.getElementById('main-content');
+
+  if (searchInput && searchResults && mainContent) {
+    let searchTimeout;
+
+    searchInput.addEventListener('input', function(e) {
+      clearTimeout(searchTimeout);
+      const query = e.target.value.trim().toLowerCase();
+
+      if (query.length < 2) {
+        searchResults.innerHTML = '';
+        searchResults.classList.remove('show');
+        return;
+      }
+
+      searchTimeout = setTimeout(() => {
+        performSearch(query);
+      }, 300);
+    });
+
+    async function performSearch(query) {
+      const results = [];
+
+      // 1. Recherche GLOBALE dans l'index (autres chapitres)
+      const index = await loadSearchIndex();
+      if (index) {
+        index.forEach(chapter => {
+          const content = chapter.content.toLowerCase();
+          if (content.includes(query.toLowerCase())) {
+            // Extraire un snippet autour du match
+            const snippet = getSnippet(chapter.content, query);
+            results.push({
+              chapterId: chapter.id,
+              chapterTitle: chapter.title,
+              chapterPart: chapter.part,
+              chapterUrl: chapter.url,
+              snippet: snippet,
+              isGlobal: true  // Flag pour résultat global
+            });
+          }
+        });
+      }
+
+      // 2. Recherche LOCALE dans le chapitre actuel
+      const searchableElements = mainContent.querySelectorAll('p, h1, h2, h3, h4, blockquote, li');
+
+      searchableElements.forEach((element, index) => {
+        const text = element.textContent.toLowerCase();
+        if (text.includes(query)) {
+          const snippet = getSnippet(element.textContent, query);
+          results.push({
+            element: element,
+            snippet: snippet,
+            index: index,
+            isGlobal: false  // Résultat local
+          });
+        }
+      });
+
+      // 3. Trier : résultats locaux en premier, puis globaux
+      results.sort((a, b) => {
+        if (a.isGlobal === b.isGlobal) return 0;
+        return a.isGlobal ? 1 : -1;
+      });
+
+      displayResults(results, query);
+    }
+
+    function getSnippet(text, query) {
+      const maxLength = 150;
+      const lowerText = text.toLowerCase();
+      const index = lowerText.indexOf(query.toLowerCase());
+
+      if (index === -1) return text.substring(0, maxLength) + '...';
+
+      const start = Math.max(0, index - 50);
+      const end = Math.min(text.length, index + query.length + 100);
+
+      let snippet = text.substring(start, end);
+      if (start > 0) snippet = '...' + snippet;
+      if (end < text.length) snippet = snippet + '...';
+
+      return snippet;
+    }
+
+    function displayResults(results, query) {
+      if (results.length === 0) {
+        searchResults.innerHTML = '<div class="search-no-results">Aucun résultat trouvé</div>';
+        searchResults.classList.add('show');
+        return;
+      }
+
+      const maxResults = 20;  // Augmenté pour résultats globaux
+      let html = `<div class="search-count">${results.length} résultat${results.length > 1 ? 's' : ''} trouvé${results.length > 1 ? 's' : ''}</div>`;
+
+      // Séparer résultats locaux et globaux
+      const localResults = results.filter(r => !r.isGlobal);
+      const globalResults = results.filter(r => r.isGlobal);
+
+      // Afficher résultats locaux (chapitre actuel)
+      if (localResults.length > 0) {
+        html += '<div class="search-section-header">Dans ce chapitre</div>';
+        localResults.slice(0, 5).forEach((result) => {
+          const highlightedSnippet = highlightQuery(result.snippet, query);
+          html += `
+            <div class="search-result search-result-local" data-index="${result.index}">
+              <div class="search-snippet">${highlightedSnippet}</div>
+            </div>
+          `;
+        });
+      }
+
+      // Afficher résultats globaux (autres chapitres)
+      if (globalResults.length > 0) {
+        html += '<div class="search-section-header">Dans le livre</div>';
+        globalResults.slice(0, 15).forEach((result) => {
+          const highlightedSnippet = highlightQuery(result.snippet, query);
+          html += `
+            <div class="search-result search-result-global" data-url="${result.chapterUrl}">
+              <div class="search-chapter-info">
+                ${result.chapterPart ? `<span class="search-part">${result.chapterPart}</span> › ` : ''}
+                <span class="search-chapter">${result.chapterTitle}</span>
+              </div>
+              <div class="search-snippet">${highlightedSnippet}</div>
+            </div>
+          `;
+        });
+      }
+
+      if (results.length > maxResults) {
+        html += `<div class="search-more">... et ${results.length - maxResults} autres résultats</div>`;
+      }
+
+      searchResults.innerHTML = html;
+      searchResults.classList.add('show');
+
+      // Gestionnaires de clic
+
+      // Résultats locaux : scroll vers l'élément
+      searchResults.querySelectorAll('.search-result-local').forEach(resultDiv => {
+        resultDiv.addEventListener('click', function() {
+          const index = parseInt(this.dataset.index);
+          const element = document.querySelectorAll('#main-content p, #main-content h1, #main-content h2, #main-content h3, #main-content h4, #main-content blockquote, #main-content li')[index];
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            element.classList.add('search-highlight');
+            setTimeout(() => element.classList.remove('search-highlight'), 2000);
+          }
+          searchResults.classList.remove('show');
+          searchInput.value = '';
+        });
+      });
+
+      // Résultats globaux : navigation vers le chapitre
+      searchResults.querySelectorAll('.search-result-global').forEach(resultDiv => {
+        resultDiv.addEventListener('click', function() {
+          const url = this.dataset.url;
+          window.location.href = url;
+        });
+      });
+    }
+
+    function highlightQuery(text, query) {
+      const regex = new RegExp(`(${escapeRegex(query)})`, 'gi');
+      return text.replace(regex, '<mark>$1</mark>');
+    }
+
+    function escapeRegex(str) {
+      return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
+
+    // Fermer les résultats si clic en dehors
+    document.addEventListener('click', function(e) {
+      if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+        searchResults.classList.remove('show');
+      }
+    });
+  }
+
+
+  // ===============================================
+  // THEME MANAGEMENT
+  // ===============================================
+
+  const THEME_KEY = 'gdoc-theme';
+  const THEME_LIGHT = 'light';
+  const THEME_DARK = 'dark';
+
+  function initTheme() {
+    const themeToggle = document.getElementById('theme-toggle');
+    if (!themeToggle) return;
+
+    // Load saved theme or detect system preference
+    let savedTheme = loadThemePreference();
+    if (!savedTheme) {
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      savedTheme = prefersDark ? THEME_DARK : THEME_LIGHT;
+    }
+
+    applyTheme(savedTheme);
+
+    // Toggle on button click
+    themeToggle.addEventListener('click', function() {
+      const currentTheme = document.body.classList.contains('dark-theme') ? THEME_DARK : THEME_LIGHT;
+      const newTheme = currentTheme === THEME_LIGHT ? THEME_DARK : THEME_LIGHT;
+      applyTheme(newTheme);
+      saveThemePreference(newTheme);
+    });
+
+    // Listen for system theme changes
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+      if (!loadThemePreference()) {
+        applyTheme(e.matches ? THEME_DARK : THEME_LIGHT);
+      }
+    });
+  }
+
+  function applyTheme(theme) {
+    if (theme === THEME_DARK) {
+      document.body.classList.add('dark-theme');
+    } else {
+      document.body.classList.remove('dark-theme');
+    }
+  }
+
+  function saveThemePreference(theme) {
+    try {
+      localStorage.setItem(THEME_KEY, theme);
+    } catch (e) {
+      console.warn('Cannot save theme preference:', e);
+    }
+  }
+
+  function loadThemePreference() {
+    try {
+      return localStorage.getItem(THEME_KEY);
+    } catch (e) {
+      console.warn('Cannot load theme preference:', e);
+      return null;
+    }
+  }
+
+  // ===============================================
+  // FONT SIZE CONTROLS
+  // ===============================================
+
+  const FONT_SIZE_KEY = 'gdoc-font-size';
+  const FONT_SIZE_MIN = 10;
+  const FONT_SIZE_MAX = 18;
+  const FONT_SIZE_DEFAULT = 12;
+  const FONT_SIZE_STEP = 1;
+
+  function initFontControls() {
+    const fontIncrease = document.getElementById('font-increase');
+    const fontDecrease = document.getElementById('font-decrease');
+    const fontReset = document.getElementById('font-reset');
+
+    if (!fontIncrease || !fontDecrease || !fontReset) return;
+
+    // Load saved font size
+    let fontSize = loadFontSize();
+    applyFontSize(fontSize);
+
+    fontIncrease.addEventListener('click', function() {
+      if (fontSize < FONT_SIZE_MAX) {
+        fontSize += FONT_SIZE_STEP;
+        applyFontSize(fontSize);
+        saveFontSize(fontSize);
+      }
+    });
+
+    fontDecrease.addEventListener('click', function() {
+      if (fontSize > FONT_SIZE_MIN) {
+        fontSize -= FONT_SIZE_STEP;
+        applyFontSize(fontSize);
+        saveFontSize(fontSize);
+      }
+    });
+
+    fontReset.addEventListener('click', function() {
+      fontSize = FONT_SIZE_DEFAULT;
+      applyFontSize(fontSize);
+      saveFontSize(fontSize);
+    });
+  }
+
+  function applyFontSize(size) {
+    document.documentElement.style.setProperty('--font-size-base', size + 'pt');
+    document.documentElement.style.setProperty('--font-size-h1', (size * 2) + 'pt');
+    document.documentElement.style.setProperty('--font-size-h2', (size * 1.5) + 'pt');
+    document.documentElement.style.setProperty('--font-size-h3', (size * 1.17) + 'pt');
+    document.documentElement.style.setProperty('--font-size-code', (size * 0.83) + 'pt');
+  }
+
+  function saveFontSize(size) {
+    try {
+      localStorage.setItem(FONT_SIZE_KEY, size);
+    } catch (e) {
+      console.warn('Cannot save font size:', e);
+    }
+  }
+
+  function loadFontSize() {
+    try {
+      const saved = localStorage.getItem(FONT_SIZE_KEY);
+      return saved ? parseInt(saved) : FONT_SIZE_DEFAULT;
+    } catch (e) {
+      console.warn('Cannot load font size:', e);
+      return FONT_SIZE_DEFAULT;
+    }
+  }
+
+  // ===============================================
+  // SIDEBAR MANAGEMENT
+  // ===============================================
+
+  function initSidebar() {
+    const sidebarToggle = document.getElementById('sidebar-toggle');
+    const sidebar = document.getElementById('book-sidebar');
+
+    if (!sidebarToggle || !sidebar) return;
+
+    // Toggle on button click
+    sidebarToggle.addEventListener('click', function() {
+      document.body.classList.toggle('sidebar-open');
+    });
+
+    // Close sidebar when clicking outside on mobile
+    document.addEventListener('click', function(e) {
+      if (window.innerWidth <= 768) {
+        if (!sidebar.contains(e.target) && !sidebarToggle.contains(e.target)) {
+          document.body.classList.remove('sidebar-open');
+        }
+      }
+    });
+
+    // Initialize part collapse/expand
+    initPartCollapse();
+
+    // Mark current chapter
+    markCurrentChapter();
+  }
+
+  function initPartCollapse() {
+    const parts = document.querySelectorAll('.sidebar-toc .toc-part');
+
+    parts.forEach(part => {
+      part.addEventListener('click', function() {
+        this.classList.toggle('collapsed');
+      });
+    });
+  }
+
+  function markCurrentChapter() {
+    const currentFile = window.location.pathname.split('/').pop();
+    const tocItems = document.querySelectorAll('.sidebar-toc .toc-item');
+
+    tocItems.forEach(item => {
+      const href = item.getAttribute('href');
+      if (href === currentFile) {
+        item.classList.add('current');
+      }
+    });
+  }
+
+  // ===============================================
+  // CHAPTER OUTLINE GENERATION
+  // ===============================================
+
+  function generateChapterOutline() {
+    const mainContent = document.getElementById('main-content');
+    const outlineContainer = document.getElementById('chapter-outline');
+
+    if (!mainContent || !outlineContainer) return;
+
+    // Find all H2 and H3 headings
+    const headings = mainContent.querySelectorAll('h2, h3');
+
+    if (headings.length === 0) {
+      outlineContainer.style.display = 'none';
+      return;
+    }
+
+    // Generate outline HTML
+    let outlineHTML = '<div class="outline-header">Dans ce chapitre</div>';
+
+    headings.forEach((heading, index) => {
+      const level = heading.tagName.toLowerCase() === 'h2' ? 2 : 3;
+      const text = heading.textContent;
+      const id = heading.id || 'heading-' + index;
+
+      // Add ID if not present
+      if (!heading.id) {
+        heading.id = id;
+      }
+
+      outlineHTML += `
+        <a href="#${id}" class="outline-item level-${level}" data-heading-id="${id}">
+          ${text}
+        </a>
+      `;
+    });
+
+    outlineContainer.innerHTML = outlineHTML;
+
+    // Add click handlers for smooth scrolling
+    outlineContainer.querySelectorAll('.outline-item').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('data-heading-id');
+        const target = document.getElementById(targetId);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+          // Close sidebar on mobile
+          if (window.innerWidth <= 768) {
+            document.body.classList.remove('sidebar-open');
+          }
+        }
+      });
+    });
+  }
+
+  // ===============================================
+  // SCROLL SPY
+  // ===============================================
+
+  let scrollSpyTimeout;
+
+  function initScrollSpy() {
+    const mainContent = document.getElementById('main-content');
+    if (!mainContent) return;
+
+    // Throttled scroll handler
+    window.addEventListener('scroll', function() {
+      clearTimeout(scrollSpyTimeout);
+      scrollSpyTimeout = setTimeout(updateScrollSpy, 100);
+    }, { passive: true });
+
+    // Initial update
+    updateScrollSpy();
+  }
+
+  function updateScrollSpy() {
+    const headings = document.querySelectorAll('#main-content h2, #main-content h3');
+    const outlineItems = document.querySelectorAll('.outline-item');
+
+    if (headings.length === 0 || outlineItems.length === 0) return;
+
+    // Find currently visible heading
+    let activeHeading = null;
+    const scrollPosition = window.scrollY + 100; // Offset for navbar
+
+    headings.forEach(heading => {
+      const headingTop = heading.offsetTop;
+      if (headingTop <= scrollPosition) {
+        activeHeading = heading;
+      }
+    });
+
+    // Update outline highlighting
+    outlineItems.forEach(item => {
+      item.classList.remove('active');
+      if (activeHeading && item.getAttribute('data-heading-id') === activeHeading.id) {
+        item.classList.add('active');
+      }
+    });
+  }
+
+  // ===============================================
+  // READING PROGRESS BAR
+  // ===============================================
+
+  let progressTimeout;
+
+  function initProgressBar() {
+    const progressBar = document.getElementById('reading-progress');
+    if (!progressBar) return;
+
+    window.addEventListener('scroll', function() {
+      clearTimeout(progressTimeout);
+      progressTimeout = setTimeout(updateProgressBar, 50);
+    }, { passive: true });
+
+    // Initial update
+    updateProgressBar();
+  }
+
+  function updateProgressBar() {
+    const progressBar = document.getElementById('reading-progress');
+    if (!progressBar) return;
+
+    const windowHeight = window.innerHeight;
+    const documentHeight = document.documentElement.scrollHeight;
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+    const scrollableDistance = documentHeight - windowHeight;
+    const progress = scrollableDistance > 0 ? (scrollTop / scrollableDistance) * 100 : 0;
+
+    progressBar.style.width = Math.min(progress, 100) + '%';
+  }
+
+  // ===============================================
+  // KEYBOARD SHORTCUTS
+  // ===============================================
+
+  // Extend existing keyboard shortcuts
+  document.addEventListener('keydown', function(e) {
+    // Existing: Ctrl+K for search
+    if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+      e.preventDefault();
+      const searchInput = document.getElementById('search-input');
+      if (searchInput) searchInput.focus();
+    }
+
+    // NEW: 'd' for dark mode toggle
+    if (e.key === 'd' && !e.ctrlKey && !e.metaKey && document.activeElement.tagName !== 'INPUT') {
+      e.preventDefault();
+      const themeToggle = document.getElementById('theme-toggle');
+      if (themeToggle) themeToggle.click();
+    }
+
+    // NEW: 's' for sidebar toggle (mobile)
+    if (e.key === 's' && !e.ctrlKey && !e.metaKey && document.activeElement.tagName !== 'INPUT') {
+      e.preventDefault();
+      if (window.innerWidth <= 768) {
+        document.body.classList.toggle('sidebar-open');
+      }
+    }
+
+    // Escape closes everything
+    if (e.key === 'Escape') {
+      const searchInput = document.getElementById('search-input');
+      const searchResults = document.getElementById('search-results');
+
+      if (searchInput) {
+        searchInput.value = '';
+        searchInput.blur();
+      }
+      if (searchResults) {
+        searchResults.classList.remove('show');
+      }
+      if (window.innerWidth <= 768) {
+        document.body.classList.remove('sidebar-open');
+      }
+    }
+  });
+
+  // ===============================================
+  // INITIALIZATION
+  // ===============================================
+
+  // Charger l'index de recherche au démarrage de la page
+  document.addEventListener('DOMContentLoaded', function() {
+    // Load search index (existing)
+    loadSearchIndex().then(() => {
+      console.log('Index de recherche prêt');
+    });
+
+    // Initialize new features
+    initTheme();
+    initFontControls();
+    initSidebar();
+    generateChapterOutline();
+    initScrollSpy();
+    initProgressBar();
+  });
+})();
+</script>
+
+  <!-- Script pour marquer le chapitre actuel dans le menu -->
+  <script>
+    (function() {
+      const currentFile = '12_Chapitre_11.html';
+      if (currentFile) {
+        const tocItems = document.querySelectorAll('.toc-item');
+        tocItems.forEach(item => {
+          if (item.getAttribute('href') === currentFile) {
+            item.classList.add('current');
+          }
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

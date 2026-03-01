@@ -1,0 +1,100 @@
+# Structure du livre pour génération navigation
+# Format: id, title, file, part (optionnel)
+
+chapters:
+  - id: "00"
+    title: "Avant-propos"
+    file: "00_Avant-propos.html"
+
+  - id: "01"
+    title: "Introduction"
+    file: "01_Introduction.html"
+
+  - id: "02"
+    title: "Chapitre 1 : Stratégie, jeu, position et mouvement"
+    file: "02_Chapitre_01.html"
+    part: "Partie I - Le Terrain de Jeu"
+
+  - id: "03"
+    title: "Chapitre 2 : Naviguer dans le brouillard"
+    file: "03_Chapitre_02.html"
+    part: "Partie I - Le Terrain de Jeu"
+
+  - id: "04"
+    title: "Chapitre 3 : L'anatomie du mur invisible"
+    file: "04_Chapitre_03.html"
+    part: "Partie II - L'Organisation face au Mouvement"
+
+  - id: "05"
+    title: "Chapitre 4 : Structure et pouvoir"
+    file: "05_Chapitre_04.html"
+    part: "Partie II - L'Organisation face au Mouvement"
+
+  - id: "06"
+    title: "Chapitre 5 : La loi du climat"
+    file: "06_Chapitre_05.html"
+    part: "Partie III - Les Lois du Mouvement"
+
+  - id: "07"
+    title: "Chapitre 6 : La loi de l'évolution"
+    file: "07_Chapitre_06.html"
+    part: "Partie III - Les Lois du Mouvement"
+
+  - id: "08"
+    title: "Chapitre 7 : La loi de l'écosystème"
+    file: "08_Chapitre_07.html"
+    part: "Partie III - Les Lois du Mouvement"
+
+  - id: "09"
+    title: "Chapitre 8 : Observer le terrain"
+    file: "09_Chapitre_08.html"
+    part: "Partie IV - La Pratique du Mouvement"
+
+  - id: "10"
+    title: "Chapitre 9 : Orienter et décider"
+    file: "10_Chapitre_09.html"
+    part: "Partie IV - La Pratique du Mouvement"
+
+  - id: "11"
+    title: "Chapitre 10 : Jouer et apprendre"
+    file: "11_Chapitre_10.html"
+    part: "Partie IV - La Pratique du Mouvement"
+
+  - id: "12"
+    title: "Chapitre 11 : Cultiver le mouvement"
+    file: "12_Chapitre_11.html"
+    part: "Partie IV - La Pratique du Mouvement"
+
+  - id: "13"
+    title: "Conclusion"
+    file: "13_Conclusion.html"
+
+  - id: "14"
+    title: "Glossaire"
+    file: "14_Annexe_Glossaire.html"
+    part: "Annexes"
+
+  - id: "15"
+    title: "Bibliographie"
+    file: "15_Annexe_Bibliographie.html"
+    part: "Annexes"
+
+  - id: "16"
+    title: "Antisèche Évolution"
+    file: "16_Annexe_Antiseche_Evolution.html"
+    part: "Annexes"
+
+  - id: "17"
+    title: "Methods Analysis"
+    file: "17_Annexe_Methods_Analysis.html"
+    part: "Annexes"
+
+  - id: "18"
+    title: "Catalogue Gameplays"
+    file: "18_Annexe_Catalogue_Gameplays.html"
+    part: "Annexes"
+
+  - id: "19"
+    title: "Grilles Décision"
+    file: "19_Annexe_Grilles_Decision.html"
+    part: "Annexes"

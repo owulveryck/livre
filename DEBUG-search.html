@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>DEBUG - Recherche Globale</title>
+  <style>
+    body { font-family: monospace; padding: 20px; background: #f5f5f5; }
+    .section { background: white; margin: 10px 0; padding: 15px; border-left: 4px solid #3498db; }
+    .success { color: green; font-weight: bold; }
+    .error { color: red; font-weight: bold; }
+    .warning { color: orange; font-weight: bold; }
+    pre { background: #f0f0f0; padding: 10px; overflow-x: auto; }
+    button { padding: 10px 20px; margin: 5px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h1>🔍 DEBUG - Recherche Globale</h1>
+  
+  <div class="section">
+    <h2>Étape 1: Vérifier fetch de l'index</h2>
+    <button onclick="test1()">▶ Test 1: Charger search-index.json</button>
+    <pre id="result1">Cliquer sur le bouton pour tester...</pre>
+  </div>
+
+  <div class="section">
+    <h2>Étape 2: Vérifier le contenu de l'index</h2>
+    <button onclick="test2()">▶ Test 2: Analyser l'index</button>
+    <pre id="result2">Cliquer sur le bouton pour tester...</pre>
+  </div>
+
+  <div class="section">
+    <h2>Étape 3: Test de recherche</h2>
+    <input type="text" id="query" value="wardley" style="padding: 5px; width: 200px;">
+    <button onclick="test3()">▶ Test 3: Rechercher</button>
+    <pre id="result3">Entrer un mot et cliquer pour tester...</pre>
+  </div>
+
+  <div class="section">
+    <h2>Étape 4: Vérifier le code dans la vraie page</h2>
+    <button onclick="test4()">▶ Test 4: Vérifier loadSearchIndex</button>
+    <pre id="result4">Cliquer sur le bouton pour tester...</pre>
+  </div>
+
+  <script>
+    let globalIndex = null;
+
+    async function test1() {
+      const output = document.getElementById('result1');
+      output.innerHTML = 'Chargement...\n';
+      
+      try {
+        const response = await fetch('search-index.json');
+        output.innerHTML += `✅ Réponse HTTP: ${response.status} ${response.statusText}\n`;
+        
+        const data = await response.json();
+        globalIndex = data;
+        output.innerHTML += `✅ JSON parsé avec succès\n`;
+        output.innerHTML += `✅ Nombre de chapitres: ${data.length}\n`;
+        output.innerHTML += `✅ Premier chapitre: "${data[0].title}"\n`;
+        output.innerHTML += `✅ Premier URL: ${data[0].url}\n`;
+        
+        output.className = 'success';
+      } catch (error) {
+        output.innerHTML += `❌ ERREUR: ${error.message}\n`;
+        output.innerHTML += `Stack: ${error.stack}\n`;
+        output.className = 'error';
+      }
+    }
+
+    async function test2() {
+      const output = document.getElementById('result2');
+      
+      if (!globalIndex) {
+        output.innerHTML = '⚠️ Index pas encore chargé. Exécuter Test 1 d\'abord.\n';
+        output.className = 'warning';
+        return;
+      }
+      
+      output.innerHTML = `Index contient ${globalIndex.length} chapitres:\n\n`;
+      
+      globalIndex.forEach((ch, i) => {
+        const contentPreview = ch.content.substring(0, 50) + '...';
+        output.innerHTML += `${i+1}. ${ch.title}\n`;
+        output.innerHTML += `   URL: ${ch.url}\n`;
+        output.innerHTML += `   Partie: ${ch.part || '(aucune)'}\n`;
+        output.innerHTML += `   Contenu (50 chars): ${contentPreview}\n\n`;
+      });
+      
+      output.className = 'success';
+    }
+
+    async function test3() {
+      const output = document.getElementById('result3');
+      const query = document.getElementById('query').value.toLowerCase();
+      
+      if (!globalIndex) {
+        await test1();
+      }
+      
+      if (!globalIndex) {
+        output.innerHTML = '❌ Impossible de charger l\'index\n';
+        output.className = 'error';
+        return;
+      }
+      
+      output.innerHTML = `Recherche de "${query}"...\n\n`;
+      
+      let count = 0;
+      globalIndex.forEach(ch => {
+        if (ch.content.toLowerCase().includes(query)) {
+          count++;
+          const index = ch.content.toLowerCase().indexOf(query);
+          const snippet = ch.content.substring(Math.max(0, index - 40), index + query.length + 40);
+          output.innerHTML += `✅ Trouvé dans: ${ch.title}\n`;
+          output.innerHTML += `   URL: ${ch.url}\n`;
+          output.innerHTML += `   Extrait: ...${snippet}...\n\n`;
+        }
+      });
+      
+      output.innerHTML += `\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
+      output.innerHTML += `Total: ${count} chapitres contiennent "${query}"\n`;
+      
+      if (count > 0) {
+        output.className = 'success';
+      } else {
+        output.innerHTML += '\n❌ Aucun résultat trouvé\n';
+        output.className = 'error';
+      }
+    }
+
+    async function test4() {
+      const output = document.getElementById('result4');
+      output.innerHTML = 'Vérification du code JavaScript dans les pages HTML...\n\n';
+      
+      // Vérifier si loadSearchIndex existe
+      if (typeof loadSearchIndex !== 'undefined') {
+        output.innerHTML += '✅ loadSearchIndex existe dans cette page\n';
+      } else {
+        output.innerHTML += '❌ loadSearchIndex N\'EXISTE PAS dans cette page\n';
+        output.innerHTML += '   → Il faut vérifier gdoc-navigation.js\n';
+      }
+      
+      // Vérifier si performSearch existe
+      if (typeof performSearch !== 'undefined') {
+        output.innerHTML += '✅ performSearch existe dans cette page\n';
+      } else {
+        output.innerHTML += '❌ performSearch N\'EXISTE PAS dans cette page\n';
+      }
+      
+      output.innerHTML += '\n📋 INSTRUCTIONS:\n';
+      output.innerHTML += '1. Ouvrir 00_Avant-propos.html\n';
+      output.innerHTML += '2. Ouvrir la Console (F12)\n';
+      output.innerHTML += '3. Taper: typeof loadSearchIndex\n';
+      output.innerHTML += '   → Devrait afficher "function"\n';
+      output.innerHTML += '4. Taper: loadSearchIndex()\n';
+      output.innerHTML += '   → Devrait charger l\'index\n';
+      output.innerHTML += '5. Chercher "wardley"\n';
+      output.innerHTML += '   → Devrait afficher résultats locaux ET globaux\n';
+    }
+
+    // Auto-exécuter test 1 au chargement
+    window.addEventListener('load', () => {
+      setTimeout(test1, 500);
+    });
+  </script>
+</body>
+</html>
