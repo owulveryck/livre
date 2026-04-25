@@ -182,6 +182,115 @@
       box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
     }
 
+    .search-bar {
+      position: relative;
+      max-width: 500px;
+      margin: 2em auto 0;
+    }
+
+    .search-bar input {
+      width: 100%;
+      padding: 0.75em 2.5em 0.75em 1em;
+      border: 2px solid var(--border-primary);
+      border-radius: 25px;
+      font-size: 1em;
+      font-family: 'Lato', sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      transition: all 0.3s;
+      box-sizing: border-box;
+    }
+
+    .search-bar input:focus {
+      outline: none;
+      border-color: var(--link-color);
+      box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+    }
+
+    .search-bar input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .search-bar .search-icon {
+      position: absolute;
+      right: 1em;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+
+    .search-results {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      margin-top: 0.5em;
+      background: var(--bg-primary);
+      border: 1px solid var(--border-primary);
+      border-radius: 8px;
+      box-shadow: var(--shadow-light);
+      max-height: 400px;
+      overflow-y: auto;
+      display: none;
+      z-index: 100;
+    }
+
+    .search-results.show { display: block; }
+
+    .search-results .search-count {
+      padding: 0.75em 1em;
+      background: var(--bg-secondary);
+      font-size: 0.85em;
+      color: var(--text-muted);
+      font-weight: 600;
+      border-bottom: 1px solid var(--border-primary);
+    }
+
+    .search-results .result {
+      padding: 0.75em 1em;
+      border-bottom: 1px solid var(--bg-secondary);
+      cursor: pointer;
+      transition: background 0.2s;
+      border-left: 3px solid var(--link-color);
+    }
+
+    .search-results .result:hover {
+      background: var(--bg-secondary);
+    }
+
+    .search-results .result-chapter {
+      font-size: 0.85em;
+      color: var(--link-color);
+      font-weight: 600;
+      margin-bottom: 0.25em;
+    }
+
+    .search-results .result-part {
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    .search-results .result-snippet {
+      font-size: 0.9em;
+      color: var(--text-primary);
+      line-height: 1.4;
+    }
+
+    .search-results .result-snippet mark {
+      background-color: var(--border-accent);
+      color: white;
+      padding: 2px 4px;
+      border-radius: 2px;
+      font-weight: 600;
+    }
+
+    .search-results .no-results {
+      padding: 1em;
+      text-align: center;
+      color: var(--text-muted);
+    }
+
     @media (max-width: 768px) {
       body { padding: 1em; }
       .book-title { font-size: 1.8em; }
@@ -189,7 +298,7 @@
     }
 
     @media print {
-      .theme-toggle { display: none; }
+      .theme-toggle, .search-bar { display: none; }
       body { background: white; color: black; }
     }
   </style>
@@ -204,6 +313,12 @@
       <p class="book-subtitle">Manœuvrer dans le digital avec les cartes de Wardley</p>
       <p class="book-author">Olivier Wulveryck</p>
       <a href="01_Introduction.html" class="start-reading">Commencer la lecture</a>
+
+      <div class="search-bar">
+        <input type="text" id="search-input" placeholder="Rechercher dans le livre... (Ctrl+K)" autocomplete="off" />
+        <span class="search-icon">🔍</span>
+        <div id="search-results" class="search-results"></div>
+      </div>
     </header>
 
     <nav aria-label="Table des matières">
@@ -336,5 +451,71 @@
       });
     })();
   </script>
-<div style="position:fixed;bottom:1em;right:1em;background:var(--bg-secondary,#f8f9fa);border:1px solid var(--border-primary,#ddd);border-radius:8px;padding:0.4em 0.8em;font-family:Lato,sans-serif;font-size:0.75em;color:var(--text-muted,#7f8c8d);z-index:900;opacity:0.8;">v2.0.0-beta-1-g873f86b</div></body>
+
+  <script src="search-index.js"></script>
+  <script>
+    (function() {
+      const input = document.getElementById('search-input');
+      const resultsDiv = document.getElementById('search-results');
+      if (!input || !resultsDiv) return;
+
+      let timeout;
+      input.addEventListener('input', function(e) {
+        clearTimeout(timeout);
+        const q = e.target.value.trim().toLowerCase();
+        if (q.length < 2) { resultsDiv.innerHTML = ''; resultsDiv.classList.remove('show'); return; }
+        timeout = setTimeout(function() { search(q); }, 300);
+      });
+
+      function search(query) {
+        const index = window.SEARCH_INDEX;
+        if (!index) { resultsDiv.innerHTML = '<div class="no-results">Index non disponible</div>'; resultsDiv.classList.add('show'); return; }
+
+        const results = [];
+        index.forEach(function(ch) {
+          if (ch.content.toLowerCase().includes(query)) {
+            results.push({ title: ch.title, part: ch.part, url: ch.url, snippet: getSnippet(ch.content, query) });
+          }
+        });
+
+        if (results.length === 0) {
+          resultsDiv.innerHTML = '<div class="no-results">Aucun résultat</div>';
+        } else {
+          var html = '<div class="search-count">' + results.length + ' résultat' + (results.length > 1 ? 's' : '') + '</div>';
+          results.slice(0, 15).forEach(function(r) {
+            html += '<div class="result" data-url="' + r.url + '">' +
+              '<div class="result-chapter">' + (r.part ? '<span class="result-part">' + r.part + '</span> › ' : '') + r.title + '</div>' +
+              '<div class="result-snippet">' + highlight(r.snippet, query) + '</div></div>';
+          });
+          resultsDiv.innerHTML = html;
+          resultsDiv.querySelectorAll('.result').forEach(function(el) {
+            el.addEventListener('click', function() { window.location.href = this.dataset.url; });
+          });
+        }
+        resultsDiv.classList.add('show');
+      }
+
+      function getSnippet(text, query) {
+        var i = text.toLowerCase().indexOf(query);
+        if (i === -1) return text.substring(0, 150) + '...';
+        var start = Math.max(0, i - 50), end = Math.min(text.length, i + query.length + 100);
+        var s = text.substring(start, end);
+        return (start > 0 ? '...' : '') + s + (end < text.length ? '...' : '');
+      }
+
+      function highlight(text, query) {
+        return text.replace(new RegExp('(' + query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi'), '<mark>$1</mark>');
+      }
+
+      document.addEventListener('click', function(e) {
+        if (!input.contains(e.target) && !resultsDiv.contains(e.target)) resultsDiv.classList.remove('show');
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if ((e.ctrlKey || e.metaKey) && e.key === 'k') { e.preventDefault(); input.focus(); }
+        if (e.key === 'Escape') { input.value = ''; resultsDiv.classList.remove('show'); input.blur(); }
+      });
+    })();
+  </script>
+<div style="position:fixed;bottom:1em;right:1em;background:var(--bg-secondary,#f8f9fa);border:1px solid var(--border-primary,#ddd);border-radius:8px;padding:0.4em 0.8em;font-family:Lato,sans-serif;font-size:0.75em;color:var(--text-muted,#7f8c8d);z-index:900;opacity:0.8;">v2.0.0-beta-2-g4e8ce11</div></body>
 </html>
