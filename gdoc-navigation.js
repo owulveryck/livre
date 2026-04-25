@@ -1,4 +1,3 @@
-// Navigation pour fichiers HTML Google Docs
 (function() {
   'use strict';
 

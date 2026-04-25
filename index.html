@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Olivier Wulveryck" />
+  <title>Le futur se trace — Table des matières</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Literata:ital,wght@0,400;0,700;1,400&family=Lato:wght@400;700&display=swap');
+
+    :root {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f8f9fa;
+      --text-primary: #2c3e50;
+      --text-secondary: #34495e;
+      --text-muted: #7f8c8d;
+      --border-primary: #ddd;
+      --border-accent: #f39c12;
+      --link-color: #3498db;
+      --link-hover: #2980b9;
+      --shadow-light: 0 2px 8px rgba(0,0,0,0.15);
+    }
+
+    body.dark-theme {
+      --bg-primary: #1a1a1a;
+      --bg-secondary: #2d2d2d;
+      --text-primary: #e4e4e4;
+      --text-secondary: #b8b8b8;
+      --text-muted: #888888;
+      --border-primary: #404040;
+      --border-accent: #f39c12;
+      --link-color: #5dade2;
+      --link-hover: #3498db;
+      --shadow-light: 0 2px 8px rgba(0,0,0,0.4);
+    }
+
+    body {
+      font-family: 'Literata', Georgia, serif;
+      font-size: 12pt;
+      line-height: 1.65;
+      color: var(--text-primary);
+      background-color: var(--bg-primary);
+      margin: 0;
+      padding: 2em;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .book-header {
+      text-align: center;
+      padding: 3em 0 2em;
+      border-bottom: 3px solid var(--border-accent);
+      margin-bottom: 2em;
+    }
+
+    .book-title {
+      font-family: 'Lato', 'Helvetica Neue', sans-serif;
+      font-size: 2.5em;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin: 0 0 0.25em;
+    }
+
+    .book-subtitle {
+      font-family: 'Lato', 'Helvetica Neue', sans-serif;
+      font-size: 1.2em;
+      font-weight: 400;
+      color: var(--text-muted);
+      margin: 0 0 1em;
+    }
+
+    .book-author {
+      font-size: 1.1em;
+      color: var(--text-secondary);
+      font-style: italic;
+    }
+
+    .theme-toggle {
+      position: fixed;
+      top: 1em;
+      right: 1em;
+      padding: 0.5em 1em;
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+      border: 2px solid var(--border-primary);
+      border-radius: 20px;
+      font-size: 1.2em;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      z-index: 100;
+    }
+
+    .theme-toggle:hover {
+      border-color: var(--link-color);
+    }
+
+    .toc-part-header {
+      font-family: 'Lato', 'Helvetica Neue', sans-serif;
+      font-size: 1.1em;
+      font-weight: 700;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 1em 0 0.5em;
+      margin-top: 1.5em;
+      border-bottom: 1px solid var(--border-primary);
+    }
+
+    .toc-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .toc-entry {
+      margin: 0;
+    }
+
+    .toc-entry a {
+      display: block;
+      padding: 0.75em 1em;
+      color: var(--text-primary);
+      text-decoration: none;
+      border-left: 3px solid transparent;
+      transition: all 0.2s ease;
+    }
+
+    .toc-entry a:hover {
+      background: var(--bg-secondary);
+      border-left-color: var(--link-color);
+      padding-left: 1.25em;
+    }
+
+    .toc-entry .chapter-num {
+      color: var(--border-accent);
+      font-weight: 700;
+      margin-right: 0.5em;
+    }
+
+    .toc-section-standalone a {
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+
+    .annexes-section {
+      margin-top: 2em;
+      padding-top: 1em;
+      border-top: 2px solid var(--border-primary);
+    }
+
+    .book-footer {
+      text-align: center;
+      margin-top: 4em;
+      padding: 2em 0;
+      border-top: 3px solid var(--border-accent);
+      color: var(--text-muted);
+      font-family: 'Lato', sans-serif;
+      font-size: 0.9em;
+    }
+
+    .start-reading {
+      display: inline-block;
+      margin-top: 1.5em;
+      padding: 0.75em 2em;
+      background: var(--link-color);
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-family: 'Lato', sans-serif;
+      font-weight: 600;
+      font-size: 1.1em;
+      transition: all 0.3s ease;
+    }
+
+    .start-reading:hover {
+      background: var(--link-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+    }
+
+    @media (max-width: 768px) {
+      body { padding: 1em; }
+      .book-title { font-size: 1.8em; }
+      .book-subtitle { font-size: 1em; }
+    }
+
+    @media print {
+      .theme-toggle { display: none; }
+      body { background: white; color: black; }
+    }
+  </style>
+</head>
+<body>
+
+  <button class="theme-toggle" id="theme-toggle" aria-label="Basculer le mode sombre">☀️</button>
+
+  <div class="container">
+    <header class="book-header">
+      <h1 class="book-title">Le futur se trace</h1>
+      <p class="book-subtitle">Manœuvrer dans le digital avec les cartes de Wardley</p>
+      <p class="book-author">Olivier Wulveryck</p>
+      <a href="01_Introduction.html" class="start-reading">Commencer la lecture</a>
+    </header>
+
+    <nav aria-label="Table des matières">
+
+      <ul class="toc-list">
+        <li class="toc-entry toc-section-standalone">
+          <a href="01_Introduction.html">Introduction</a>
+        </li>
+      </ul>
+
+      <div class="toc-part-header">Partie I — Le terrain de jeu</div>
+      <ul class="toc-list">
+        <li class="toc-entry">
+          <a href="02_Chapitre_1.html"><span class="chapter-num">1</span>Stratégie, jeu, position et mouvement</a>
+        </li>
+        <li class="toc-entry">
+          <a href="03_Chapitre_2.html"><span class="chapter-num">2</span>Naviguer dans le brouillard</a>
+        </li>
+      </ul>
+
+      <div class="toc-part-header">Partie II — L'organisation face au mouvement</div>
+      <ul class="toc-list">
+        <li class="toc-entry">
+          <a href="04_Chapitre_3.html"><span class="chapter-num">3</span>L'anatomie du mur invisible</a>
+        </li>
+        <li class="toc-entry">
+          <a href="05_Chapitre_4.html"><span class="chapter-num">4</span>Structure et pouvoir</a>
+        </li>
+      </ul>
+
+      <div class="toc-part-header">Partie III — Les lois du mouvement</div>
+      <ul class="toc-list">
+        <li class="toc-entry">
+          <a href="06_Chapitre_5.html"><span class="chapter-num">5</span>La loi du climat</a>
+        </li>
+        <li class="toc-entry">
+          <a href="07_Chapitre_6.html"><span class="chapter-num">6</span>La loi de l'évolution</a>
+        </li>
+        <li class="toc-entry">
+          <a href="08_Chapitre_7.html"><span class="chapter-num">7</span>La loi de l'écosystème</a>
+        </li>
+      </ul>
+
+      <div class="toc-part-header">Partie IV — La pratique du mouvement</div>
+      <ul class="toc-list">
+        <li class="toc-entry">
+          <a href="09_Chapitre_8.html"><span class="chapter-num">8</span>Observer le terrain</a>
+        </li>
+        <li class="toc-entry">
+          <a href="10_Chapitre_9.html"><span class="chapter-num">9</span>Orienter et décider</a>
+        </li>
+        <li class="toc-entry">
+          <a href="11_Chapitre_10.html"><span class="chapter-num">10</span>Jouer et apprendre</a>
+        </li>
+        <li class="toc-entry">
+          <a href="12_Chapitre_11.html"><span class="chapter-num">11</span>Cultiver le mouvement</a>
+        </li>
+      </ul>
+
+      <ul class="toc-list">
+        <li class="toc-entry toc-section-standalone">
+          <a href="13_Conclusion.html">Conclusion</a>
+        </li>
+      </ul>
+
+      <div class="annexes-section">
+        <div class="toc-part-header">Annexes</div>
+        <ul class="toc-list">
+          <li class="toc-entry">
+            <a href="14_Annexe_Glossaire.html">Glossaire</a>
+          </li>
+          <li class="toc-entry">
+            <a href="15_Annexe_Bibliographie.html">Bibliographie</a>
+          </li>
+          <li class="toc-entry">
+            <a href="16_Annexe_Antisèche_Évolution.html">Antisèche Évolution</a>
+          </li>
+          <li class="toc-entry">
+            <a href="17_Annexe_Methods_Analysis.html">Methods Analysis</a>
+          </li>
+          <li class="toc-entry">
+            <a href="18_Annexe_Catalogue_Gameplays.html">Catalogue Gameplays</a>
+          </li>
+          <li class="toc-entry">
+            <a href="19_Annexe_Grilles_Décision.html">Grilles Décision</a>
+          </li>
+        </ul>
+      </div>
+
+    </nav>
+
+    <footer class="book-footer">
+      <p>&copy; 2026 Olivier Wulveryck — Tous droits réservés</p>
+    </footer>
+  </div>
+
+  <script>
+    (function() {
+      const THEME_KEY = 'gdoc-theme';
+      const toggle = document.getElementById('theme-toggle');
+
+      let theme = localStorage.getItem(THEME_KEY);
+      if (!theme) {
+        theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+
+      function apply(t) {
+        if (t === 'dark') {
+          document.body.classList.add('dark-theme');
+          toggle.textContent = '🌙';
+        } else {
+          document.body.classList.remove('dark-theme');
+          toggle.textContent = '☀️';
+        }
+      }
+
+      apply(theme);
+
+      toggle.addEventListener('click', function() {
+        theme = document.body.classList.contains('dark-theme') ? 'light' : 'dark';
+        apply(theme);
+        localStorage.setItem(THEME_KEY, theme);
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'd' && document.activeElement.tagName !== 'INPUT') {
+          e.preventDefault();
+          toggle.click();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
