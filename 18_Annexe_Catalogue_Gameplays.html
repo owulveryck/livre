@@ -1005,7 +1005,12 @@
      RESPONSIVE
      =============================================== */
 
-  /* Impression - masquer la navigation et footer */
+  /* En-tête impression (masqué à l'écran) */
+  .print-header {
+    display: none;
+  }
+
+  /* Impression */
   @media print {
     .gdoc-navbar,
     .book-sidebar,
@@ -1027,6 +1032,38 @@
     body.dark-theme {
       background: white !important;
       color: black !important;
+    }
+
+    /* En-tête avec titre, sous-titre et auteur */
+    .print-header {
+      display: block !important;
+      text-align: center;
+      padding: 2em 0 1.5em;
+      margin-bottom: 2em;
+      border-bottom: 2px solid #2c3e50;
+    }
+
+    .print-title {
+      font-family: 'Lato', 'Helvetica Neue', sans-serif;
+      font-size: 20pt;
+      font-weight: 700;
+      color: #2c3e50;
+      margin-bottom: 0.25em;
+    }
+
+    .print-subtitle {
+      font-family: 'Lato', 'Helvetica Neue', sans-serif;
+      font-size: 12pt;
+      font-weight: 400;
+      color: #7f8c8d;
+      margin-bottom: 0.5em;
+    }
+
+    .print-author {
+      font-family: 'Literata', Georgia, serif;
+      font-size: 11pt;
+      font-style: italic;
+      color: #34495e;
     }
   }
   </style>
@@ -1166,6 +1203,13 @@
       <!-- Populated dynamically by generateChapterOutline() -->
     </nav>
   </aside>
+
+  <!-- En-tête impression (masqué à l'écran) -->
+  <header class="print-header">
+    <div class="print-title">Le futur se trace</div>
+    <div class="print-subtitle">Manœuvrer dans le digital avec les cartes de Wardley</div>
+    <div class="print-author">Olivier Wulveryck</div>
+  </header>
 
   <!-- Contenu principal -->
   <div id="main-content">
@@ -1378,5 +1422,5 @@ stratégique.</p>
       }
     })();
   </script>
-</body>
+<div style="position:fixed;bottom:1em;right:1em;background:var(--bg-secondary,#f8f9fa);border:1px solid var(--border-primary,#ddd);border-radius:8px;padding:0.4em 0.8em;font-family:Lato,sans-serif;font-size:0.75em;color:var(--text-muted,#7f8c8d);z-index:900;opacity:0.8;">v2.0.0-beta-1-g873f86b</div></body>
 </html>
