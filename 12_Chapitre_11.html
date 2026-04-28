@@ -1216,16 +1216,10 @@ mouvement</span>
   <div id="main-content">
 <h1 id="chapitre-11-créer-son-propre-moteur-leffet-dentraînement-de-la-valeur">Chapitre
 11 : Créer son propre moteur — L’effet d’entraînement de la valeur</h1>
-<p>Vous voici arrivé au terme d’un long parcours. Vous avez exploré le
-terrain de jeu, diagnostiqué l’organisation, dévoilé les lois du
-mouvement, et pratiqué la cartographie. Vous avez appris à lire les
-forces qui façonnent votre environnement, à identifier les blocages qui
-paralysent vos équipes, et à mobiliser un catalogue de manœuvres
-stratégiques pour transformer votre position.</p>
-<p>Mais un piège mental vous guette — celui de croire que la stratégie
-est désormais « faite ». Que la carte est tracée, le plan établi, les
-manœuvres identifiées. Que vous pouvez maintenant passer à l’exécution
-et cocher des cases.</p>
+<p>Un piège mental vous guette au terme de ce parcours : croire que la
+stratégie est désormais « faite ». Que la carte est tracée, le plan
+établi, les manœuvres identifiées. Que vous pouvez maintenant passer à
+l’exécution et cocher des cases.</p>
 <p>Cette croyance est une illusion dangereuse. Car le terrain que vous
 avez cartographié ne vous attend pas. Pendant que vous lisez ces lignes,
 vos concurrents bougent, les technologies évoluent, les besoins de vos
@@ -1236,33 +1230,26 @@ chapitre vous révélera comment transformer ce cycle potentiellement
 épuisant en un moteur qui s’accélère de lui-même.</p>
 <h2 id="le-cycle-qui-ne-sarrête-jamais">Le cycle qui ne s’arrête
 jamais</h2>
-<p>Reprenons le fil de notre voyage. Vous avez d’abord compris que le
-marché est un terrain de jeu régi par des forces concurrentielles
-(Partie I). Vous avez ensuite diagnostiqué votre organisation pour
-identifier vos capitaux et vos inerties (Partie II). Vous avez découvert
-les lois de l’évolution qui gouvernent le mouvement des composants
-(Partie III). Enfin, vous avez appris à construire une carte, à lire les
-schémas climatiques, et à jouer avec le répertoire des manœuvres (Partie
+<p>Vous avez parcouru les quatre phases d’un cycle stratégique complet :
+comprendre pourquoi agir (Partie I), diagnostiquer les forces en
+présence (Partie II), saisir les lois qui gouvernent le mouvement
+(Partie III), construire une carte et choisir une manœuvre (Partie
 IV).</p>
-<p>Chacune de ces étapes vous a demandé un effort considérable.
-Comprendre le cadre théorique. Cartographier votre système. Identifier
-les blocages. Choisir une manœuvre. L’exécuter. Mesurer les
-résultats.</p>
 <p>Et maintenant que cette boucle est parcourue une première fois, une
 question naturelle émerge : « Et ensuite ? »</p>
 <p>La réponse pourrait sembler décourageante : vous recommencez. Le
-terrain a changé pendant que vous agiissiez. De nouveaux concurrents
-sont apparus. Une technologie que vous aviez positionnée en phase
-Produit a glissé vers la Commodité plus vite que prévu. Un Cygne Noir
+terrain a changé pendant que vous agissiez. De nouveaux concurrents sont
+apparus. Une technologie que vous aviez positionnée en phase Produit a
+glissé vers la Commodité plus vite que prévu. Un Cygne Noir
 réglementaire a rebattu les cartes. Votre carte d’hier ne suffit plus
 pour naviguer aujourd’hui.</p>
-<p>Cela peut ressembler à une condamnation — celle de Sisyphe poussant
-éternellement son rocher. Mais c’est ici que réside la subtilité. Le
-piège serait de croire que vous recommencez <em>de zéro</em>. En
-réalité, chaque itération du cycle s’appuie sur la précédente. Vous ne
-repartez pas à la case départ. Vous montez d’un cran.</p>
+<p>Cela ressemble au châtiment de Sisyphe : pousser éternellement le
+même rocher. Mais c’est ici que réside la subtilité. Le piège serait de
+croire que vous recommencez <em>de zéro</em>. En réalité, chaque
+itération du cycle s’appuie sur la précédente. Vous ne repartez pas à la
+case départ. Vous montez d’un cran.</p>
 <p>Imaginez un architecte qui construit un immeuble pendant qu’une
-tempête fait rage. Il ne peut pas attendre que le vent cesse — le
+tempête fait rage. Il ne peut pas attendre que le vent cesse : le
 bâtiment doit tenir <em>pendant</em> qu’il le construit. Chaque étage
 achevé devient une plateforme stable pour ériger le suivant. Certes, la
 tempête continue de souffler. Mais l’architecte n’est plus au
@@ -1287,22 +1274,22 @@ d’entraînement — Le volant d’inertie stratégique</h2>
 d’inertie</h3>
 <p>Si vous avez déjà tenté de faire démarrer un vieux moteur à
 manivelle, vous connaissez cette sensation. Les premiers tours demandent
-une force colossale. Vos bras tirent de toutes leurs forces, le volant
-résiste, il semble presque immobile. Vous vous demandez si le mécanisme
-est grippé. Puis, tour après tour, quelque chose change. Le volant prend
-de la vitesse. Vos efforts ne diminuent pas nécessairement, mais leur
-effet s’amplifie. Et soudain, le moteur démarre — le volant tourne
-maintenant si vite qu’il vous entraînerait presque.</p>
+une force considérable. Vos bras tirent de toutes leurs forces, le
+volant résiste, il semble presque immobile. Vous vous demandez si le
+mécanisme est grippé. Puis, tour après tour, quelque chose change. Le
+volant prend de la vitesse. Vos efforts ne diminuent pas nécessairement,
+mais leur effet s’amplifie. Et soudain, le moteur démarre : le volant
+tourne maintenant si vite qu’il vous entraînerait presque.</p>
 <p>Cette image physique n’est pas qu’une métaphore poétique. C’est une
 description précise de ce qui se passe quand vous pratiquez la stratégie
 comme une discipline itérative.</p>
 <p>Un volant d’inertie possède une propriété remarquable : il accumule
 de l’énergie cinétique à chaque rotation. Plus il tourne vite, moins il
-demande d’énergie pour maintenir sa vitesse — et plus il devient
-difficile de l’arrêter. La physique nomme ce phénomène le « momentum
+demande d’énergie pour maintenir sa vitesse (et plus il devient
+difficile de l’arrêter). La physique nomme ce phénomène le « momentum
 ».</p>
 <p>Transposé à la stratégie, cela signifie que chaque itération de votre
-cycle — Observer, Orienter, Décider, Agir<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> —
+cycle (Observer, Orienter, Décider, Agir<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>)
 alimente la suivante.</p>
 <p>Les capacités que vous développez lors de la première carte
 facilitent la deuxième. Les patterns que vous reconnaissez lors du
@@ -1317,38 +1304,36 @@ sur les dépendances. C’était laborieux, parfois frustrant.</p>
 démarre.</p>
 <h3 id="le-value-flywheel-effect">Le Value Flywheel Effect</h3>
 <p>David Anderson, Mark McCann et Michael O’Reilly ont formalisé cette
-dynamique dans leur ouvrage <em>The Value Flywheel Effect</em><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. Leur intuition fondamentale —
-inspirée par l’observation des pratiques d’Amazon — est que la création
-de valeur n’est pas linéaire.</p>
-<p>Elle suit une boucle auto-renforçante composée de quatre phases
-distinctes.</p>
-<p><strong>Clarity of Purpose</strong> : savoir pourquoi on agit, quel
-besoin on sert. C’est l’ancrage de toute stratégie. Sans clarté sur
-l’utilisateur et son besoin, vous optimisez dans le vide. Cette phase
-correspond à ce que vous avez appris aux chapitres 1 et 2 : identifier
-le besoin utilisateur comme repère fondamental, et comprendre que la
-stratégie est un jeu de position et de mouvement. Sans cet ancrage, vous
-partez dans n’importe quelle direction.</p>
-<p><strong>Challenge and Landscape</strong> : comprendre le terrain,
-diagnostiquer les forces en présence. Cette phase mobilise tout ce que
-vous avez appris dans les parties II et III du livre. Vous identifiez
-vos capitaux, vous mesurez votre inertie, vous comprenez les lois de
-l’évolution qui façonnent le terrain. Vous cartographiez les forces
-climatiques qui poussent les composants vers la droite, et les blocages
-qui ralentissent votre organisation.</p>
-<p><strong>Next Best Actions</strong> : décider et agir sur la base de
-cette compréhension. C’est le cœur de la Partie IV. Vous tracez votre
-carte, vous lisez les schémas de Flow et d’inertie, vous choisissez une
+dynamique dans leur ouvrage <em>The Value Flywheel Effect</em><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. Leur intuition fondamentale
+(inspirée par l’observation des pratiques d’Amazon) est que la création
+de valeur n’est pas linéaire. Elle suit une boucle auto-renforçante
+composée de quatre phases distinctes.</p>
+<p>Tout commence par la clarté de l’intention (<em>Clarity of
+Purpose</em>) : savoir pourquoi on agit, quel besoin on sert. C’est
+l’ancrage de toute stratégie. Sans clarté sur l’utilisateur et son
+besoin, vous optimisez dans le vide. Cette phase correspond à ce que
+vous avez appris aux chapitres 1 et 2 : identifier le besoin utilisateur
+comme repère fondamental, et comprendre que la stratégie est un jeu de
+position et de mouvement.</p>
+<p>Cette clarté ouvre la voie à la compréhension du terrain
+(<em>Challenge and Landscape</em>) : diagnostiquer les forces en
+présence, identifier vos capitaux, mesurer votre inertie, comprendre les
+lois de l’évolution qui façonnent le terrain. Vous cartographiez les
+forces climatiques qui poussent les composants vers la droite, et les
+blocages qui ralentissent votre organisation. C’est tout ce que vous
+avez appris dans les parties II et III.</p>
+<p>De cette compréhension découle l’action (<em>Next Best Actions</em>)
+: tracer votre carte, lire les schémas de Flow et d’inertie, choisir une
 manœuvre adaptée à votre contexte. Vous ne cherchez pas le plan parfait
-à trois ans. Vous identifiez la <em>prochaine</em> meilleure action —
-celle qui vous fera progresser sans nécessiter une omniscience que vous
-ne pouvez pas avoir.</p>
-<p><strong>Long Term Value</strong> : récolter la valeur créée et la
-réinvestir dans le cycle suivant. C’est la phase souvent oubliée — celle
-où vous mesurez ce que vos actions ont produit. Avez-vous réduit votre
-dette technique ? Gagné de nouveaux clients ? Libéré du temps d’équipe ?
-Cette valeur ne disparaît pas. Elle devient la ressource que vous
-réinjectez dans le prochain cycle. Vous repartez de plus haut.</p>
+à trois ans. Vous identifiez la <em>prochaine</em> meilleure action
+(celle qui vous fera progresser sans nécessiter une omniscience que vous
+ne pouvez pas avoir). C’est le cœur de la Partie IV.</p>
+<p>Enfin, la valeur créée se mesure et se réinvestit (<em>Long Term
+Value</em>). C’est la phase souvent oubliée, celle où vous évaluez ce
+que vos actions ont produit. Avez-vous réduit votre dette technique ?
+Gagné de nouveaux clients ? Libéré du temps d’équipe ? Cette valeur ne
+disparaît pas. Elle devient la ressource que vous réinjectez dans le
+prochain cycle. Vous repartez de plus haut.</p>
 <p>Ces quatre phases forment une boucle fermée. La valeur récoltée à la
 fin nourrit la clarté initiale du cycle suivant. Vous comprenez mieux
 vos utilisateurs parce que vous avez observé l’impact de vos actions.
@@ -1376,25 +1361,25 @@ Effect</em> et ce que vous venez de parcourir dans ce livre.</p>
 </thead>
 <tbody>
 <tr class="odd">
-<td><strong>Clarity of Purpose</strong></td>
+<td><em>Clarity of Purpose</em></td>
 <td>Le repère utilisateur, le besoin comme ancrage stratégique</td>
 <td>Ch. 1-2, Ch. 8</td>
 </tr>
 <tr class="even">
-<td><strong>Challenge and Landscape</strong></td>
+<td><em>Challenge and Landscape</em></td>
 <td>Diagnostic de l’organisation, lois de l’évolution, mécanique de
 l’inertie</td>
 <td>Ch. 3-7</td>
 </tr>
 <tr class="odd">
-<td><strong>Next Best Actions</strong></td>
+<td><em>Next Best Actions</em></td>
 <td>Construction de cartes, lecture stratégique, catalogue des
 manœuvres</td>
 <td>Ch. 8-10</td>
 </tr>
 <tr class="even">
-<td><strong>Long Term Value</strong></td>
-<td>Ce chapitre — et votre prochain cycle</td>
+<td><em>Long Term Value</em></td>
+<td>Ce chapitre (et votre prochain cycle)</td>
 <td>Ch. 11</td>
 </tr>
 </tbody>
@@ -1413,11 +1398,11 @@ rapide.</strong></p>
 <p>La deuxième carte que vous tracerez ne partira pas de zéro. Vous
 saurez déjà où chercher les composants critiques. Vous reconnaîtrez les
 schémas d’inertie sans avoir à relire le chapitre 6. Vous identifierez
-les manœuvres pertinents sans parcourir tout le catalogue du chapitre
+les manœuvres pertinentes sans parcourir tout le catalogue du chapitre
 10.</p>
 <p>Le volant a commencé à tourner. Votre rôle maintenant est de
-maintenir le mouvement — et de comprendre comment ce mouvement change de
-nature avec l’accumulation des itérations.</p>
+maintenir le mouvement (et de comprendre comment ce mouvement change de
+nature avec l’accumulation des itérations).</p>
 <h2 id="linertie-retournée-du-frein-au-propulseur">L’inertie retournée —
 Du frein au propulseur</h2>
 <p>Nous avons consacré deux chapitres entiers (chapitres 6 et 7) à
@@ -1425,44 +1410,44 @@ comprendre l’inertie comme une force de résistance. L’inertie,
 avons-nous dit, est une propriété proportionnelle au succès passé. Plus
 une organisation a réussi dans une direction donnée, plus il devient
 difficile de changer de cap. L’inertie se manifeste dans les cinq
-capitaux — technologique, humain, organisationnel, relationnel,
-financier. Elle freine le mouvement. Elle vous empêche de tourner quand
+capitaux (technologique, humain, organisationnel, relationnel,
+financier). Elle freine le mouvement. Elle vous empêche de tourner quand
 le terrain l’exige.</p>
 <p>C’est une description exacte de l’inertie subie. Mais ce n’est qu’une
 face de la médaille.</p>
 <p>Car l’inertie n’est pas intrinsèquement bonne ou mauvaise. C’est une
 propriété physique neutre. Le même phénomène qui vous empêche de pivoter
-peut aussi vous propulser — si vous le construisez délibérément.</p>
+peut aussi vous propulser (si vous le construisez délibérément).</p>
 <h3 id="rappel-linertie-comme-frein">Rappel : l’inertie comme frein</h3>
 <p>Rappelez-vous le cas de Nokia au chapitre 6. L’entreprise finlandaise
 dominait le marché du téléphone mobile dans les années 2000. Elle avait
-accumulé une expertise gigantesque dans le hardware, une chaîne
+accumulé une expertise considérable dans le hardware, une chaîne
 d’approvisionnement optimisée, des relations solides avec les opérateurs
-télécoms. Son inertie était colossale — et c’était une force tant que le
+télécoms. Son inertie était massive (et c’était une force tant que le
 jeu consistait à produire des téléphones de meilleure qualité, plus
-robustes, avec une meilleure autonomie.</p>
-<p>Mais en 2007, Apple a changé les règles du jeu. Le téléphone n’était
-plus un appareil de communication robuste. C’était une plateforme
-logicielle tactile. Nokia possédait tout le capital nécessaire pour
-dominer l’ancien jeu — et c’est précisément ce capital qui l’a empêchée
-de pivoter vers le nouveau.</p>
+robustes, avec une meilleure autonomie).</p>
+<p>Mais en 2007, Apple a changé les règles du jeu<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>. Le
+téléphone n’était plus un appareil de communication robuste. C’était une
+plateforme logicielle tactile. Nokia possédait tout le capital
+nécessaire pour dominer l’ancien jeu (et c’est précisément ce capital
+qui l’a empêchée de pivoter vers le nouveau).</p>
 <p>L’inertie était un poids mort. Nokia courait dans la mauvaise
 direction, et son propre élan l’empêchait de tourner à temps.</p>
 <h3 id="le-retournement-linertie-comme-momentum">Le retournement :
 l’inertie comme momentum</h3>
 <p>Mais imaginez maintenant Amazon Web Services. Depuis 2006,
-l’entreprise accumule des capacités dans le cloud computing. Chaque
-service lancé — EC2, S3, Lambda, DynamoDB — devient une brique qui
-alimente le suivant. Chaque client acquis génère des données d’usage qui
-permettent d’identifier les prochains besoins à commoditiser (le modèle
-ILC du chapitre 10). Chaque dollar réinvesti dans l’infrastructure
-réduit les coûts unitaires et crée un avantage de prix sur les
-concurrents.</p>
+l’entreprise accumule des capacités dans le cloud computing<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>. Chaque service lancé (EC2, S3,
+Lambda, DynamoDB) devient une brique qui alimente le suivant. Chaque
+client acquis génère des données d’usage qui permettent d’identifier les
+prochains besoins à commoditiser (le modèle ILC, pour
+<em>Industrialise-Leverage-Commoditise</em>, décrit au chapitre 10).
+Chaque dollar réinvesti dans l’infrastructure réduit les coûts unitaires
+et crée un avantage de prix sur les concurrents.</p>
 <p>Ici aussi, il y a de l’inertie. AWS possède un élan colossal dans le
 cloud. Mais cet élan est dirigé <em>dans la bonne direction</em>. Il
 propulse l’entreprise plus loin, plus vite. Chaque itération du cycle
 renforce la position au lieu de la fragiliser.</p>
-<p>C’est le même phénomène physique que chez Nokia — l’accumulation de
+<p>C’est le même phénomène physique que chez Nokia : l’accumulation de
 capacités dans une direction donnée. Mais la relation à cette
 accumulation est radicalement différente.</p>
 <p><strong>L’inertie subie</strong>, c’est quand vous êtes lancé dans
@@ -1474,7 +1459,7 @@ retiennent.</p>
 <p><strong>Le momentum construit</strong>, c’est quand vous êtes lancé
 dans une direction délibérée, celle que votre diagnostic vous a révélée
 comme stratégiquement pertinente. L’accumulation de capacités ne vous
-freine pas — elle vous accélère. Chaque ressource mobilisée, chaque
+freine pas, elle vous accélère. Chaque ressource mobilisée, chaque
 compétence développée, chaque partenariat noué devient un actif qui
 alimente le mouvement.</p>
 <p>La différence entre les deux n’est pas dans la physique du phénomène.
@@ -1484,34 +1469,34 @@ l’inertie. L’architecte expérimenté la construit.</p>
 accumule</h3>
 <p>Alors, concrètement, qu’est-ce qui s’accumule au fil des itérations
 du cycle stratégique ?</p>
-<p><strong>Des capacités de diagnostic.</strong> Votre première analyse
-des cinq capitaux (chapitre 4) vous a peut-être pris une journée
-entière. La dixième vous prendra une heure. Vous « voyez » désormais les
-patterns. Vous repérez l’inertie culturelle en écoutant une simple
-réunion d’équipe. Vous identifiez les blocages technologiques en
-parcourant une architecture. Ce qui était autrefois laborieux est devenu
-un réflexe<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>.</p>
-<p><strong>Des patterns reconnus.</strong> Après avoir tracé dix cartes
-de Wardley, certaines configurations deviennent familières. Vous
+<p>D’abord, des capacités de diagnostic. Votre première analyse des cinq
+capitaux (chapitre 4) vous a peut-être pris une journée entière. La
+dixième vous prendra une heure. Vous « voyez » désormais les patterns.
+Vous repérez l’inertie culturelle en écoutant une simple réunion
+d’équipe. Vous identifiez les blocages technologiques en parcourant une
+architecture. Ce qui était autrefois laborieux est devenu un réflexe<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>.</p>
+<p>Ensuite, des patterns reconnus. Après avoir tracé dix cartes de
+Wardley, certaines configurations deviennent familières. Vous
 reconnaissez immédiatement le schéma d’une commodité reconstruite en
 interne (chapitre 3, violation de la doctrine). Vous identifiez sans
 analyse formelle les situations où le modèle ILC est pertinent, ou où le
-Strangler Fig s’impose. Vous n’avez plus besoin de consulter le
-catalogue des manœuvres — il est devenu votre langage naturel.</p>
-<p><strong>Des ressources mobilisables.</strong> Chaque cycle réussi
-vous laisse des actifs. Vous avez réduit votre dette technique via une
-migration Strangler Fig. Vous avez formé vos équipes à la cartographie.
-Vous avez créé une couche d’abstraction qui préserve vos options
-stratégiques. Ces ressources ne disparaissent pas. Elles deviennent les
-fondations du prochain mouvement.</p>
-<p><strong>Une culture du mouvement.</strong> Le changement le plus
-profond n’est pas technique, il est culturel. Après plusieurs
-itérations, votre organisation apprend à pivoter. Les équipes ne voient
-plus une nouvelle carte comme une remise en question, mais comme une
-mise à jour naturelle. Elles acceptent que ce qui était vrai hier ne le
-soit plus aujourd’hui. Elles développent ce que Carol Dweck appelle un «
-état d’esprit de croissance »<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> — la conviction que les
-capacités se développent par la pratique, pas par le talent inné.</p>
+<em>Strangler Fig</em> (la migration progressive par encapsulation)
+s’impose. Vous n’avez plus besoin de consulter le catalogue des
+manœuvres : il est devenu votre langage naturel.</p>
+<p>À ces compétences s’ajoutent des ressources mobilisables. Chaque
+cycle réussi vous laisse des actifs. Vous avez réduit votre dette
+technique via une migration <em>Strangler Fig</em>. Vous avez formé vos
+équipes à la cartographie. Vous avez créé une couche d’abstraction qui
+préserve vos options stratégiques. Ces ressources ne disparaissent pas.
+Elles deviennent les fondations du prochain mouvement.</p>
+<p>Et le changement le plus profond n’est pas technique, il est
+culturel. Après plusieurs itérations, votre organisation apprend à
+pivoter. Les équipes ne voient plus une nouvelle carte comme une remise
+en question, mais comme une mise à jour naturelle. Elles acceptent que
+ce qui était vrai hier ne le soit plus aujourd’hui. Elles développent ce
+que Carol Dweck appelle un « état d’esprit de croissance »<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> (la
+conviction que les capacités se développent par la pratique, pas par le
+talent inné).</p>
 <p>C’est cette accumulation qui transforme le cycle en volant d’inertie.
 Vous ne recommencez pas de zéro. Vous montez d’un cran à chaque
 tour.</p>
@@ -1523,14 +1508,14 @@ vite.</p>
 l’efficience</h3>
 <p>Une tentation naturelle émerge à ce stade de notre raisonnement. Si
 chaque itération du cycle devient plus facile, si les diagnostics
-s’accélèrent, si les décisions deviennent plus rapides, alors —
-pense-t-on — l’effort total va diminuer. Avec l’expérience, nous
+s’accélèrent, si les décisions deviennent plus rapides, alors
+(pense-t-on) l’effort total va diminuer. Avec l’expérience, nous
 finirons par travailler moins.</p>
 <p>C’est une vision séduisante, presque réconfortante. Après des années
 de pratique, vous pourriez enfin vous reposer sur vos lauriers, tracer
 vos cartes en pilote automatique, et consacrer votre énergie libérée à
 d’autres activités.</p>
-<p>Mais c’est une illusion. Et c’est même, osons le dire, un piège.</p>
+<p>Mais c’est une illusion, et même un piège.</p>
 <p>Cette vision est défensive. Elle suppose que le but du jeu est
 d’atteindre un état de confort où la stratégie devient une routine
 indolore. Mais rappelez-vous le chapitre 1 et la loi de la Reine Rouge :
@@ -1550,48 +1535,44 @@ la vélocité d’adaptation</h3>
 <p>Le volant ne vous permet pas de travailler moins. Il vous permet de
 parcourir plus de chemin dans le même temps. Vous tracez des cartes plus
 vite, donc vous pouvez en tracer davantage. Vous identifiez les
-manœuvres pertinents plus rapidement, donc vous pouvez en tester
-plusieurs au lieu d’un seul. Vous pivotez avec moins de friction, donc
+manœuvres pertinentes plus rapidement, donc vous pouvez en tester
+plusieurs au lieu d’une seule. Vous pivotez avec moins de friction, donc
 vous pouvez ajuster votre trajectoire avant que vos concurrents ne
 réagissent.</p>
 <p>Dans un monde où l’avantage concurrentiel va à celui qui s’adapte le
 plus vite, cette vélocité est l’atout décisif.</p>
-<p>Pensez à Spotify. L’entreprise suédoise ne possède pas un avantage
-technologique inattaquable. Elle n’a pas de brevet sur le streaming
-musical. Elle ne détient pas les droits exclusifs sur les catalogues
-musicaux. Son avantage réside dans sa capacité à itérer plus vite que
-ses concurrents — à tester de nouvelles fonctionnalités, à mesurer leur
-adoption, à pivoter si nécessaire, et à recommencer. Pendant que
+<p>Pensez à Spotify<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a>. L’entreprise suédoise ne possède
+pas un avantage technologique inattaquable. Elle n’a pas de brevet sur
+le streaming musical. Elle ne détient pas les droits exclusifs sur les
+catalogues musicaux. Son avantage réside dans sa capacité à itérer plus
+vite que ses concurrents : tester de nouvelles fonctionnalités, mesurer
+leur adoption, pivoter si nécessaire, et recommencer. Pendant que
 d’autres entreprises discutent encore de la feuille de route annuelle,
 Spotify a déjà testé, validé ou abandonné trois nouvelles
 hypothèses.</p>
 <p>Le volant d’inertie de Spotify tourne vite. Et cette vitesse
 elle-même devient un avantage concurrentiel.</p>
-<p>Concrètement, qu’est-ce que cela signifie pour vous ?</p>
-<p><strong>Plus vous itérez, plus vos analyses sont rapides.</strong> Ce
-qui prenait trois jours prend maintenant trois heures. Vous libérez du
-temps — non pas pour vous reposer, mais pour analyser davantage de
-scénarios.</p>
-<p><strong>Plus vous itérez, plus vos décisions sont informées.</strong>
-Vous avez déjà vu ce pattern dix fois. Vous savez ce qui a fonctionné,
-ce qui a échoué, et pourquoi. Vous ne recommencez pas l’analyse depuis
-zéro. Vous ajustez en fonction de ce qui a changé.</p>
-<p><strong>Plus vous itérez, plus vous pouvez pivoter avant les
-autres.</strong> Pendant que vos concurrents en sont encore à tracer
-leur première carte, vous en êtes déjà à la cinquième. Vous détectez les
-signaux faibles plus tôt. Vous agissez avant que le mouvement ne
-devienne évident pour tout le monde.</p>
-<p><strong>Plus vous itérez, plus vous captez les opportunités
-émergentes.</strong> Les Cygnes Noirs (chapitre 9) créent des fenêtres
-d’opportunité qui se referment vite. Celui qui réagit le premier capte
-la valeur. Le volant d’inertie vous donne cette réactivité.</p>
+<p>Concrètement, qu’est-ce que cela signifie pour vous ? Plus vous
+itérez, plus vos analyses sont rapides : ce qui prenait trois jours
+prend maintenant trois heures. Vous libérez du temps (non pas pour vous
+reposer, mais pour analyser davantage de scénarios). Vos décisions
+gagnent en qualité, parce que vous avez déjà vu ce pattern dix fois.
+Vous savez ce qui a fonctionné, ce qui a échoué, et pourquoi. Vous ne
+recommencez pas l’analyse depuis zéro, vous ajustez en fonction de ce
+qui a changé. Et surtout, vous pouvez pivoter avant les autres : pendant
+que vos concurrents en sont encore à tracer leur première carte, vous en
+êtes déjà à la cinquième. Vous détectez les signaux faibles plus tôt.
+Vous agissez avant que le mouvement ne devienne évident pour tout le
+monde. Les Cygnes Noirs (chapitre 9) créent des fenêtres d’opportunité
+qui se referment vite. Celui qui réagit le premier capte la valeur. Le
+volant d’inertie vous donne cette réactivité.</p>
 <h3 id="retour-au-jeu">Retour au jeu</h3>
 <p>Le chapitre 1 posait les règles fondamentales : le marché est un
 terrain de jeu en mouvement perpétuel, régi par les forces de la
-concurrence. Votre stratégie repose sur deux variables — votre position
-actuelle, et le mouvement que vous choisissez pour l’améliorer. Tous les
-mouvements ne se valent pas, et l’art du stratège consiste à choisir le
-bon mouvement au bon moment.</p>
+concurrence. Votre stratégie repose sur deux variables (votre position
+actuelle, et le mouvement que vous choisissez pour l’améliorer). Tous
+les mouvements ne se valent pas, et l’art du stratège consiste à choisir
+le bon mouvement au bon moment.</p>
 <p>Le chapitre 11 boucle cette logique en donnant la réponse finale :
 pour gagner, il ne suffit pas d’avoir le meilleur plan initial. Il faut
 ajuster le plus vite.</p>
@@ -1600,8 +1581,14 @@ parfaite. C’est celui qui la retrace assez vite pour que sa carte soit
 toujours pertinente. C’est celui qui enchaîne les cycles avant que ses
 concurrents n’aient terminé le premier.</p>
 <p>La victoire ne va pas au plus intelligent, ni au mieux financé. Elle
-va au plus véloce — à celui dont le volant d’inertie tourne assez vite
-pour transformer le mouvement perpétuel en avantage durable.</p>
+va au plus véloce (à celui dont le volant d’inertie tourne assez vite
+pour transformer le mouvement perpétuel en avantage durable). Cette
+règle connaît des nuances dans les secteurs fortement réglementés
+(santé, finance, nucléaire) où la conformité impose un rythme contraint.
+Mais même dans ces environnements, la vélocité d’adaptation reste un
+avantage relatif : celui qui s’adapte le premier aux nouvelles
+contraintes réglementaires capte un avantage sur ceux qui subissent le
+changement.</p>
 <p>Mais même le volant le plus puissant n’est pas éternel. Le terrain
 peut changer brutalement, sans prévenir. C’est là que la vélocité
 acquise devient votre meilleure assurance.</p>
@@ -1610,80 +1597,77 @@ terrain change — La résilience du stratège</h2>
 <h3 id="le-cygne-noir-ne-respecte-pas-le-volant-dinertie">Le Cygne Noir
 ne respecte pas le volant d’inertie</h3>
 <p>Nous avons consacré une large section du chapitre 9 aux Cygnes Noirs
-— ces événements imprévisibles et impactants qui rebattent soudainement
-les cartes. Une pandémie mondiale qui force la digitalisation en
+(ces événements imprévisibles et impactants qui rebattent soudainement
+les cartes). Une pandémie mondiale qui force la digitalisation en
 quelques semaines. Une régulation inattendue qui ferme un marché ou en
 ouvre un nouveau. Une innovation technologique qui rend obsolète toute
 une industrie du jour au lendemain.</p>
 <p>Le volant d’inertie que vous avez patiemment construit ne vous
 immunise pas contre ces ruptures. Vous pouvez avoir tracé cent cartes,
 diagnostiqué mille fois votre organisation, enchaîné les manœuvres avec
-une maestria parfaite — et voir tout cela remis en question par un
+une maestria parfaite, et voir tout cela remis en question par un
 événement que personne n’avait anticipé.</p>
 <p>C’est la réalité brutale du monde complexe dans lequel nous évoluons.
 Le terrain ne vous doit rien. Il peut se dérober sous vos pieds au
 moment où vous pensiez avoir trouvé votre rythme.</p>
 <p>Faut-il en conclure que le volant d’inertie est inutile face aux
-ruptures ? Absolument pas. Mais il faut comprendre ce qu’il vous apporte
-dans ces moments critiques.</p>
+ruptures ? Non. Mais il faut comprendre ce qu’il vous apporte dans ces
+moments critiques.</p>
 <h3 id="ce-que-le-volant-vous-donne-face-à-la-rupture">Ce que le volant
 vous donne face à la rupture</h3>
-<p><strong>Des ressources accumulées.</strong> Chaque itération du cycle
-vous a laissé des actifs. Vous avez réduit votre dette technique via le
-Strangler Fig. Vous avez formé vos équipes à la cartographie. Vous avez
-construit une couche d’abstraction qui préserve vos options
-stratégiques. Vous avez diversifié vos capitaux au lieu de tout miser
-sur un seul pari. Quand la rupture survient, vous n’êtes pas démuni.
-Vous avez des options, du capital, des compétences mobilisables.</p>
-<p><strong>Une vélocité d’analyse.</strong> Face à un Cygne Noir, tout
-le monde est surpris. Mais tout le monde ne réagit pas à la même
-vitesse. Celui qui a pratiqué la cartographie cent fois comprendra la
-nouvelle donne plus vite que celui qui découvre l’outil. Vous savez déjà
-comment tracer une carte sous pression. Vous savez identifier les
-composants critiques, repérer les nouvelles dépendances, anticiper les
-déplacements sur l’axe d’évolution. Pendant que d’autres organisations
-tâtonnent encore, vous avez déjà tracé deux scénarios.</p>
-<p><strong>Une habitude du pivot.</strong> Chaque itération du cycle
-stratégique était, d’une certaine manière, un mini-pivot. Vous avez
-découvert que votre carte d’hier n’était plus exacte. Vous avez ajusté.
-Vous avez changé de gameplay. Vous avez réalloué des ressources. Cette
-pratique répétée du pivot crée une capacité organisationnelle rare : la
-tolérance au changement brutal. Vos équipes ne voient plus le changement
-comme une catastrophe, mais comme un signal qu’il est temps de retourner
-au tableau blanc.</p>
-<p><strong>Un réseau de sensing.</strong> Plus vous avez tracé de
-cartes, plus vous avez développé un réseau de capteurs — formels ou
-informels — qui vous alertent sur les signaux faibles. Vous avez appris
-à observer les mouvements de vos concurrents, à surveiller les
-évolutions technologiques, à écouter les frustrations de vos
-utilisateurs. Quand un Cygne Noir se profile, vous n’êtes peut-être pas
-capable de le prédire, mais vous détectez les tremblements
-avant-coureurs avant qu’il ne frappe.</p>
-<p>Ces quatre éléments ne vous garantissent pas d’éviter la rupture.
-Personne ne peut vous garantir cela. Mais ils transforment radicalement
-votre capacité à rebondir.</p>
+<p>Les capacités accumulées au fil des itérations (diagnostic, patterns
+reconnus, ressources mobilisables, culture du mouvement) deviennent
+votre principal atout quand le terrain se dérobe. Mais le volant vous
+donne aussi quelque chose de spécifique en situation de crise.</p>
+<p>D’abord, une vélocité d’analyse. Face à un Cygne Noir, tout le monde
+est surpris. Mais tout le monde ne réagit pas à la même vitesse. Celui
+qui a pratiqué la cartographie cent fois comprendra la nouvelle donne
+plus vite que celui qui découvre l’outil. Vous savez déjà comment tracer
+une carte sous pression. Vous savez identifier les composants critiques,
+repérer les nouvelles dépendances, anticiper les déplacements sur l’axe
+d’évolution. Pendant que d’autres organisations tâtonnent encore, vous
+avez déjà tracé deux scénarios.</p>
+<p>Ensuite, une habitude du pivot. Chaque itération du cycle stratégique
+était, d’une certaine manière, un mini-pivot. Vous avez découvert que
+votre carte d’hier n’était plus exacte. Vous avez ajusté. Vous avez
+changé de gameplay. Vous avez réalloué des ressources. Cette pratique
+répétée du pivot crée une capacité organisationnelle rare : la tolérance
+au changement brutal. Vos équipes ne voient plus le changement comme une
+catastrophe, mais comme un signal qu’il est temps de retourner au
+tableau blanc.</p>
+<p>Enfin, un réseau de <em>sensing</em>. Plus vous avez tracé de cartes,
+plus vous avez développé un réseau de capteurs (formels ou informels)
+qui vous alertent sur les signaux faibles. Vous avez appris à observer
+les mouvements de vos concurrents, à surveiller les évolutions
+technologiques, à écouter les frustrations de vos utilisateurs. Quand un
+Cygne Noir se profile, vous n’êtes peut-être pas capable de le prédire,
+mais vous détectez les tremblements avant-coureurs avant qu’il ne
+frappe.</p>
+<p>Ces éléments ne vous garantissent pas d’éviter la rupture. Personne
+ne peut vous garantir cela. Mais ils transforment radicalement votre
+capacité à rebondir.</p>
 <h3 id="le-cycle-recommence-mais-pas-de-zéro">Le cycle recommence, mais
 pas de zéro</h3>
 <p>Après une rupture majeure, vous repassez nécessairement par les
 quatre phases du <em>Value Flywheel Effect</em>.</p>
-<p><strong>Clarity of Purpose.</strong> Quel besoin utilisateur sert-on
+<p><em>Clarity of Purpose</em> : quel besoin utilisateur sert-on
 maintenant que le terrain a changé ? La pandémie a transformé la
 collaboration à distance d’un « nice to have » en un besoin vital. La
 régulation NIS2 a fait de la souveraineté numérique un critère d’achat
 prioritaire. Vous devez redéfinir votre ancrage.</p>
-<p><strong>Challenge and Landscape.</strong> Quelles sont les nouvelles
-forces en présence ? Quels composants ont soudainement glissé vers la
-droite ou vers la gauche sur l’axe d’évolution ? Quels nouveaux acteurs
-sont apparus ? Quelles vos ressources sont encore pertinentes, et
-lesquelles sont devenues obsolètes ?</p>
-<p><strong>Next Best Actions.</strong> Quel est le prochain mouvement le
-plus judicieux dans ce nouveau contexte ? Peut-être que la manœuvre qui
+<p><em>Challenge and Landscape</em> : quelles sont les nouvelles forces
+en présence ? Quels composants ont soudainement glissé vers la droite ou
+vers la gauche sur l’axe d’évolution ? Quels nouveaux acteurs sont
+apparus ? Quelles ressources sont encore pertinentes, et lesquelles sont
+devenues obsolètes ?</p>
+<p><em>Next Best Actions</em> : quel est le prochain mouvement le plus
+judicieux dans ce nouveau contexte ? Peut-être que la manœuvre qui
 marchait avant ne fonctionne plus. Peut-être que la fenêtre
-d’opportunité pour un Land Grab (chapitre 10) vient de s’ouvrir.</p>
-<p><strong>Long Term Value.</strong> Qu’avez-vous appris de cette
-rupture ? Comment pouvez-vous renforcer votre résilience pour la
-prochaine ?</p>
-<p>Le cycle recommence, certes. Mais — et c’est le point capital — vous
+d’opportunité pour un <em>Land Grab</em> (chapitre 10) vient de
+s’ouvrir.</p>
+<p><em>Long Term Value</em> : qu’avez-vous appris de cette rupture ?
+Comment pouvez-vous renforcer votre résilience pour la prochaine ?</p>
+<p>Le cycle recommence, certes. Mais (et c’est le point capital) vous
 gardez les capacités acquises.</p>
 <p>Votre volant d’inertie ralentit temporairement. Il ne s’arrête pas.
 Il ne repart pas de l’immobilité. Il conserve une partie de son élan. Et
@@ -1707,10 +1691,10 @@ suppose un terrain stable, prévisible, où les hypothèses de départ
 restent valides jusqu’à la fin. Nous savons maintenant que ce terrain
 n’existe pas.</p>
 <p>Un moteur, lui, tourne et s’accélère. Il transforme le mouvement
-perpétuel — cette réalité épuisante de la Reine Rouge — en avantage
+perpétuel (cette réalité épuisante de la Reine Rouge) en avantage
 cumulatif. Chaque tour du volant vous rend plus rapide, plus perspicace,
 plus résilient.</p>
-<p>Le chapitre suivant — la conclusion de ce livre — vous appartient.
+<p>Le chapitre suivant (la conclusion de ce livre) vous appartient.
 C’est vous qui l’écrirez, carte après carte, décision après décision,
 cycle après cycle.</p>
 <section class="footnotes footnotes-end-of-document" role="doc-endnotes">
@@ -1719,22 +1703,37 @@ cycle après cycle.</p>
 <li id="fn1" role="doc-endnote"><p>La boucle OODA (<em>Observe, Orient,
 Decide, Act</em>) a été conceptualisée par le colonel John Boyd de l’US
 Air Force dans les années 1970. Boyd n’a jamais publié d’ouvrage formel,
-mais ses briefings — notamment <em>Patterns of Conflict</em> (1986) et
-<em>The Strategic Game of ? and ?</em> — ont profondément influencé la
+mais ses briefings (notamment <em>Patterns of Conflict</em>, 1986, et
+<em>The Strategic Game of ? and ?</em>) ont profondément influencé la
 pensée stratégique militaire et, par extension, la stratégie
 d’entreprise.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2" role="doc-endnote"><p>David J. Anderson, Mark McCann et
 Michael O’Reilly, <em>The Value Flywheel Effect: Power the Future and
 Accelerate Your Organization to the Modern Digital Economy</em>, IT
 Revolution Press, 2023.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3" role="doc-endnote"><p>Daniel Kahneman et Gary Klein, «
+<li id="fn3" role="doc-endnote"><p>Steve Jobs présente l’iPhone le 9
+janvier 2007 lors de la keynote Macworld. L’appareil redéfinit le
+téléphone mobile comme une plateforme logicielle ouverte aux
+développeurs tiers, bouleversant un marché jusqu’alors dominé par le
+hardware.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4" role="doc-endnote"><p>Amazon lance S3 (<em>Simple Storage
+Service</em>) en mars 2006, puis EC2 (<em>Elastic Compute Cloud</em>) en
+août 2006. Ces deux services posent les fondations du cloud computing
+public. Lambda (2014) et DynamoDB (2012) illustrent la stratégie
+d’empilement progressif de briques de plus en plus spécialisées.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5" role="doc-endnote"><p>Daniel Kahneman et Gary Klein, «
 Conditions for Intuitive Expertise: A Failure to Disagree »,
 <em>American Psychologist</em>, vol. 64, n° 6, septembre 2009,
 p. 515-526. Les auteurs montrent que l’intuition fiable exige un
 environnement suffisamment régulier et une pratique prolongée avec
-feedback — précisément ce que le cycle stratégique itératif construit.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4" role="doc-endnote"><p>Carol S. Dweck, <em>Mindset: The New
-Psychology of Success</em>, Random House, 2006.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+feedback (précisément ce que le cycle stratégique itératif construit).<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6" role="doc-endnote"><p>Carol S. Dweck, <em>Mindset: The New
+Psychology of Success</em>, Random House, 2006.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7" role="doc-endnote"><p>Henrik Kniberg et Anders Ivarsson, «
+Scaling Agile @ Spotify with Tribes, Squads, Chapters &amp; Guilds »,
+octobre 2012. Ce white paper décrit l’organisation en squads autonomes
+qui permet à Spotify d’itérer rapidement sur de multiples fronts
+simultanés.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 
@@ -2370,5 +2369,5 @@ Psychology of Success</em>, Random House, 2006.<a href="#fnref4" class="footnote
     })();
   </script>
 <script src="search-index.js"></script>
-<div style="position:fixed;bottom:1em;right:1em;background:var(--bg-secondary,#f8f9fa);border:1px solid var(--border-primary,#ddd);border-radius:8px;padding:0.4em 0.8em;font-family:Lato,sans-serif;font-size:0.75em;color:var(--text-muted,#7f8c8d);z-index:900;opacity:0.8;">v2.0.0-beta-2-g4e8ce11</div></body>
+<div style="position:fixed;bottom:1em;right:1em;background:var(--bg-secondary,#f8f9fa);border:1px solid var(--border-primary,#ddd);border-radius:8px;padding:0.4em 0.8em;font-family:Lato,sans-serif;font-size:0.75em;color:var(--text-muted,#7f8c8d);z-index:900;opacity:0.8;">v2.15.0-beta</div></body>
 </html>
